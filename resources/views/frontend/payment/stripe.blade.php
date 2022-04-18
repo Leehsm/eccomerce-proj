@@ -61,17 +61,45 @@ Stripe Payment Page
 										<hr>
 										<li>
 											@if(Session::has('coupon'))
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
-												( {{ session()->get('coupon')['coupon_discount'] }} % )
-												<hr>
-												<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
-												<hr>
-												<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] }} 
-												<hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 10.00 }} 
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 15.00 }} 
+													<hr>
+												@endif
 											@else
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Grand Total : </strong> RM{{ $cartTotal }} <hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal + 10.00}}
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal +15.00}}
+													<hr>
+												@endif
 											@endif 
 										</li>
 									</ul>		
@@ -116,11 +144,19 @@ Stripe Payment Page
 									</div>
 									<br>
 									<button class="btn btn-primary">Pay
-										@if(Session::has('coupon'))
-											RM{{ session()->get('coupon')['total_amount'] }} 
+										@if($data['state_id'] != '3' && $data['state_id'] != '4')
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 10.00}} 
+											@else
+												RM{{ $cartTotal + 10.00}} 
+											@endif 
 										@else
-											RM{{ $cartTotal }} 
-										@endif 
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 15.00}} 
+											@else
+												RM{{ $cartTotal + 15.00}} 
+											@endif
+										@endif
 									</button>
 								</form>
 								
