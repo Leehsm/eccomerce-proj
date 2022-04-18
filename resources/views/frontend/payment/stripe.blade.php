@@ -38,7 +38,7 @@ Stripe Payment Page
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
-				<li class='active'>Stripe</li>
+				<li class='active'>Stripe Payment</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
