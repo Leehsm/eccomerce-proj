@@ -104,7 +104,7 @@ Stripe Payment Page
 											<input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
 											<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
 										</label>
-										<input type="text" name="holdername" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Holder Bank Name" required="">
+										<input type="text" name="holdername" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Name on Card" required="">
 										<br>
 										<input type="text" name="bankname" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Bank Name" required="">
 										<br>
