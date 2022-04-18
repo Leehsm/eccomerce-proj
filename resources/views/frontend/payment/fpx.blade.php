@@ -3,7 +3,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @section('title')
-Stripe Payment Page 
+FPX Payment Page 
 @endsection
 
 <div class="breadcrumb">
@@ -12,7 +12,7 @@ Stripe Payment Page
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
-				<li class='active'>Stripe</li>
+				<li class='active'>FPX Payment</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->

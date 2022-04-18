@@ -59,7 +59,7 @@ class PaymentController extends Controller
             'holdername' => $request->holdername,
             'bankname' => $request->bankname,
     
-            'invoice_no' => 'EOS'.mt_rand(10000000,99999999),
+            'invoice_no' => 'SSPS'.mt_rand(10000000,99999999),
             'order_date' => Carbon::now()->format('d F Y'),
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
