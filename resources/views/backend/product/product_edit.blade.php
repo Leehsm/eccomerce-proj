@@ -112,7 +112,7 @@
                                     <div class="form-group">
                                         <h5>Product Name Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_name_my" class="form-control" required="" value="{{ $products->product_name_my }}"> 
+                                            <input type="text" name="product_name_my" class="form-control" value="{{ $products->product_name_my }}"> 
                                             @error('product_name_my')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -157,7 +157,7 @@
                                     <div class="form-group">
                                         <h5>Product tag English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_tags_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_tags_en }}"> 
+                                            <input type="text" name="product_tags_en" class="form-control" data-role="tagsinput" value="{{ $products->product_tags_en }}"> 
                                             @error('product_tags_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -168,7 +168,7 @@
                                     <div class="form-group">
                                         <h5>Product tag Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_tags_my" class="form-control"  data-role="tagsinput" required="" value="{{ $products->product_tags_my }}"> 
+                                            <input type="text" name="product_tags_my" class="form-control"  data-role="tagsinput" value="{{ $products->product_tags_my }}"> 
                                             @error('product_tags_my')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -197,7 +197,7 @@
                                     <div class="form-group">
                                         <h5>Product size Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_size_my" class="form-control" value="kecil,sederhana,besar" data-role="tagsinput" value="{{ $products->product_size_my }}"> 
+                                            <input type="text" name="product_size_my" class="form-control"  data-role="tagsinput" value="{{ $products->product_size_my }}"> 
                                             @error('product_size_my')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -210,7 +210,7 @@
                                     <div class="form-group">
                                         <h5>Product Color English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_en }}"> 
+                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput"  value="{{ $products->product_color_en }}"> 
                                             @error('product_color_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -223,7 +223,7 @@
                                     <div class="form-group">
                                         <h5>Product Color Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_color_my" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_my }}"> 
+                                            <input type="text" name="product_color_my" class="form-control" data-role="tagsinput"  value="{{ $products->product_color_my }}"> 
                                             @error('product_color_my')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -290,7 +290,7 @@
                                     <div class="form-group">
                                         <h5>Short Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <textarea name="short_desc_my" id="textarea" class="form-control" required placeholder="Textarea text" required="">
+                                            <textarea name="short_desc_my" id="textarea" class="form-control" placeholder="Textarea text" required="">
                                                 {!! $products->short_desc_my !!}
                                             </textarea>     
                                         </div>
@@ -315,7 +315,7 @@
                                     <div class="form-group">
                                         <h5>Long Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <textarea id="long_desc_my" name="long_desc_my" rows="10" cols="80" required="">
+                                            <textarea id="long_desc_my" name="long_desc_my" rows="10" cols="80" >
                                             {!! $products->long_desc_my !!} 
                                             </textarea>    
                                         </div>

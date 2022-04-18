@@ -29,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('product_tags_my')->nullable();
             $table->string('product_size_en')->nullable();
             $table->string('product_size_my')->nullable();
-            $table->string('product_color_en');
+            $table->string('product_color_en')->nullable();
             $table->string('product_color_my')->nullable();
             $table->string('selling_price');
             $table->string('discount_price')->nullable();
