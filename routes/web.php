@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ToyyibpayController;
 
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -203,7 +204,12 @@ Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWish
 
 //Payment Page
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
-Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+// Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+
+//ToyyibPay
+Route::post('/user/toyyibpay', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create'); //fpx
+Route::post('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
+Route::post('/user/toyyibpay/callback', [ToyyibpayController::class, 'callBack'])->name('toyyibpay-callback'); //fpx
 
 //Order History
 Route::get('/user/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
@@ -309,3 +315,4 @@ Route::prefix('report')->group(function(){
  Route::prefix('alluser')->group(function(){ 
     Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-user'); 
 });
+

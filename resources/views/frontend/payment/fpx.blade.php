@@ -6,32 +6,6 @@
 FPX Payment Page 
 @endsection
 
-<style>
-    /**
- * The CSS shown here will not be introduced in the Quickstart guide, but shows
- * how you can use CSS to style your Element's container.
- */
-.StripeElement {
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 12px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-  -webkit-transition: box-shadow 150ms ease;
-  transition: box-shadow 150ms ease;
-}
-.StripeElement--focus {
-  box-shadow: 0 1px 3px 0 #cfd7df;
-}
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
-.StripeElement--webkit-autofill {
-  background-color: #fefde5 !important;}
-</style>
-
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
@@ -116,7 +90,8 @@ FPX Payment Page
 								<div class="panel-heading">
 									<h4 class="unicase-checkout-title">FPX Payment</h4>
 								</div>
-								<form action="{{route('fpx.order')}} " method="post" id="payment-form">
+								{{-- <form id="payment-form" action="{{route('toyyibpay-create')}} " method="post" id="payment-form"> --}}
+								<form id="payment-form" >
 									@csrf
 									<div class="form-row">
 										<label for="card-element">
@@ -133,6 +108,10 @@ FPX Payment Page
 										</label>
 									</div>
 									<br>
+									<label for="fpx-bank-element">FPX Bank</label>
+									<div id="fpx-bank-element">
+										<!-- A Stripe Element will be inserted here. -->ini fpx
+									</div>
 									<button class="btn btn-primary">Pay
 										@if($data['state_id'] != '3' && $data['state_id'] != '4')
 											@if(Session::has('coupon'))
@@ -160,48 +139,58 @@ FPX Payment Page
 </div><!-- /.body-content -->
 
 <script type="text/javascript">
-    var style = {
-        base: {
-            // Add your base input styles here. For example:
-            padding: '10px 12px',
-            color: '#32325d',
-            fontSize: '16px',
-        },
-    };
+    document.addEventListener('DOMContentLoaded', async() => {
+		const stripe = Stripe('sk_test_51Kl2mfAXlhPfw81sbjS5rLjGKHGq4Ehi19jkQnxYlMxvBYESfXsJgLNq5eOefDoUtU5kIlykvdkdisPP1BdGx5wy008MtvwEON');
 
-// Create an instance of the fpxBank Element.
-    var fpxBank = elements.create(
-    'fpxBank',
-    {
-        style: style,
-        accountHolderType: 'individual',
-    }
-    );
+		const elements = stripe.elements();
+		const fpxBank = elements.create('fpxBank',{
+			accountHolderType: 'individual',
+		})
+		fpxBank.mount('#fpx-bank-element');
 
-    // Add an instance of the fpxBank Element into the container with id `fpx-bank-element`.
-    fpxBank.mount('#fpx-bank-element');
+		const form = document.querySelector('#payment-form');
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
 
-    var form = document.getElementById('payment-form');
+			//Create a payment intent on the server
+			const {
+				error: backendError,
+				clientSecret
+			} = await fetch('/create-payment-intent', {
+				method: 'POST',
+				header: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					paymentMethodType: 'fpx',
+					currency: 'myr',
+				}),
+			}).then(r => r.json());
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+			if(backendError){
+				addMessage(backendError.message);
+				return;
+			}
 
-        var fpxButton = document.getElementById('fpx-button');
-        var clientSecret = fpxButton.dataset.secret;
-        stripe.confirmFpxPayment(clientSecret, {
-            payment_method: {
-            fpx: fpxBank,
-            },
-            // Return URL where the customer should be redirected after the authorization
-            return_url: `${window.location.href}`,
-        }).then((result) => {
-            if (result.error) {
-            // Inform the customer that there was an error.
-            var errorElement = document.getElementById('error-message');
-            errorElement.textContent = result.error.message;
-            }
-        });
-    });
+			//Confirm the payment on the client
+			const nameInput = document.querySelector('#name');
+			const {error, paymentIntent} = await Stripe.confirmFpxPayment(
+				clientSecret, {
+					payment_method:{
+						fpx: fpxBank,
+						billing_details:{
+							name: nameInput.value,
+						},
+					},
+					return_url: `${window.location.origin}/return.html`
+				}
+			)
+			if(error) {
+				addMessage(error.message);
+				return;
+			}
+		});
+	});
 </script>
 
 @endsection 
