@@ -1,58 +1,99 @@
 @extends('admin.admin_master')
 @section('admin')
+
+@php
+
+$date = date('DD m YY');
+
+$customer = DB::table('users')->count();
+$newCustomer = DB::table('users')->latest()->count();
+
+$todaysales = DB::table('orders')->where('order_date',$date)->sum('amount');
+$totalsales = DB::table('orders')->sum('amount');
+
+$todayorder = DB::table('orders')->where('order_date',$date)->count();
+$totalorder = DB::table('orders')->count();
+
+@endphp
     
 <div class="container-full">
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-2 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="icon bg-primary-light rounded w-60 h-60">
                             <i class="text-primary mr-0 font-size-24 mdi mdi-account-multiple"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">New Customers</p>
-                            <h3 class="text-white mb-0 font-weight-500">3400 <small class="text-success"><i class="fa fa-caret-up"></i> +2.5%</small></h3>
+                            <p class="text-mute mt-20 mb-0 font-size-16">New Users</p>
+                            <h3 class="text-white mb-0 font-weight-500">{{$newCustomer}} </h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-2 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
-                        <div class="icon bg-warning-light rounded w-60 h-60">
-                            <i class="text-warning mr-0 font-size-24 mdi mdi-car"></i>
+                        <div class="icon bg-primary-light rounded w-60 h-60">
+                            <i class="text-primary mr-0 font-size-24 mdi mdi-account-multiple"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Sold Cars</p>
-                            <h3 class="text-white mb-0 font-weight-500">3400 <small class="text-success"><i class="fa fa-caret-up"></i> +2.5%</small></h3>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Total Users</p>
+                            <h3 class="text-white mb-0 font-weight-500">{{$customer}} </h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-6">
-                <div class="box overflow-hidden pull-up">
-                    <div class="box-body">							
-                        <div class="icon bg-info-light rounded w-60 h-60">
-                            <i class="text-info mr-0 font-size-24 mdi mdi-sale"></i>
-                        </div>
-                        <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Sales Lost</p>
-                            <h3 class="text-white mb-0 font-weight-500">$1,250 <small class="text-danger"><i class="fa fa-caret-down"></i> -0.5%</small></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-6">
+            <div class="col-xl-2 col-6">
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">							
                         <div class="icon bg-danger-light rounded w-60 h-60">
                             <i class="text-danger mr-0 font-size-24 mdi mdi-phone-incoming"></i>
                         </div>
                         <div>
-                            <p class="text-mute mt-20 mb-0 font-size-16">Inbound Call</p>
-                            <h3 class="text-white mb-0 font-weight-500">1,460 <small class="text-danger"><i class="fa fa-caret-up"></i> -1.5%</small></h3>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Today Order</p>
+                            <h3 class="text-white mb-0 font-weight-500">{{$todayorder}} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-6">
+                <div class="box overflow-hidden pull-up">
+                    <div class="box-body">							
+                        <div class="icon bg-danger-light rounded w-60 h-60">
+                            <i class="text-danger mr-0 font-size-24 mdi mdi-phone-incoming"></i>
+                        </div>
+                        <div>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Total Order</p>
+                            <h3 class="text-white mb-0 font-weight-500">{{$totalorder}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-6">
+                <div class="box overflow-hidden pull-up">
+                    <div class="box-body">							
+                        <div class="icon bg-warning-light rounded w-60 h-60">
+                            <i class="text-warning mr-0 font-size-24 mdi mdi-car"></i>
+                        </div>
+                        <div>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Today Sales</p>
+                            <h3 class="text-white mb-0 font-weight-500">RM {{ $todaysales }} </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-6">
+                <div class="box overflow-hidden pull-up">
+                    <div class="box-body">							
+                        <div class="icon bg-info-light rounded w-60 h-60">
+                            <i class="text-info mr-0 font-size-24 mdi mdi-sale"></i>
+                        </div>
+                        <div>
+                            <p class="text-mute mt-20 mb-0 font-size-16">Monthly sales</p>
+                            <h3 class="text-white mb-0 font-weight-500">RM {{ $totalsales }}</h3>
                         </div>
                     </div>
                 </div>
@@ -71,10 +112,10 @@
                             <table class="table no-border">
                                 <thead>
                                     <tr class="text-uppercase bg-lightest">
-                                        <th style="min-width: 250px"><span class="text-white">products</span></th>
-                                        <th style="min-width: 100px"><span class="text-fade">pruce</span></th>
-                                        <th style="min-width: 100px"><span class="text-fade">deposit</span></th>
-                                        <th style="min-width: 150px"><span class="text-fade">agent</span></th>
+                                        <th style="min-width: 250px"><span class="text-white">Order Date</span></th>
+                                        <th style="min-width: 100px"><span class="text-fade">Customer Name</span></th>
+                                        <th style="min-width: 100px"><span class="text-fade">Order Total</span></th>
+                                        <th style="min-width: 150px"><span class="text-fade"></span></th>
                                         <th style="min-width: 130px"><span class="text-fade">status</span></th>
                                         <th style="min-width: 120px"></th>
                                     </tr>
