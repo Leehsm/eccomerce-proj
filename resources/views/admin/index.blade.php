@@ -20,7 +20,7 @@ $dailySales = DB::table('orders')->where('order_date',$date)->sum('amount');
 $monthlySales = DB::table('orders')->where('order_date', 'LIKE', "%$month2%")->sum('amount');
 $totalSales = DB::table('orders')->sum('amount');
 
-$orders = DB::table('orders')->get();
+$orders = DB::table('orders')->orderBy('order_date','DESC')->get();
 
 @endphp
     
