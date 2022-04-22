@@ -21,48 +21,6 @@
 		<div class='row single-product'>
 			<div class='col-md-3 sidebar'>
 				<div class="sidebar-module-container">
-                    {{-- <div class="home-banner outer-top-n">
-                        <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
-                    </div>		 --}}
-                    <!-- ============================================== HOT DEALS ============================================== -->
-                    {{-- @include('frontend.common.hot_deals') --}}
-                    <!-- ============================================== HOT DEALS: END ============================================== -->					
-                    <!-- ============================================== NEWSLETTER ============================================== -->
-                    {{-- <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small outer-top-vs">
-                        <h3 class="section-title">Newsletters</h3>
-                        <div class="sidebar-widget-body outer-top-xs">
-                            <p>Sign Up for Our Newsletter!</p>
-                            <form>
-                                <div class="form-group">
-                                    <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Subscribe to our newsletter">
-                                </div>
-                                <button class="btn btn-primary">Subscribe</button>
-                            </form>
-                        </div><!-- /.sidebar-widget-body -->
-                    </div><!-- /.sidebar-widget --> --}}
-                    <!-- ============================================== NEWSLETTER: END ============================================== -->
-                    <!-- ============================================== Testimonials============================================== -->
-                    {{-- <div class="sidebar-widget  wow fadeInUp outer-top-vs ">
-                        <div id="advertisement" class="advertisement">
-                            <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member1.png') }} " alt="Image"></div>
-                                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">John Doe	<span>Abc Company</span>	</div><!-- /.container-fluid -->
-                            </div><!-- /.item -->
-                            <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member3.png') }} " alt="Image"></div>
-                                <div class="testimonials"><em>"</em>Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">Stephen Doe	<span>Xperia Designs</span>	</div>    
-                            </div><!-- /.item -->
-                            <div class="item">
-                                <div class="avatar"><img src="{{ asset('frontend/assets/images/testimonials/member2.png') }} " alt="Image"></div>
-                                <div class="testimonials"><em>"</em> Vtae sodales aliq uam morbi non sem lacus port mollis. Nunc condime tum metus eud molest sed consectetuer.<em>"</em></div>
-                                <div class="clients_author">Saraha Smith	<span>Datsun &amp; Co</span>	</div><!-- /.container-fluid -->
-                            </div><!-- /.item -->
-                        </div><!-- /.owl-carousel -->
-                    </div> --}}
-                <!-- ============================================== Testimonials: END ============================================== -->
 			    </div>
 		    </div><!-- /.sidebar -->
             <div class='col-md-12'>
@@ -102,119 +60,204 @@
                                         {{ $product->product_name_en }} 
                                     @endif
                                 </h1>
-                                <div class="rating-reviews m-t-20">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            {{-- <div class="rating rateit-small"></div> --}}
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div class="reviews">
-                                                <a href="#" class="lnk">(13 Reviews)</a>
+                                @if($product->product_qty >= 1)
+                                    <div class="stock-container info-container m-t-10">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="stock-box">
+                                                    <span class="label">Availability :</span>
+                                                </div>	
                                             </div>
-                                        </div>
-                                    </div><!-- /.row -->		
-                                </div><!-- /.rating-reviews -->
-                                <div class="stock-container info-container m-t-10">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <div class="stock-box">
-                                                <span class="label">Availability :</span>
-                                            </div>	
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="stock-box">
-                                                <span class="value">In Stock</span>
-                                            </div>	
-                                        </div>
-                                    </div><!-- /.row -->	
-                                </div><!-- /.stock-container -->
-                                <div class="description-container m-t-20">
-                                    @if(session()->get('language') == 'malay') 
-                                        {{ $product->short_desc_my }} 
-                                    @else 
-                                        {{ $product->short_desc_en }} 
-                                    @endif
-                                </div><!-- /.description-container -->
-                                <div class="price-container info-container m-t-20">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="price-box">
-                                                @if ($product->discount_price == NULL)
-                                                    <span class="price">RM{{ $product->selling_price }}</span>
-                                                @else
-                                                    <span class="price">RM{{ $product->discount_price }}</span>
-                                                    <span class="price-strike">RM{{ $product->selling_price }}</span>
-                                                @endif
+                                            <div class="col-sm-9">
+                                                <div class="stock-box">
+                                                    <span class="value">In Stock</span>
+                                                </div>	
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="favorite-button m-t-10">
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
-                                                    <i class="fa fa-heart"></i>
-                                                </a>
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
-                                                <i class="fa fa-signal"></i>
-                                                </a>
-                                                <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
-                                                    <i class="fa fa-envelope"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                    </div><!-- /.row -->
-                                </div><!-- /.price-container -->
-                                <!--     /// Add Product Color And Product Size ///// -->
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="info-title control-label">Choose Color <span> </span></label>
-                                            <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color">
-                                                <option selected="" disabled="">--Choose Color--</option>
-                                                @foreach($product_color_en as $color)
-                                                    <option value="{{ $color }}">{{ ucwords($color) }}</option>
-                                                @endforeach
-                                            </select> 
-                                        </div> <!-- // end form group -->
-                                    </div> <!-- // end col 6 -->
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            @if($product->product_size_en == null)
-
-                                            @else
-                                                <label class="info-title control-label">Choose Size <span> </span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size">
-                                                    <option selected="" disabled="">--Choose Size--</option>
-                                                    @foreach($product_size_en as $size)
-                                                        <option value="{{ $size }}">{{ ucwords($size) }}</option>
-                                                    @endforeach
-                                                </select> 
-                                            @endif
-                                        </div> <!-- // end form group -->
-                                    </div> <!-- // end col 6 -->
-                                </div><!-- /.row -->
-                                <!--     /// End Add Product Color And Product Size ///// -->
-                                <div class="quantity-container info-container">
-                                    <div class="row">
-                                        <div class="col-sm-2">
-                                            <span class="label">Qty :</span>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="cart-quantity">
-                                                <div class="quant-input">
-                                                    <div class="arrows">
-                                                        <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                                        <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                                    </div>
-                                                    <input type="text" id="qty" value="1" min="1">
+                                        </div><!-- /.row -->	
+                                    </div><!-- /.stock-container -->
+                                    <div class="description-container m-t-20">
+                                        @if(session()->get('language') == 'malay') 
+                                            {{ $product->short_desc_my }} 
+                                        @else 
+                                            {{ $product->short_desc_en }} 
+                                        @endif
+                                    </div><!-- /.description-container -->
+                                    <div class="price-container info-container m-t-20">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="price-box">
+                                                    @if ($product->discount_price == NULL)
+                                                        <span class="price">RM{{ $product->selling_price }}</span>
+                                                    @else
+                                                        <span class="price">RM{{ $product->discount_price }}</span>
+                                                        <span class="price-strike">RM{{ $product->selling_price }}</span>
+                                                    @endif
                                                 </div>
                                             </div>
-                                        </div>
-                                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
-                                        <div class="col-sm-7">
-                                            <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
-                                        </div>
+                                            <div class="col-sm-6">
+                                                <div class="favorite-button m-t-10">
+                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    
+                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
+                                                        <i class="fa fa-share"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div><!-- /.row -->
+                                    </div><!-- /.price-container -->
+                                    <!--     /// Add Product Color And Product Size ///// -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="info-title control-label">Choose Color <span> </span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
+                                                    <option selected="" disabled="">--Choose Color--</option>
+                                                    @foreach($product_color_en as $color)
+                                                        <option value="{{ $color }}">{{ ucwords($color) }}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div> <!-- // end form group -->
+                                        </div> <!-- // end col 6 -->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @if($product->product_size_en == null)
+
+                                                @else
+                                                    <label class="info-title control-label">Choose Size <span> </span></label>
+                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
+                                                        <option selected="" disabled="">--Choose Size--</option>
+                                                        @foreach($product_size_en as $size)
+                                                            <option value="{{ $size }}">{{ ucwords($size) }}</option>
+                                                        @endforeach
+                                                    </select> 
+                                                @endif
+                                            </div> <!-- // end form group -->
+                                        </div> <!-- // end col 6 -->
                                     </div><!-- /.row -->
-                                </div><!-- /.quantity-container -->
+                                    <!--     /// End Add Product Color And Product Size ///// -->
+                                    <div class="quantity-container info-container">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <span class="label">Qty :</span>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="cart-quantity">
+                                                    <div class="quant-input">
+                                                        <div class="arrows">
+                                                            <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+                                                            <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                                        </div>
+                                                        <input type="text" id="qty" value="1" min="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                                            <div class="col-sm-7">
+                                                <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+                                            </div>
+                                        </div><!-- /.row -->
+                                    </div><!-- /.quantity-container -->
+                                @else
+                                    <div class="stock-container info-container m-t-10">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <div class="stock-box">
+                                                    <span class="label">Availability :</span>
+                                                </div>	
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <div class="stock-box">
+                                                    <span class="value">Out Of Stock</span>
+                                                </div>	
+                                            </div>
+                                        </div><!-- /.row -->	
+                                    </div><!-- /.stock-container -->
+                                    <div class="description-container m-t-20">
+                                        @if(session()->get('language') == 'malay') 
+                                            {{ $product->short_desc_my }} 
+                                        @else 
+                                            {{ $product->short_desc_en }} 
+                                        @endif
+                                    </div><!-- /.description-container -->
+                                    <div class="price-container info-container m-t-20">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="price-box">
+                                                    @if ($product->discount_price == NULL)
+                                                        <span class="price">SOLD OUT</span>
+                                                    @else
+                                                        <span class="price">SOLD OUT</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="favorite-button m-t-10">
+                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
+                                                        <i class="fa fa-share"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.row -->
+                                    </div><!-- /.price-container -->
+                                    <!--     /// Add Product Color And Product Size ///// -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="info-title control-label">Choose Color <span> </span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
+                                                    <option selected="" disabled="">--Choose Color--</option>
+                                                    @foreach($product_color_en as $color)
+                                                        <option value="{{ $color }}" disabled>{{ ucwords($color) }}</option>
+                                                    @endforeach
+                                                </select> 
+                                            </div> <!-- // end form group -->
+                                        </div> <!-- // end col 6 -->
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                @if($product->product_size_en == null)
+
+                                                @else
+                                                    <label class="info-title control-label">Choose Size <span> </span></label>
+                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
+                                                        <option selected="" disabled="">--Choose Size--</option>
+                                                        @foreach($product_size_en as $size)
+                                                            <option value="{{ $size }}" disabled>{{ ucwords($size) }}</option>
+                                                        @endforeach
+                                                    </select> 
+                                                @endif
+                                            </div> <!-- // end form group -->
+                                        </div> <!-- // end col 6 -->
+                                    </div><!-- /.row -->
+                                    <!--     /// End Add Product Color And Product Size ///// -->
+                                    <div class="quantity-container info-container">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <span class="label">Qty :</span>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="cart-quantity">
+                                                    <div class="quant-input">
+                                                        <div class="arrows">
+                                                            <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+                                                            <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                                        </div>
+                                                        <input type="text" id="qty" value="1" min="1">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1" disabled>
+                                            <div class="col-sm-7">
+                                                <button type="submit" onclick="addToCart()" class="btn btn-primary" disabled><i class="fa fa-shopping-cart inner-right-vs"></i> SOLD OUT</button>
+                                            </div>
+                                        </div><!-- /.row -->
+                                    </div><!-- /.quantity-container -->
+                                @endif
                             </div><!-- /.product-info -->
                         </div><!-- /.col-sm-7 -->
                     </div><!-- /.row -->
@@ -359,52 +402,99 @@
                     <h3 class="section-title">Related products</h3>
                     <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
                         @foreach($relatedProduct as $product)
-                            <div class="item item-carousel">
-                                <div class="products">
+                            @if($product->product_qty >= 1)
+                                <div class="item item-carousel">
+                                    <div class="products">
 
-                                    <div class="product">		
-                                        <div class="product-image">
-                                            <div class="image">
-                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
-                                            </div><!-- /.image -->			
-                                            {{-- <div class="tag sale"><span>sale</span></div>            		    --}}
-                                        </div><!-- /.product-image -->
-                                        <div class="product-info text-left">
-                                            <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
-                                                @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a>
-                                            </h3>
-                                            {{-- <div class="rating rateit-small"></div> --}}
-                                            <div class="description"></div>
+                                        <div class="product">		
+                                            <div class="product-image">
+                                                <div class="image">
+                                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
+                                                </div><!-- /.image -->			
+                                                {{-- <div class="tag sale"><span>sale</span></div>            		    --}}
+                                            </div><!-- /.product-image -->
+                                            <div class="product-info text-left">
+                                                <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                    @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a>
+                                                </h3>
+                                                {{-- <div class="rating rateit-small"></div> --}}
+                                                <div class="description"></div>
 
-                                            @if ($product->discount_price == NULL)
-                                                <div class="product-price">		
-                                                    <span class="price">
-                                                        RM{{ $product->selling_price }}	 
-                                                    </span> 
-                                                </div><!-- /.product-price -->
-                                            @else
-                                                <div class="product-price">		
-                                                    <span class="price">
-                                                        RM{{ $product->discount_price }}	 </span>
-                                                    <span class="price-before-discount">RM {{ $product->selling_price }}</span>
-                                                </div><!-- /.product-price -->
-                                            @endif
-                                        </div><!-- /.product-info -->
-                                        <div class="cart clearfix animate-effect">
-                                            <div class="action">
-                                                <ul class="list-unstyled">
-                                                    <li class="add-cart-button btn-group">
-                                                        <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
-                                                        <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
-                                                      </li>
-                                                      <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
-                                                      <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
-                                                </ul>
-                                            </div><!-- /.action -->
-                                        </div><!-- /.cart -->
-                                    </div><!-- /.product -->
-                                </div><!-- /.products -->
-                            </div><!-- /.item -->
+                                                @if ($product->discount_price == NULL)
+                                                    <div class="product-price">		
+                                                        <span class="price">
+                                                            RM{{ $product->selling_price }}	 
+                                                        </span> 
+                                                    </div><!-- /.product-price -->
+                                                @else
+                                                    <div class="product-price">		
+                                                        <span class="price">
+                                                            RM{{ $product->discount_price }}	 </span>
+                                                        <span class="price-before-discount">RM {{ $product->selling_price }}</span>
+                                                    </div><!-- /.product-price -->
+                                                @endif
+                                            </div><!-- /.product-info -->
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+                                                    <ul class="list-unstyled">
+                                                        <li class="add-cart-button btn-group">
+                                                            <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
+                                                            <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
+                                                        </li>
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
+                                                    </ul>
+                                                </div><!-- /.action -->
+                                            </div><!-- /.cart -->
+                                        </div><!-- /.product -->
+                                    </div><!-- /.products -->
+                                </div><!-- /.item -->
+                            @else
+                                <div class="item item-carousel">
+                                    <div class="products">
+
+                                        <div class="product">		
+                                            <div class="product-image">
+                                                <div class="image">
+                                                    <a><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
+                                                </div><!-- /.image -->			
+                                                {{-- <div class="tag sale"><span>sale</span></div>            		    --}}
+                                            </div><!-- /.product-image -->
+                                            <div class="product-info text-left">
+                                                <h3 class="name"><a >
+                                                    @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a>
+                                                </h3>
+                                                {{-- <div class="rating rateit-small"></div> --}}
+                                                <div class="description"></div>
+
+                                                @if ($product->discount_price == NULL)
+                                                    <div class="product-price">		
+                                                        <span class="price">
+                                                            SOLD OUT	 
+                                                        </span> 
+                                                    </div><!-- /.product-price -->
+                                                @else
+                                                    <div class="product-price">		
+                                                        <span class="price">
+                                                            SOLD OUT	 
+                                                        </span>                                                        
+                                                    </div><!-- /.product-price -->
+                                                @endif
+                                            </div><!-- /.product-info -->
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+                                                    <ul class="list-unstyled">
+                                                        <li class="add-cart-button btn-group">
+                                                          <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)" disabled> <i class="fa fa-shopping-cart"></i> </button>
+                                                          <button class="btn btn-primary cart-btn" type="button" >Sold Out</button>
+                                                        </li>
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" > <i class="fa fa-heart"></i> </button>
+                                                      </ul>
+                                                </div><!-- /.action -->
+                                            </div><!-- /.cart -->
+                                        </div><!-- /.product -->
+                                    </div><!-- /.products -->
+                                </div><!-- /.item -->
+                            @endif
                         @endforeach		
                     </div><!-- /.home-owl-carousel -->
                 </section><!-- /.section -->

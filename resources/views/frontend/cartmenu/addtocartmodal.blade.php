@@ -1,3 +1,7 @@
+{{-- @php
+$stock = DB::table('products')->where('product_color_en', NULL)->get();
+@endphp --}}
+
 <!-- Add to Cart Product Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
