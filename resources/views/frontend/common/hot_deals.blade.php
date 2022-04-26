@@ -8,14 +8,17 @@ $hot_deals = App\Models\Product::where('hot_deals',1)
 @endphp
 
 <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-    <h3 class="section-title">hot deals</h3>
+    <h3 class="section-title">Hot Deals</h3>
     <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
         @foreach($hot_deals as $product)
             @if($product->product_qty >= 1)
                 <div class="item">
                     <div class="products">
                     <div class="hot-deal-wrapper"> 
-                        <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                        <div class="image"> 
+                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                            <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                        </div>
                             @php
                             $amount = $product->selling_price - $product->discount_price;
                             $discount = ($amount/$product->selling_price) * 100;
@@ -59,7 +62,10 @@ $hot_deals = App\Models\Product::where('hot_deals',1)
                 <div class="item">
                     <div class="products">
                     <div class="hot-deal-wrapper"> 
-                        <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                        <div class="image">
+                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                            <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                        </div>
                             @php
                             $amount = $product->selling_price - $product->discount_price;
                             $discount = ($amount/$product->selling_price) * 100;
@@ -87,7 +93,7 @@ $hot_deals = App\Models\Product::where('hot_deals',1)
                             <div class="action">
                             <div class="add-cart-button btn-group">
                                 {{-- <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)" disabled> <i class="fa fa-shopping-cart"></i> </button> --}}
-                                <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)" disabled>SOLD OUT</button>
+                                <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" disabled>SOLD OUT</button>
                             </div>
                             </div>
                             <!-- /.action --> 

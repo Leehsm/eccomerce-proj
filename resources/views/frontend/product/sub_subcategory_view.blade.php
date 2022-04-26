@@ -48,7 +48,7 @@ Sub - Subcategory Product
                     </div>
                     <!-- /.col -->
                     <div class="col col-sm-12 col-md-6">
-                        {{-- <div class="col col-sm-3 col-md-6 no-padding">
+                        <div class="col col-sm-3 col-md-6 no-padding">
                             <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                                 <div class="fld inline">
                                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
@@ -64,9 +64,9 @@ Sub - Subcategory Product
                                 <!-- /.fld --> 
                             </div>
                             <!-- /.lbl-cnt --> 
-                        </div> --}}
+                        </div>
                         <!-- /.col -->
-                        {{-- <div class="col col-sm-3 col-md-6 no-padding">
+                        <div class="col col-sm-3 col-md-6 no-padding">
                             <div class="lbl-cnt"> <span class="lbl">Show</span>
                                 <div class="fld inline">
                                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
@@ -88,7 +88,7 @@ Sub - Subcategory Product
                                 <!-- /.fld --> 
                             </div>
                             <!-- /.lbl-cnt --> 
-                        </div> --}}
+                        </div>
                         <!-- /.col --> 
                     </div>
                     <!-- /.col -->
