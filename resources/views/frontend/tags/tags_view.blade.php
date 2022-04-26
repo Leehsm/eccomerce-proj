@@ -30,43 +30,56 @@ Tag Wise Product
                     <h4 class="widget-title">Category</h4>
                 </div>
                 <div class="sidebar-widget-body">
-                    <div class="accordion">
-                        @foreach($categories as $category)
-                        <div class="accordion-group">
-                            <div class="accordion-heading"> <a href="#collapse{{ $category->id }}" data-toggle="collapse" class="accordion-toggle collapsed"> 
-                                @if(session()->get('language') == 'malay') {{ $category->category_name_my }} @else {{ $category->category_name_en }} @endif 
-                            </a></div>
-                            <!-- /.accordion-heading -->
-                            <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
-                                <div class="accordion-inner">
-                                    @php
-                                        $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
-                                    @endphp 
-                            
-                                    @foreach($subcategories as $subcategory)
-                                        <ul>
-                                            <li>
-                                              <a href="#">
-                                                @if(session()->get('language') == 'malay') {{ $subcategory->subcategory_name_my }} @else {{ $subcategory->subcategory_name_en }} @endif
-                                              </a>
-                                            </li>
-                            
-                                        </ul>
-                                    @endforeach 
-                                </div>
-                            <!-- /.accordion-inner --> 
-                            </div>
-                            <!-- /.accordion-body --> 
-                        </div>
-                        <!-- /.accordion-group -->
-                        @endforeach 
-                    </div>
-                <!-- /.accordion --> 
-                </div>
+                  <div class="accordion">
+                      @foreach($categories as $category)
+                          <div class="accordion-group">
+                              <div class="accordion-heading"> 
+                                  <a href="#collapse{{ $category->id }}" data-toggle="collapse" class="accordion-toggle collapsed"> 
+                                      @if(session()->get('language') == 'malay') 
+                                          {{ $category->category_name_my }} 
+                                      @else 
+                                          {{ $category->category_name_en }} 
+                                      @endif 
+                                  </a> 
+                              </div>
+                              <!-- /.accordion-heading -->
+                              <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
+                                  <div class="accordion-inner">
+                                      @php
+                                          $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
+                                      @endphp 
+                                      @foreach($subcategories as $subcategory)
+                                          <ul>
+                                              <li>
+                                                  <a href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
+                                                      @if(session()->get('language') == 'malay') 
+                                                          {{ $subcategory->subcategory_name_my }} 
+                                                      @else 
+                                                          {{ $subcategory->subcategory_name_en }} 
+                                                      @endif
+                                                  </a>
+                                              </li>
+          
+                                          </ul>
+                                      @endforeach 
+                                  </div>
+                              <!-- /.accordion-inner --> 
+                              </div>
+                          <!-- /.accordion-body --> 
+                          </div>
+                      <!-- /.accordion-group -->
+                      @endforeach              
+                  </div>
+                  <!-- /.accordion --> 
+              </div>
               <!-- /.sidebar-widget-body --> 
             </div>
             <!-- /.sidebar-widget --> 
             <!-- ============================================== SIDEBAR CATEGORY : END ============================================== --> 
+
+            <!-- ============================================== COLOR============================================== -->
+            @include('frontend.common.color')
+            <!-- ============================================== COLOR: END ============================================== --> 
 
             <!-- ============================================== PRICE SILDER============================================== -->
             <div class="sidebar-widget wow fadeInUp">
@@ -85,67 +98,18 @@ Tag Wise Product
             </div>
             <!-- /.sidebar-widget --> 
             <!-- ============================================== PRICE SILDER : END ============================================== --> 
-            <!-- ============================================== MANUFACTURES============================================== -->
-            <div class="sidebar-widget wow fadeInUp">
-                <div class="widget-header">
-                    <h4 class="widget-title">Manufactures</h4>
-                </div>
-                <div class="sidebar-widget-body">
-                    <ul class="list">
-                    <li><a href="#">Forever 18</a></li>
-                    <li><a href="#">Nike</a></li>
-                    <li><a href="#">Dolce & Gabbana</a></li>
-                    <li><a href="#">Alluare</a></li>
-                    <li><a href="#">Chanel</a></li>
-                    <li><a href="#">Other Brand</a></li>
-                    </ul>
-                    <!--<a href="#" class="lnk btn btn-primary">Show Now</a>--> 
-                </div>
-              <!-- /.sidebar-widget-body --> 
-            </div>
-            <!-- /.sidebar-widget --> 
-            <!-- ============================================== MANUFACTURES: END ============================================== --> 
-            <!-- ============================================== COLOR============================================== -->
-            <div class="sidebar-widget wow fadeInUp">
-                <div class="widget-header">
-                    <h4 class="widget-title">Colors</h4>
-                </div>
-                <div class="sidebar-widget-body">
-                    <ul class="list">
-                    <li><a href="#">Red</a></li>
-                    <li><a href="#">Blue</a></li>
-                    <li><a href="#">Yellow</a></li>
-                    <li><a href="#">Pink</a></li>
-                    <li><a href="#">Brown</a></li>
-                    <li><a href="#">Teal</a></li>
-                    </ul>
-                </div>
-              <!-- /.sidebar-widget-body --> 
-            </div>
-            <!-- /.sidebar-widget --> 
-            <!-- ============================================== COLOR: END ============================================== --> 
-            <!-- ============================================== COMPARE============================================== -->
-            <div class="sidebar-widget wow fadeInUp outer-top-vs">
-                <h3 class="section-title">Compare products</h3>
-                <div class="sidebar-widget-body">
-                    <div class="compare-report">
-                    <p>You have no <span>item(s)</span> to compare</p>
-                    </div>
-                    <!-- /.compare-report --> 
-                </div>
-              <!-- /.sidebar-widget-body --> 
-            </div>
-            <!-- /.sidebar-widget --> 
-            <!-- ============================================== COMPARE: END ============================================== --> 
+            
+            
+            
             <!-- ============================================== PRODUCT TAGS ============================================== -->
             @include('frontend.common.product_tags')
             <!-- /.sidebar-widget --> 
 
             <!-- ============================================== Testimonials ============================================== -->
-            @include('frontend.common.testimonials')
+            {{-- @include('frontend.common.testimonials') --}}
             <!-- ============================================== Testimonials: END ============================================== -->
 
-            <div class="home-banner"> <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image"> </div>
+            {{-- <div class="home-banner"> <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image"> </div> --}}
           </div>
           <!-- /.sidebar-filter --> 
         </div>
