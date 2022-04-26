@@ -212,7 +212,10 @@ Subcategory Product
                                                 <div class="row product-list-row">
                                                     <div class="col col-sm-4 col-lg-4">
                                                         <div class="product-image">
-                                                            <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                                                            <div class="image"> 
+                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                                <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                                                            </div>
                                                         </div>
                                                     <!-- /.product-image --> 
                                                     </div>
@@ -246,11 +249,11 @@ Subcategory Product
                                                             <div class="cart clearfix animate-effect">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
-                                                                    </li>
-                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
-                                                                    {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
+                                                                        <li class="add-cart-button btn-group">
+                                                                            
+                                                                            <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
+                                                                        </li>
+                                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                     </ul>
                                                                 </div>
                                                             <!-- /.action --> 
@@ -285,7 +288,10 @@ Subcategory Product
                                                 <div class="row product-list-row">
                                                     <div class="col col-sm-4 col-lg-4">
                                                         <div class="product-image">
-                                                            <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                                                            <div class="image"> 
+                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                                <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                                                            </div>
                                                         </div>
                                                     <!-- /.product-image --> 
                                                     </div>
@@ -319,11 +325,8 @@ Subcategory Product
                                                             <div class="cart clearfix animate-effect">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
-                                                                    <li class="add-cart-button btn-group">
-                                                                        {{-- <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button> --}}
-                                                                    </li>
-                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
-                                                                    {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
+                                                                        
+                                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                     </ul>
                                                                 </div>
                                                             <!-- /.action --> 

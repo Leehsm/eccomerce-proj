@@ -145,11 +145,10 @@ Sub - Subcategory Product
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                                    <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
+                                                                    <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
                                                                 </li>
-                                                                <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                                                <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                                                <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
                                                             </ul>
                                                         </div>
                                                         <!-- /.action --> 
@@ -165,7 +164,10 @@ Sub - Subcategory Product
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
-                                                        <div class="image"> <a><img  src="{{ asset($product->product_thambnail) }}" alt=""></a> </div>
+                                                        <div class="image"> 
+                                                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                            <img  src="{{ asset($product->product_thambnail) }}" alt=""> 
+                                                        </div>
                                                         <!-- /.image -->
                                                         @php
                                                             $amount = $product->selling_price - $product->discount_price;
@@ -225,7 +227,10 @@ Sub - Subcategory Product
                                                 <div class="row product-list-row">
                                                     <div class="col col-sm-4 col-lg-4">
                                                         <div class="product-image">
-                                                            <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                                                            <div class="image"> 
+                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                                <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                                                            </div>
                                                         </div>
                                                     <!-- /.product-image --> 
                                                     </div>
@@ -247,12 +252,10 @@ Sub - Subcategory Product
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            {{-- <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button> --}}
-                                                                            <button class="btn btn-primary cart-btn" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
-                                                                            <button class="btn btn-primary cart-btn" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" >Add to wishlist</button>
+                                                                            {{-- <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button> --}}
+                                                                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                                         </li>
-                                                                        {{-- <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li> --}}
-                                                                        {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
+                                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                     </ul>
                                                                 </div>
                                                             <!-- /.action --> 
@@ -287,7 +290,10 @@ Sub - Subcategory Product
                                                 <div class="row product-list-row">
                                                     <div class="col col-sm-4 col-lg-4">
                                                         <div class="product-image">
-                                                            <div class="image"> <img src="{{ asset($product->product_thambnail) }}" alt=""> </div>
+                                                            <div class="image"> 
+                                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                                                <img src="{{ asset($product->product_thambnail) }}" alt=""> 
+                                                            </div>
                                                         </div>
                                                     <!-- /.product-image --> 
                                                     </div>
