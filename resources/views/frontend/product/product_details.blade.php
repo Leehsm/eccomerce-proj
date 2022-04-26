@@ -253,7 +253,7 @@
                                             </div>
                                             <input type="hidden" id="product_id" value="{{ $product->id }}" min="1" disabled>
                                             <div class="col-sm-7">
-                                                <button type="submit" onclick="addToCart()" class="btn btn-primary" disabled><i class="fa fa-shopping-cart inner-right-vs"></i> SOLD OUT</button>
+                                                <button type="submit" class="btn btn-primary" disabled><i class="fa fa-shopping-cart inner-right-vs"></i> SOLD OUT</button>
                                             </div>
                                         </div><!-- /.row -->
                                     </div><!-- /.quantity-container -->
@@ -268,7 +268,6 @@
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                 <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
                                 <li><a data-toggle="tab" href="#review">REVIEW</a></li>
-                                <li><a data-toggle="tab" href="#tags">TAGS</a></li>
                             </ul><!-- /.nav-tabs #product-tabs -->
                         </div>
                         <div class="col-sm-9">
@@ -369,29 +368,6 @@
                                         </div><!-- /.product-add-review -->										
                                     </div><!-- /.product-tab -->
                                 </div><!-- /.tab-pane -->
-
-                                <div id="tags" class="tab-pane">
-                                    <div class="product-tag">
-                                        <h4 class="title">Product Tags</h4>
-                                        <form role="form" class="form-inline form-cnt">
-                                            <div class="form-container">
-                                                <div class="form-group">
-                                                    <label for="exampleInputTag">Add Your Tags: </label>
-                                                    <input type="email" id="exampleInputTag" class="form-control txt">
-                                                </div>
-                                                <button class="btn btn-upper btn-primary" type="submit">ADD TAGS</button>
-                                            </div><!-- /.form-container -->
-                                        </form><!-- /.form-cnt -->
-                                        <form role="form" class="form-inline form-cnt">
-                                            <div class="form-group">
-                                                <label>&nbsp;</label>
-                                                <span class="text col-md-offset-3">Use spaces to separate tags. Use single quotes (') for phrases.</span>
-                                            </div>
-                                        </form><!-- /.form-cnt -->
-
-                                    </div><!-- /.product-tab -->
-                                </div><!-- /.tab-pane -->
-
                             </div><!-- /.tab-content -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -402,7 +378,7 @@
                     <h3 class="section-title">Related products</h3>
                     <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
                         @foreach($relatedProduct as $product)
-                            @if($product->product_qty >= 1)
+                            {{-- @if($product->product_qty >= 1) --}}
                                 <div class="item item-carousel">
                                     <div class="products">
 
@@ -448,53 +424,8 @@
                                         </div><!-- /.product -->
                                     </div><!-- /.products -->
                                 </div><!-- /.item -->
-                            @else
-                                <div class="item item-carousel">
-                                    <div class="products">
-
-                                        <div class="product">		
-                                            <div class="product-image">
-                                                <div class="image">
-                                                    <a><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
-                                                </div><!-- /.image -->			
-                                                {{-- <div class="tag sale"><span>sale</span></div>            		    --}}
-                                            </div><!-- /.product-image -->
-                                            <div class="product-info text-left">
-                                                <h3 class="name"><a >
-                                                    @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a>
-                                                </h3>
-                                                {{-- <div class="rating rateit-small"></div> --}}
-                                                <div class="description"></div>
-
-                                                @if ($product->discount_price == NULL)
-                                                    <div class="product-price">		
-                                                        <span class="price">
-                                                            SOLD OUT	 
-                                                        </span> 
-                                                    </div><!-- /.product-price -->
-                                                @else
-                                                    <div class="product-price">		
-                                                        <span class="price">
-                                                            SOLD OUT	 
-                                                        </span>                                                        
-                                                    </div><!-- /.product-price -->
-                                                @endif
-                                            </div><!-- /.product-info -->
-                                            <div class="cart clearfix animate-effect">
-                                                <div class="action">
-                                                    <ul class="list-unstyled">
-                                                        <li class="add-cart-button btn-group">
-                                                          <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)" disabled> <i class="fa fa-shopping-cart"></i> </button>
-                                                          <button class="btn btn-primary cart-btn" type="button" >Sold Out</button>
-                                                        </li>
-                                                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" > <i class="fa fa-heart"></i> </button>
-                                                      </ul>
-                                                </div><!-- /.action -->
-                                            </div><!-- /.cart -->
-                                        </div><!-- /.product -->
-                                    </div><!-- /.products -->
-                                </div><!-- /.item -->
-                            @endif
+                            
+                            {{-- @endif --}}
                         @endforeach		
                     </div><!-- /.home-owl-carousel -->
                 </section><!-- /.section -->
