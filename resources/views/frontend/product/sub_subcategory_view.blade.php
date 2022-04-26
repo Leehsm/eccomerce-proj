@@ -48,7 +48,7 @@ Sub - Subcategory Product
                     </div>
                     <!-- /.col -->
                     <div class="col col-sm-12 col-md-6">
-                        <div class="col col-sm-3 col-md-6 no-padding">
+                        {{-- <div class="col col-sm-3 col-md-6 no-padding">
                             <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                                 <div class="fld inline">
                                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
@@ -64,9 +64,9 @@ Sub - Subcategory Product
                                 <!-- /.fld --> 
                             </div>
                             <!-- /.lbl-cnt --> 
-                        </div>
+                        </div> --}}
                         <!-- /.col -->
-                        <div class="col col-sm-3 col-md-6 no-padding">
+                        {{-- <div class="col col-sm-3 col-md-6 no-padding">
                             <div class="lbl-cnt"> <span class="lbl">Show</span>
                                 <div class="fld inline">
                                     <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
@@ -88,7 +88,7 @@ Sub - Subcategory Product
                                 <!-- /.fld --> 
                             </div>
                             <!-- /.lbl-cnt --> 
-                        </div>
+                        </div> --}}
                         <!-- /.col --> 
                     </div>
                     <!-- /.col -->
@@ -171,18 +171,10 @@ Sub - Subcategory Product
                                                             $amount = $product->selling_price - $product->discount_price;
                                                             $discount = ($amount/$product->selling_price) * 100;
                                                         @endphp     
-
-                                                        <div>
-                                                            @if ($product->discount_price == NULL)
-                                                                <div class="tag new"><span>new</span></div>
-                                                            @else
-                                                                <div class="tag hot"><span>{{ round($discount) }}%</span></div>
-                                                            @endif
-                                                        </div>
                                                     </div>
                                                     <!-- /.product-image -->
                                                     <div class="product-info text-left">
-                                                        <h3 class="name"><a>
+                                                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                                             @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a></h3>
                                                         {{-- <div class="rating rateit-small"></div> --}}
                                                         <div class="description"></div>
@@ -302,13 +294,13 @@ Sub - Subcategory Product
                                                     <!-- /.col -->
                                                     <div class="col col-sm-8 col-lg-8">
                                                         <div class="product-info">
-                                                            <h3 class="name"><a>
+                                                            <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
                                                                 @if(session()->get('language') == 'malay') {{ $product->product_name_my }} @else {{ $product->product_name_en }} @endif</a></h3>
                                                             {{-- <div class="rating rateit-small"></div> --}}
                                                             @if ($product->discount_price == NULL)
                                                                 <div class="product-price"> <span class="price"> SOLD OUT </span>  </div>
                                                             @else
-                                                                <div class="product-price"> <span class="price"> SOLD OUT </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span> </div>
+                                                                <div class="product-price"> <span class="price"> SOLD OUT </span></div>
                                                             @endif
                                                             <!-- /.product-price -->
                                                             <div class="description m-t-10">
@@ -317,7 +309,7 @@ Sub - Subcategory Product
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
-                                                                            <button class="btn btn-primary cart-btn" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" >Add to wishlist</button>
+                                                                            <button class="btn btn-primary cart-btn" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" >Add to Wishlist</button>
                                                                         </li>
                                                                         
                                                                     </ul>
@@ -335,13 +327,6 @@ Sub - Subcategory Product
                                                     $discount = ($amount/$product->selling_price) * 100;
                                                 @endphp    
                                                 <!-- /.product-list-row -->
-                                                <div>
-                                                    @if ($product->discount_price == NULL)
-                                                        <div class="tag new"><span>new</span></div>
-                                                    @else
-                                                        <div class="tag hot"><span>{{ round($discount) }}%</span></div>
-                                                    @endif
-                                                </div>
                                             </div>
                                             <!-- /.product-list --> 
                                         </div>
