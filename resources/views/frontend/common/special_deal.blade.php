@@ -37,7 +37,10 @@
                             <div class="row product-micro-row">
                                 <div class="col col-xs-5">
                                 <div class="product-image">
-                                    <div class="image"> <a> <img src="{{ asset($product->product_thambnail) }}"  alt=""> </a> </div>
+                                    <div class="image"> 
+                                        <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en ) }}">
+                                        <img src="{{ asset($product->product_thambnail) }}"  alt=""> 
+                                    </div>
                                     <!-- /.image -->
                                     </div>
                                     <!-- /.product-image --> 
