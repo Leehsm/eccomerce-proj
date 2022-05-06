@@ -188,6 +188,11 @@ Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::cl
 // Product View Modal with Ajax
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
 
+//frontend others
+Route::get('/contact-us', [IndexController::class, 'ContactUs'])->name('contact-us');
+Route::get('/faq', [IndexController::class, 'Faq'])->name('faq');
+Route::get('/delivery', [IndexController::class, 'Delivery'])->name('delivery');
+
 // Add to Cart Store Data
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
