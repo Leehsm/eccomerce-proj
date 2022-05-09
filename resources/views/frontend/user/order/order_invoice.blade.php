@@ -76,16 +76,18 @@
                                           {{ $order->post_code }}, 
                                           {{ $order->district->district_name }},
                                           {{ $order->division->division_name }}, 
-                                          {{ $order->state->state_name }} </th>
+                                          {{ $order->state->state_name }} <br>
+
+                <strong>Note:</strong> {{ $order->notes }} 
                 
                 </p>
                 </td>
                 <td>
                 <p class="font">
                     <h3><span style="color: rgb(0, 0, 0);">Invoice No:</span> #{{ $order->invoice_no }}</h3>
-                    Order Date: {{ $order->order_date }} <br>
-                    Delivery Date: {{ $order->delivered_date }} <br>
-                    Payment Type : {{ $order->payment_type }} </span>
+                    <strong>Order Date: </strong> {{ $order->order_date }} <br>
+                    <strong>Delivery Date: </strong> {{ $order->delivered_date }} <br>
+                    <strong>Payment Type : </strong> {{ $order->payment_type }} </span>
                 </p>
                 </td>
             </tr>
@@ -140,8 +142,8 @@
         <table width="100%" style=" padding:0 10px 0 10px;">
             <tr>
                 <td align="right" >
-                    <h2><span style="color: rgb(0, 0, 0);">Subtotal:</span> {{ $order->amount }}</h2>
-                    <h2><span style="color: rgb(0, 0, 0);">Total:</span> {{ $order->amount }}</h2>
+                    <h2><span style="color: rgb(0, 0, 0);">Subtotal (+ Shipping Fee):</span> {{ $order->amount }}</h2>
+                    <h2><span style="color: rgb(0, 0, 0);">Total :</span> {{ $order->amount }}</h2>
                     <h2><span style="color: rgb(0, 0, 0);">Full Payment PAID</h2>
                 </td>
             </tr>

@@ -73,6 +73,10 @@
                                 <th>{{ $order->amount }} </th>
                             </tr>
                             <tr>
+                                <th> Notes : </th>
+                                <th>{{ $order->notes }} </th>
+                            </tr>
+                            <tr>
                                 <th> Order : </th>
                                 <th>   
                                     <span class="badge badge-pill badge-warning" style="background: #418DB9;">{{ $order->status }} </span> 
