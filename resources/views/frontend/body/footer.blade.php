@@ -81,6 +81,7 @@
             <a target="_blank" href="https://www.instagram.com/_sahirashop_/?hl=en" title="Instagram"><img src="{{ asset('frontend/assets/images/social/instagram.png') }}" style="width: 17%; height: 17%"></a></li>
             <a target="_blank" href="https://www.tiktok.com/@_sahirashop_" title="Tiktok"><img src="{{ asset('frontend/assets/images/social/tik-tok.png') }}" style="width: 15%; height: 15%"></a></li>
             <a target="_blank" href="https://www.youtube.com/channel/UCmowQRy-W0_Evqzcz925uwg" title="Youtube"><img src="{{ asset('frontend/assets/images/social/youtube.png') }}" style="width: 15%; height: 15%"></a></li>               
+            <a target="_blank" href="https://t.me/+jo2Zzv09p9YxYzFl" title="Telegram"><img src="{{ asset('frontend/assets/images/social/telegram.png') }}" style="width: 15%; height: 15%"></a></li>               
           </div>
           <!-- /.module-body --> 
         </div>
