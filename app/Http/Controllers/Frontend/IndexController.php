@@ -211,5 +211,15 @@ class IndexController extends Controller
 		));
 
     }
+
+    public function ContactUs(){
+        return view('frontend.others.contactUs');
+    }
+    public function Faq(){
+        return view('frontend.others.faq');
+    }
+    public function Delivery(){
+        return view('frontend.others.delivery');
+    }
     
 }
