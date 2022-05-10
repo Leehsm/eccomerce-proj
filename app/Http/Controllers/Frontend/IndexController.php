@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\User;
@@ -221,5 +222,22 @@ class IndexController extends Controller
     public function Delivery(){
         return view('frontend.others.delivery');
     }
-    
+    public function Blog(){
+        $blogs = Blog::where('status',1)
+                        ->orderBy('id','DESC')
+                        ->get();
+        return view('frontend.others.blog', compact('blogs'));
+    }
+    public function BlogDetail($id){
+        $blogs = Blog::findOrFail($id);
+
+        $image = $blogs->blogImg;
+		$title = $blogs->title;
+
+		$date = $blogs->date;
+		$description = $blogs->description;
+		$description2 = $blogs->long_description;
+
+        return view('frontend.others.blogDetails', compact('blogs','image','title','date','description','description2'));
+    }
 }
