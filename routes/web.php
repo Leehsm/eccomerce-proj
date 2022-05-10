@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -192,6 +193,9 @@ Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax
 Route::get('/contact-us', [IndexController::class, 'ContactUs'])->name('contact-us');
 Route::get('/faq', [IndexController::class, 'Faq'])->name('faq');
 Route::get('/delivery', [IndexController::class, 'Delivery'])->name('delivery');
+Route::get('/blog', [IndexController::class, 'Blog'])->name('blog');
+Route::get('/blog/blog-details/{id}', [IndexController::class, 'BlogDetail'])->name('blog-details');
+
 
 // Add to Cart Store Data
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
@@ -324,4 +328,17 @@ Route::prefix('report')->group(function(){
  Route::prefix('alluser')->group(function(){ 
     Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-user'); 
 });
+
+Route::prefix('blog')->group(function(){
+    // Ship Division 
+    Route::get('/view', [BlogController::class, 'BlogView'])->name('all-blog');
+    Route::get('/add', [BlogController::class, 'BlogAdd'])->name('blog.add');
+    Route::post('/store', [BlogController::class, 'BlogStore'])->name('blog.store');
+    Route::get('/edit/{id}', [BlogController::class, 'BlogEdit'])->name('blog.edit');
+    Route::post('/update/{id}', [BlogController::class, 'BlogUpdate'])->name('blog.update');
+    Route::get('/delete/{id}', [BlogController::class, 'BlogDelete'])->name('blog.delete');
+
+    Route::get('/inactive/{id}', [BlogController::class, 'BlogInactive'])->name('blog.inactive');
+    Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
+});   
 
