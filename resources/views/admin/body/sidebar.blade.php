@@ -103,6 +103,8 @@
           <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship Country</a></li>  
         </ul>
       </li>
+
+
       <li class="header nav-small-cap">Sales</li>
       <li class="treeview {{ ($prefix == '/orders')?'active':'' }}  ">
         <a href="#">
@@ -147,7 +149,25 @@
           <li class="{{ ($route == 'all-user')? 'active':'' }}"><a href="{{ route('all-user') }}"><i class="ti-more"></i>All User</a></li>
         </ul>
       </li> 
+
+
+      <li class="header nav-small-cap">Others</li>
+      <li class="treeview {{ ($prefix == '/blog')?'active':'' }}  ">
+        <a href="#">
+          <i data-feather="book-open"></i>
+          <span>Blog</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ ($route == 'all-blog')? 'active':'' }}"><a href="{{ route('all-blog') }}"><i class="ti-more"></i>All Blog</a></li>
+          <li class="{{ ($route == 'blog.add')? 'active':'' }}"><a href="{{ route('blog.add') }}"><i class="ti-more"></i>Add Blog</a></li>
+        </ul>
+      </li>
     </ul>
+
+
   </section>
 	<div class="sidebar-footer">
 		<!-- item-->

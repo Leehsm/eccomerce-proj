@@ -62,7 +62,7 @@
           <div class="module-body">
             <ul class='list-unstyled'>
               <li class="first"><a title="Company" href="#">Company</a></li>
-              <li><a title="Blogs" href="#">Blogs</a></li>
+              <li><a title="Blogs" href="{{ route('blog') }}">Blogs</a></li>
               <li class="last"><a title="Membership">Membership (Coming Soon)</a></li>
             </ul>
           </div>
