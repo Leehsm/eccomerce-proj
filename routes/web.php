@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 //USER ALL ROUTE
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/user/reg', [IndexController::class, 'UserReg'])->name('user.register');
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
 Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
 Route::get('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
@@ -341,4 +342,7 @@ Route::prefix('blog')->group(function(){
     Route::get('/inactive/{id}', [BlogController::class, 'BlogInactive'])->name('blog.inactive');
     Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
 });   
+
+//Search route
+Route::post('/product/search', [CartController::class, 'Search'])->name('product.search');
 
