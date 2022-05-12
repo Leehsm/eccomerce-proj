@@ -240,4 +240,8 @@ class IndexController extends Controller
 
         return view('frontend.others.blogDetails', compact('blogs','image','title','date','description','description2'));
     }
+
+    public function UserReg(){
+        return view('auth.register');
+    }
 }
