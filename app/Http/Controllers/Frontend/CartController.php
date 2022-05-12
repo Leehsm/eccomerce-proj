@@ -159,6 +159,14 @@ class CartController extends Controller
         }
     } // end method 
 
+    public function Search(Request $request){
+        $item = $request->search;
 
+        // echo "$item";
+
+        $products = Product::where('product_name_en', 'LIKE', "%$item%")->paginate(20);
+
+        return view('frontend.others.search', compact('products'));
+    }
 
 }
