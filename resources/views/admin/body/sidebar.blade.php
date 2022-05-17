@@ -11,8 +11,8 @@
       <div class="ulogo">
         <a href="index.html">
           <!-- logo for regular state and mobile devices -->
-          <div class="d-flex align-items-center justify-content-center">					 	
-              <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
+          <div class="d-flex align-items-center justify-content-center">			
+            <img src="{{ asset('backend/images/logo.png') }}" alt="" style="width: 25%">
               <h3><b>Sahira</b> Shop</h3>
           </div>
         </a>
@@ -173,7 +173,7 @@
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
 		<!-- item-->
-		<a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ti-email"></i></a>
+		<a href="{{ route('stock-cart') }}" class="link" data-toggle="tooltip" title="" data-original-title="Stock Cart"><i class="ti-agenda"></i></a>
 		<!-- item-->
 		<a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
 	</div>

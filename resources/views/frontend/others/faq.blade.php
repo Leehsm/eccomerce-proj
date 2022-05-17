@@ -9,7 +9,7 @@ FAQ
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<ol><a href="{{ url('/') }}">Home</a></ol>
+				<li><a href="{{ url('/') }}">Home</a></li>
 				<li class='active'>FAQ</ol>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->

@@ -10,8 +10,7 @@
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="{{ url('/') }}">Home</a></li>
-				<li><a href="#">Clothing</a></li>
-				<li class='active'>Product name</li>
+				<li class='active'>{{ $product->product_name_en }}</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -114,7 +113,7 @@
                                             <div class="form-group">
                                                 <label class="info-title control-label">Choose Color <span> </span></label>
                                                 <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
-                                                    <option selected="" disabled="">--Choose Color--</option>
+                                                    {{-- <option selected="" disabled="">--Choose Color--</option> --}}
                                                     @foreach($product_color_en as $color)
                                                         <option value="{{ $color }}">{{ ucwords($color) }}</option>
                                                     @endforeach
@@ -128,7 +127,7 @@
                                                 @else
                                                     <label class="info-title control-label">Choose Size <span> </span></label>
                                                     <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
-                                                        <option selected="" disabled="">--Choose Size--</option>
+                                                        {{-- <option selected="" disabled="">--Choose Size--</option> --}}
                                                         @foreach($product_size_en as $size)
                                                             <option value="{{ $size }}">{{ ucwords($size) }}</option>
                                                         @endforeach

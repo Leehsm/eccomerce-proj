@@ -4,17 +4,6 @@
 Subcategory Product 
 @endsection
 
-<div class="breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-inner">
-            <ul class="list-inline list-unstyled">
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li class='active'>Handbags</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- /.breadcrumb -->
 <div class="body-content outer-top-xs">
     <div class='container'>
         <div class='row'>

@@ -10,7 +10,8 @@ Blog
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>Blog</li>
+				<li><a href="{{ url('/blog') }}">Blog</a></li>
+				<li class='active'>Blog Detail</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->

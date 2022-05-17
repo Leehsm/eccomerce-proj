@@ -22,9 +22,24 @@ $totalSales = DB::table('orders')->sum('amount');
 
 $orders = DB::table('orders')->orderBy('order_date','DESC')->get();
 
+$orderTrial1 = DB::table('products')
+                ->join('order_items', 'products.id', '=', 'order_items.product_id')
+                ->get(['product_qty', 'qty']);
+               
+$orderTrial2 = DB::table('products')
+               ->join('order_items', 'products.id', '=', 'order_items.product_id')
+               ->get(['qty']);
+
+$orderTrial3 = DB::table('products')
+                ->join('order_items', 'products.id', '=', 'order_items.product_id')
+                ->select('products.*', 'order_items.product_id');
+
 @endphp
     
 <div class="container-full">
+    {{$orderTrial1}}
+    {{-- {{$orderTrial2}} --}}
+    {{-- {{$orderTrial3}} --}}
     <!-- Main content -->
     <section class="content">
         <div class="row">

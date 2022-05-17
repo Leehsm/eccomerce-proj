@@ -63,7 +63,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
             <!-- ============================================================= LOGO ============================================================= -->
-            <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/ss.png') }}" alt="logo"> </a> </div>
+            <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/slogo.png') }}" alt="logo" style="width: 60%"> </a> </div>
             <!-- /.logo --> 
             <!-- ============================================================= LOGO : END ============================================================= --> </div>
           <!-- /.logo-holder -->
@@ -72,10 +72,11 @@
             <!-- /.contact-row --> 
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-              <form>
+              <form method="post" action="{{ route('product.search') }}">
+                @csrf
                 <div class="control-group">
-                  <input class="search-field" placeholder="Search here..." />
-                  <a class="search-button" href="#" ></a> 
+                  <input class="search-field" type="search" name="search" placeholder="Search here..." />
+                  <button type="submit"class="search-button"></button>
                 </div>
               </form>
             </div>

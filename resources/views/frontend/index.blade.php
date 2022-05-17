@@ -922,7 +922,7 @@ SahiraShop
         <!-- == ==== skip_brand_product_1 PRODUCTS : END ==== === --> 
         
         <!-- ============================================== BLOG SLIDER ============================================== -->
-        <section class="section latest-blog outer-bottom-vs wow fadeInUp">
+        {{-- <section class="section latest-blog outer-bottom-vs wow fadeInUp">
           <h3 class="section-title">latest form blog</h3>
           <div class="blog-slider-container outer-top-xs">
             <div class="owl-carousel blog-slider custom-carousel">
@@ -1027,7 +1027,7 @@ SahiraShop
             <!-- /.owl-carousel --> 
           </div>
           <!-- /.blog-slider-container --> 
-        </section>
+        </section> --}}
         <!-- /.section --> 
         <!-- ============================================== BLOG SLIDER : END ============================================== -->         
       </div>

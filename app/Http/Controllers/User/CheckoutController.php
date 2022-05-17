@@ -42,11 +42,6 @@ class CheckoutController extends Controller
     	$data['state_id'] = $request->state_id;
     	$data['notes'] = $request->notes;
 
-		// if($request->state_id != 3 && $request->state_id != 4){
-		// 	$cartTotal = Cart::total() + 10.00;
-		// }else{
-		// 	$cartTotal = Cart::total() + 15.00;
-		// }
         $cartTotal = Cart::total();
 
     	if ($request->payment_method == 'stripe') {

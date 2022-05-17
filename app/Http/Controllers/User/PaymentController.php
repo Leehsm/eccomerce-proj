@@ -15,6 +15,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 
+// require 'vendor/autoload.php';
+
 class PaymentController extends Controller
 {
     public function StripeOrder(Request $request){
@@ -102,6 +104,10 @@ class PaymentController extends Controller
                 'message' => 'Your Order Place Successfully',
                 'alert-type' => 'success'
             );
+
+            // $stockDec = DB::table('products')
+            //             ->join('order_items', 'products.id', '=', 'order_items.product_id')
+            //             ->get(['qty']);
 
             return redirect()->route('my.orders')->with($notification);
         }else{
