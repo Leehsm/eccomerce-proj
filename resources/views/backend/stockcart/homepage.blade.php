@@ -48,7 +48,7 @@
                                             </td>
                                             <td>
                                                 <span class="text-fade font-weight-600 d-block font-size-16">
-                                                    RM {{ $item->size }}
+                                                    {{ $item->size }}
                                                 </span>
                                             </td>
                                             <td>
@@ -62,7 +62,15 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a href="{{ route('pending-orders-details',$item->id) }}" class="waves-effect waves-light btn btn-info btn-circle mx-5" title="Edit Data"><span class="fa fa-eye"></span></a>
+                                                @if($item->category == 'Bag')
+                                                    <a href="{{ route('bag.edit',$item->id) }}" class="waves-effect waves-light btn btn-info btn-circle mx-5" title="Edit Data"><span class="fa fa-eye"></span></a>
+                                                @elseif($item->category == 'Clothing')
+                                                    <a href="{{ route('cloth.edit',$item->id) }}" class="waves-effect waves-light btn btn-info btn-circle mx-5" title="Edit Data"><span class="fa fa-eye"></span></a>
+                                                @elseif($item->category == 'Wallet')
+                                                    <a href="{{ route('wallet.edit',$item->id) }}" class="waves-effect waves-light btn btn-info btn-circle mx-5" title="Edit Data"><span class="fa fa-eye"></span></a>
+                                                @else
+                                                    <a href="{{ route('skincare.edit',$item->id) }}" class="waves-effect waves-light btn btn-info btn-circle mx-5" title="Edit Data"><span class="fa fa-eye"></span></a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach	

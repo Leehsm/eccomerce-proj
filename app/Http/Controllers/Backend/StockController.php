@@ -19,7 +19,7 @@ class StockController extends Controller
 
     //Bag
     public function BagView(){
-		$bags = Stock::latest()->get();
+		$bags = Stock::latest()->where('category', 'Bag')->get();
 		return view('backend.stockcart.bag.view',compact('bags'));
 	}
 
@@ -129,7 +129,7 @@ class StockController extends Controller
 
     //Clothing
     public function ClothView(){
-        $cloths = Stock::latest()->get();
+        $cloths = Stock::latest()->where('category', 'Clothing')->get();
         return view('backend.stockcart.clothing.view',compact('cloths'));
     }
 
@@ -239,7 +239,7 @@ class StockController extends Controller
 
     //WALLET
     public function WalletView(){
-        $wallets = Stock::latest()->get();
+        $wallets = Stock::latest()->where('category', 'Wallet')->get();
         return view('backend.stockcart.wallet.view',compact('wallets'));
     }
 
@@ -349,7 +349,7 @@ class StockController extends Controller
 
     //SKINCARE
     public function SkincareView(){
-        $skincare = Stock::latest()->get();
+        $skincare = Stock::latest()->where('category', 'Skincare')->get();
         return view('backend.stockcart.skincare.view',compact('skincare'));
     }
 
@@ -455,4 +455,15 @@ class StockController extends Controller
         return redirect()->back()->with($notification);
     
     } // end method
+
+    //SEARCH
+    public function Search(Request $request){
+        $item = $request->search;
+
+        // echo "$item";
+
+        $stocks = Stock::where('name', 'LIKE', "%$item%")->paginate(20);
+
+        return view('backend.stockcart.homepage', compact('stocks'));
+    }
 }

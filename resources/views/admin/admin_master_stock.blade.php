@@ -25,7 +25,7 @@
 	
 <div class="wrapper">
 
-    @include('admin.body.header')
+    @include('admin.body.header_stock')
 
   <!-- Left side column. contains the logo and sidebar -->
   

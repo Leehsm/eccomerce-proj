@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <h5>Category<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  name="category" class="form-control" > 
+                                        <input type="text"  name="category" class="form-control" value="Wallet" disabled> 
                                         @error('category') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 

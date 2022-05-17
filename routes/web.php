@@ -354,6 +354,10 @@ Route::get('/edit/{id}', [StockController::class, 'StockCartEdit'])->name('stock
 Route::post('/update', [StockController::class, 'StockCartUpdate'])->name('stock.update');
 Route::get('/delete/{id}', [StockController::class, 'StockCartDelete'])->name('stock.delete'); 
 
+
+//Stock Cart search route
+Route::post('/stock/search', [StockController::class, 'Search'])->name('stock.search');
+
 //Bag Stock All Route
 Route::prefix('bag')->group(function(){
     
