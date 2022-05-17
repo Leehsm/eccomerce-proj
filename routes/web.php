@@ -10,6 +10,8 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryController;
+use App\Http\Controllers\Backend\StockController;
+
 // use App\Http\Controllers\Backend\SubSubSubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
@@ -346,3 +348,49 @@ Route::prefix('blog')->group(function(){
 //Search route
 Route::post('/product/search', [CartController::class, 'Search'])->name('product.search');
 
+//Stock cart route
+Route::get('/stock-cart', [StockController::class, 'StockCart'])->name('stock-cart');
+Route::get('/edit/{id}', [StockController::class, 'StockCartEdit'])->name('stock.edit');
+Route::post('/update', [StockController::class, 'StockCartUpdate'])->name('stock.update');
+Route::get('/delete/{id}', [StockController::class, 'StockCartDelete'])->name('stock.delete'); 
+
+//Bag Stock All Route
+Route::prefix('bag')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'BagView'])->name('manage-bag');
+    Route::get('/add', [StockController::class, 'AddBag'])->name('add-bag');
+    Route::post('/store', [StockController::class, 'BagStore'])->name('bag.store');
+    Route::get('/edit/{id}', [StockController::class, 'BagEdit'])->name('bag.edit');
+    Route::post('/update', [StockController::class, 'BagUpdate'])->name('bag.update');
+    Route::get('/delete/{id}', [StockController::class, 'BagDelete'])->name('bag.delete');  
+});
+//Clothing Stock All Route
+Route::prefix('clothing')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'ClothView'])->name('manage-cloth');
+    Route::get('/add', [StockController::class, 'AddCloth'])->name('add-cloth');
+    Route::post('/store', [StockController::class, 'ClothStore'])->name('cloth.store');
+    Route::get('/edit/{id}', [StockController::class, 'ClothEdit'])->name('cloth.edit');
+    Route::post('/update', [StockController::class, 'ClothUpdate'])->name('cloth.update');
+    Route::get('/delete/{id}', [StockController::class, 'ClothDelete'])->name('cloth.delete');  
+});
+//Wallet Stock All Route
+Route::prefix('wallet')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'WalletView'])->name('manage-wallet');
+    Route::get('/add', [StockController::class, 'AddWallet'])->name('add-wallet');
+    Route::post('/store', [StockController::class, 'WalletStore'])->name('wallet.store');
+    Route::get('/edit/{id}', [StockController::class, 'WalletEdit'])->name('wallet.edit');
+    Route::post('/update', [StockController::class, 'WalletUpdate'])->name('wallet.update');
+    Route::get('/delete/{id}', [StockController::class, 'WalletDelete'])->name('wallet.delete');  
+});
+//Skincare Stock All Route
+Route::prefix('skincare')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'SkincareView'])->name('manage-skincare');
+    Route::get('/add', [StockController::class, 'AddSkincare'])->name('add-skincare');
+    Route::post('/store', [StockController::class, 'SkincareStore'])->name('skincare.store');
+    Route::get('/edit/{id}', [StockController::class, 'SkincareEdit'])->name('skincare.edit');
+    Route::post('/update', [StockController::class, 'SkincareUpdate'])->name('skincare.update');
+    Route::get('/delete/{id}', [StockController::class, 'SkincareDelete'])->name('skincare.delete');  
+});
