@@ -48,85 +48,83 @@
               @endauth
             </ul>
           </div>
-          <!-- /.cnt-account -->
-          <!-- /.cnt-cart -->
           <div class="clearfix"></div>
         </div>
-        <!-- /.header-top-inner --> 
       </div>
-      <!-- /.container --> 
     </div>
-    <!-- /.header-top --> 
     <!-- ============================================== TOP MENU : END ============================================== -->
+
     <div class="main-header">
       <div class="container">
         <div class="row">
+
+          <!-- ============================================================= LOGO ============================================================= -->
           <div class="col-xs-12 col-sm-12 col-md-3 logo-holder"> 
-            <!-- ============================================================= LOGO ============================================================= -->
-            <div class="logo"> <a href="{{ url('/') }}"> <img src="{{ asset('frontend/assets/images/ss.png') }}" alt="logo"> </a> </div>
-            <!-- /.logo --> 
-            <!-- ============================================================= LOGO : END ============================================================= --> </div>
-          <!-- /.logo-holder -->
+            <div class="logo"> 
+              <a href="{{ url('/') }}"> 
+                <img src="{{ asset('frontend/assets/images/slogo.png') }}" alt="logo" style="width: 60%"> 
+              </a> 
+            </div>
+          </div>
+          <!-- ============================================================= LOGO ============================================================= -->
           
+          <!-- ============================================================= SEARCH AREA ============================================================= -->
           <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder"> 
-            <!-- /.contact-row --> 
-            <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-              <form>
+              <form method="post" action="{{ route('product.search') }}">
+                @csrf
                 <div class="control-group">
-                  <input class="search-field" placeholder="Search here..." />
-                  <a class="search-button" href="#" ></a> 
+                  <input class="search-field" type="search" name="search" placeholder="Search here..." />
+                  <button type="submit"class="search-button"></button>
                 </div>
               </form>
             </div>
-            <!-- /.search-area --> 
-            <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
-          <!-- /.top-search-holder -->
+          </div>
+          <!-- ============================================================= SEARCH AREA : END ============================================================= --> 
           
+          <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
           <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row"> 
-            <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
-            
-            <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
+            <div class="dropdown dropdown-cart"> 
+              <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
               <div class="items-cart-inner">
-                <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
-              <div class="total-price-basket"> <span class="lbl">cart -</span> 
-                <span class="total-price"> <span class="sign">RM</span>
-                <span class="value" id="cartSubTotal"> </span> </span> </div>
+                <div class="basket"> 
+                  <i class="glyphicon glyphicon-shopping-cart"></i> 
+                </div>
+                <div class="basket-item-count">
+                  <span class="count" id="cartQty"> </span>
+                </div>
+                <div class="total-price-basket"> 
+                  <span class="lbl">cart -</span> 
+                  <span class="total-price"> 
+                    <span class="sign">RM</span>
+                    <span class="value" id="cartSubTotal"> </span> 
+                  </span> 
+                </div>
               </div>
               </a>
               <ul class="dropdown-menu">
                 <li>
                   <!--   // Mini Cart Start with Ajax -->
-
                   <div id="miniCart">
 
                   </div>
-
                   <!--   // End Mini Cart Start with Ajax -->
                   <div class="clearfix cart-total">
                     <div class="pull-right"> <span class="text">Sub Total : RM</span>
-                      <span class='price'  id="cartSubTotal"> </span> </div>
+                      <span class='price'  id="cartSubTotal"> </span> 
+                    </div>
                     <div class="clearfix"></div>
-                    <a href="{{ route('mycart') }}" class="btn btn-upper btn-primary btn-block m-t-20">View Cart</a> </div>
-                  <!-- /.cart-total--> 
-                  
+                    <a href="{{ route('mycart') }}" class="btn btn-upper btn-primary btn-block m-t-20">View Cart</a> 
+                  </div>
                 </li>
               </ul>
-              <!-- /.dropdown-menu--> 
             </div>
-            <!-- /.dropdown-cart --> 
-            
-            <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> </div>
-          <!-- /.top-cart-row --> 
+          </div>
+          <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> 
+
         </div>
-        <!-- /.row --> 
-        
       </div>
-      <!-- /.container --> 
-      
     </div>
-    <!-- /.main-header --> 
     
     <!-- ============================================== NAVBAR ============================================== -->
     <div class="header-nav animate-dropdown">

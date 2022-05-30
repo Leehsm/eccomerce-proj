@@ -1,120 +1,100 @@
 <footer id="footer" class="footer color-bg">
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="module-heading">
-              <h4 class="module-title">Contact Us</h4>
-            </div>
-            <!-- /.module-heading -->
-            
-            <div class="module-body">
-              <ul class="toggle-footer" style="">
-                <li class="media">
-                  <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
-                  <div class="media-body">
-                    <p>No. 10 Kampung Batu 25, 81500 Pontian Johor</p>
-                  </div>
-                </li>
-                <li class="media">
-                  <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
-                  <div class="media-body">
-                    <p><a href="tel:123-456-7890"> 123-4567</a><br>
-                  </div>
-                </li>
-                <li class="media">
-                  <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                  <div class="media-body"> <span><a href="mailto: sahirashop25@gmail.com">support@sahirashop@gmail.com</a></span> </div>
-                </li>
-              </ul>
-            </div>
-            <!-- /.module-body --> 
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title"></h4>
           </div>
-          <!-- /.col -->
+          <!-- /.module-heading -->
           
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="module-heading">
-              <h4 class="module-title">Customer Service</h4>
-            </div>
-            <!-- /.module-heading -->
-            
-            <div class="module-body">
-              <ul class='list-unstyled'>
-                <li class="first"><a href="#" title="Contact us">My Account</a></li>
-                <li><a href="#" title="About us">Order History</a></li>
-                <li><a href="#" title="faq">FAQ</a></li>
-                <li><a href="#" title="Popular Searches">Specials</a></li>
-                <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
-              </ul>
-            </div>
-            <!-- /.module-body --> 
-          </div>
-          <!-- /.col -->
-          
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="module-heading">
-              <h4 class="module-title">Corporation</h4>
-            </div>
-            <!-- /.module-heading -->
-            
-            <div class="module-body">
-              <ul class='list-unstyled'>
-                <li class="first"><a title="Your Account" href="#">About us</a></li>
-                <li><a title="Information" href="#">Customer Service</a></li>
-                <li><a title="Addresses" href="#">Company</a></li>
-                <li><a title="Addresses" href="#">Investor Relations</a></li>
-                <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
-              </ul>
-            </div>
-            <!-- /.module-body --> 
-          </div>
-          <!-- /.col -->
-          
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="module-heading">
-              <h4 class="module-title">Why Choose Us</h4>
-            </div>
-            <!-- /.module-heading -->
-            
-            <div class="module-body">
-              <ul class='list-unstyled'>
-                <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-                <li><a href="#" title="Blog">Blog</a></li>
-                <li><a href="#" title="Company">Company</a></li>
-                <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-                <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
-              </ul>
-            </div>
-            <!-- /.module-body --> 
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="copyright-bar">
-      <div class="container">
-        <div class="col-xs-12 col-sm-6 no-padding social">
-          <ul class="link">
-            <li class="fb pull-left"><a target="_blank" rel="nofollow" href="#" title="Facebook"></a></li>
-            <li class="tw pull-left"><a target="_blank" rel="nofollow" href="#" title="Twitter"></a></li>
-            <li class="googleplus pull-left"><a target="_blank" rel="nofollow" href="#" title="GooglePlus"></a></li>
-            <li class="rss pull-left"><a target="_blank" rel="nofollow" href="#" title="RSS"></a></li>
-            <li class="pintrest pull-left"><a target="_blank" rel="nofollow" href="#" title="PInterest"></a></li>
-            <li class="linkedin pull-left"><a target="_blank" rel="nofollow" href="#" title="Linkedin"></a></li>
-            <li class="youtube pull-left"><a target="_blank" rel="nofollow" href="#" title="Youtube"></a></li>
-          </ul>
-        </div>
-        <div class="col-xs-12 col-sm-6 no-padding">
-          <div class="clearfix payment-methods">
-            <ul>
-              <li><img src="{{ asset('frontend/assets/images/payments/1.png') }}" alt=""></li>
-              <li><img src="{{ asset('frontend/assets/images/payments/2.png') }}" alt=""></li>
-              <li><img src="{{ asset('frontend/assets/images/payments/3.png') }}" alt=""></li>
-              <li><img src="{{ asset('frontend/assets/images/payments/4.png') }}" alt=""></li>
-              <li><img src="{{ asset('frontend/assets/images/payments/5.png') }}" alt=""></li>
+          <div class="module-body">
+            <ul class="toggle-footer" style="">
+              <li class="media">
+
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p><a href="https://goo.gl/maps/CPH4cmsrjp7w77o47">No. 10 Kampung Batu 25, 81500 Pontian Johor</a></p>
+                </div>
+
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p><a href="tel:123-456-7890"> 123-4567</a>
+                </div>
+                
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body"> <span><a href="mailto: sahirashop25@gmail.com">sahirashop@gmail.com</a></span> </div>
+              </li>
+              {{-- <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p><a href="tel:123-456-7890"> 123-4567</a><br>
+                </div>
+              </li>
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body"> <span><a href="mailto: sahirashop25@gmail.com">sahirashop@gmail.com</a></span> </div>
+              </li> --}}
             </ul>
           </div>
-          <!-- /.payment-methods --> 
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Get Help</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              @auth
+              <li class="first"><a href="{{ route('dashboard') }}" title="My Account">My Account</a></li>
+              <li><a href="{{ route('my.orders') }}" title="Order History">Order History</a></li>
+              @endauth
+              <li><a href="{{ route('faq') }}" title="faq">FAQ</a></li>
+              <li><a href="{{ route('delivery') }}" title="Delivery">Delivery</a></li>
+              <li class="last"><a href="{{ route('contact-us') }}" title="Contact Us">Contact Us</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">About Sahira</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a title="Company" href="#">Company</a></li>
+              <li><a title="Blogs" href="{{ route('blog') }}">Blogs</a></li>
+              <li class="last"><a title="Membership">Membership (Coming Soon)</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Find Us:</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <a target="_blank" href="https://web.facebook.com/TonerSerumHouse" title="Facebook"><img src="{{ asset('frontend/assets/images/social/facebook.png') }}" style="width: 15%; height: 15%"></a></li>
+            <a target="_blank" href="https://www.instagram.com/_sahirashop_/?hl=en" title="Instagram"><img src="{{ asset('frontend/assets/images/social/instagram.png') }}" style="width: 17%; height: 17%"></a></li>
+            <a target="_blank" href="https://www.tiktok.com/@_sahirashop_" title="Tiktok"><img src="{{ asset('frontend/assets/images/social/tik-tok.png') }}" style="width: 15%; height: 15%"></a></li>
+            <a target="_blank" href="https://www.youtube.com/channel/UCmowQRy-W0_Evqzcz925uwg" title="Youtube"><img src="{{ asset('frontend/assets/images/social/youtube.png') }}" style="width: 15%; height: 15%"></a></li>               
+            <a target="_blank" href="https://t.me/+jo2Zzv09p9YxYzFl" title="Telegram"><img src="{{ asset('frontend/assets/images/social/telegram.png') }}" style="width: 15%; height: 15%"></a></li>               
+          </div>
+          <!-- /.module-body --> 
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+</footer>

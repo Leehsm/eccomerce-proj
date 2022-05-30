@@ -143,7 +143,7 @@ img[src="assets/images/blank.gif"] {
   -ms-transition: all linear 0.2s;
   -o-transition: all linear 0.2s;
   transition: all linear 0.2s;
-  background: #108bea;
+  background: #f89696;
   color: #fff;
   border: none;
   font-size: 13px;
@@ -1191,7 +1191,7 @@ a {
 /*===================================================================================*/
 /* Header
 /*===================================================================================*/
-header{background:#ff7878}/* ini */
+header{background:#f89696}/* ini */
 
 .main-header {
   padding:5px 0px 12px 0px;
@@ -1219,8 +1219,9 @@ header{background:#ff7878}/* ini */
   -moz-border-radius: 0px;
   border-radius: 0px;
   margin: 8px 0 0;
-  background:#fff;
+  background:#f89696;
   border-radius:2px;
+  /* float: right; */
 }
 .main-header .top-search-holder .search-area .search-field {
   border: medium none;
@@ -1228,7 +1229,7 @@ header{background:#ff7878}/* ini */
   -moz-border-radius: 5px 0 0 5px;
   border-radius: 5px 0 0 5px;
   padding: 13px;
-  width: 67%;
+  width: 84.5%;
 }
 .main-header .top-search-holder .search-area .categories-filter {
   border-right: 1px solid #E0E0E0;
@@ -1274,15 +1275,15 @@ header{background:#ff7878}/* ini */
 .main-header .top-search-holder .search-area .search-button {
   border-radius: 0px 3px 3px 0px;
   display: inline-block;
-  float: right;
+  /* float: right; */
   margin: 0px;
   padding: 12px 19px 12px;
   text-align: center;
     background-color: #f89696;/* ini */
-    border: 1px solid #ff7878;
+    border: 1px solid #ffffff;
 }
 .main-header .top-search-holder .search-area .search-button:after {
-  color: #333;
+  color: rgb(255, 255, 255);
   content: "\f002";
   font-family: fontawesome;
   font-size: 16px;
@@ -1305,7 +1306,7 @@ header{background:#ff7878}/* ini */
 .top-cart-row .dropdown-cart .lnk-cart {
   padding: 0px;
       background: #f89696;
-    border: 1px solid #ff7878;
+    border: 1px solid #fff;
   border-radius: 3px;
   display: inline-block;
   color: #fff;
@@ -2757,7 +2758,7 @@ age-container #owl-main .owl-next {
 .product .cart .action ul li.add-cart-button .btn.btn-primary.icon {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  background: #fdd922 ;
+  background: #f89696 ;
 }
 .product .cart .action ul li.lnk {
   margin: 10px 0px;
@@ -2833,8 +2834,8 @@ age-container #owl-main .owl-next {
 .cart .action .add-cart-button .btn.btn-primary.icon {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  background: #fdd922 ;
-  color:#333
+  background: #f89696 ;
+  color:rgb(255, 255, 255)
 }
 
 
@@ -4754,7 +4755,7 @@ age-container #owl-main .owl-next {
     position: relative;
   }
   .main-header .top-search-holder .search-area .control-group .search-button {
-    position: absolute;
+    /* position: absolute; */
     top: 0px;
     right: 0px;
   }

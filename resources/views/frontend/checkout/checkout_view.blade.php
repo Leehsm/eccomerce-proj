@@ -24,7 +24,7 @@ My Checkout
 					<div class="panel-group checkout-steps" id="accordion">
 						<!-- checkout-step-01  -->
                         <div class="panel panel-default checkout-step-01">
-                            <h4 class="checkout-subtitle"><b>Shipping Infomation</b></h4>
+                            <h4 class="checkout-subtitle"><b>Shipping Infomation</b> (Please double check infomation you inserted)</h4>
                         <!-- panel-heading -->
                         <!-- panel-heading -->
                             <div id="collapseOne" class="panel-collapse collapse in">
@@ -118,18 +118,28 @@ My Checkout
                                 <div class="">
                                     <ul class="nav nav-checkout-progress list-unstyled">
                                         @foreach($carts as $item)
-                                        <li> 
-                                            <strong>Image: </strong>
-                                            <img src="{{ asset($item->options->image) }}" style="height: 50px; width: 50px;">
-                                        </li>
-                                        <li> 
-                                            <strong>Qty: </strong>
-                                            ( {{ $item->qty }} )
-                                            <strong>Color: </strong>
-                                            {{ $item->options->color }}
-                                            <strong>Size: </strong>
-                                            {{ $item->options->size }}
-                                        </li>
+                                        <table>
+                                            <tr>
+                                                <th><strong>Item : </strong></th>
+                                                <td><img src="{{ asset($item->options->image) }}" style="height: 50px; width: 50px;"></td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Name :</strong></th>
+                                                <td>{{ $item->name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Quantity:</strong></th>
+                                                <td>{{ $item->qty }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Color :</strong></th>
+                                                <td>{{ $item->options->color }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>Size :</strong></th>
+                                                <td>{{ $item->options->size }}</td>
+                                            </tr>
+                                        </table>
                                         @endforeach 
                                         <hr>
                                         <li>
@@ -167,8 +177,8 @@ My Checkout
                                         <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
                                     </div> <!-- end col md 4 -->
                                     <div class="col-md-4">
-                                        <label for="">FPX</label> 		
-                                        <input type="radio" name="payment_method" value="fpx">	
+                                        <label for="">FPX (Coming Soon)</label> 		
+                                        <input type="radio" name="payment_method" value="fpx" disabled>	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
                                     </div> <!-- end col md 4 -->
                                     {{-- <div class="col-md-4">

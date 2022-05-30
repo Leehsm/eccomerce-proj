@@ -3,7 +3,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @section('title')
-Stripe Payment Page 
+FPX Payment Page 
 @endsection
 
 <div class="breadcrumb">
@@ -12,7 +12,7 @@ Stripe Payment Page
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
-				<li class='active'>Stripe</li>
+				<li class='active'>FPX Payment</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -35,17 +35,45 @@ Stripe Payment Page
 										<hr>
 										<li>
 											@if(Session::has('coupon'))
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
-												( {{ session()->get('coupon')['coupon_discount'] }} % )
-												<hr>
-												<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
-												<hr>
-												<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] }} 
-												<hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 10.00 }} 
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 15.00 }} 
+													<hr>
+												@endif
 											@else
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Grand Total : </strong> RM{{ $cartTotal }} <hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal + 10.00}}
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal +15.00}}
+													<hr>
+												@endif
 											@endif 
 										</li>
 									</ul>		
@@ -60,25 +88,44 @@ Stripe Payment Page
 						<div class="panel-group">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="unicase-checkout-title">Selected Payment Method</h4>
+									<h4 class="unicase-checkout-title">FPX Payment</h4>
 								</div>
-								<form id="payment-form">
-                                    <div class="form-row">
-                                      <div>
-                                        <label for="fpx-bank-element">
-                                          FPX Bank
-                                        </label>
-                                        <div id="fpx-bank-element">
-                                          <!-- A Stripe Element will be inserted here. -->
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <button id="fpx-button" >Pay
-										@if(Session::has('coupon'))
-											RM{{ session()->get('coupon')['total_amount'] }} 
+								{{-- <form id="payment-form" action="{{route('toyyibpay-create')}} " method="post" id="payment-form"> --}}
+								<form id="payment-form" >
+									@csrf
+									<div class="form-row">
+										<label for="card-element">
+											<input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
+											<input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
+											<input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
+											<input type="hidden" name="address1" value="{{ $data['address1'] }}">
+											<input type="hidden" name="address2" value="{{ $data['address2'] }}">
+											<input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
+											<input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
+											<input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
+											<input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
+											<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
+										</label>
+									</div>
+									<br>
+									<label for="fpx-bank-element">FPX Bank</label>
+									<div id="fpx-bank-element">
+										<!-- A Stripe Element will be inserted here. -->ini fpx
+									</div>
+									<button class="btn btn-primary">Pay
+										@if($data['state_id'] != '3' && $data['state_id'] != '4')
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 10.00}} 
+											@else
+												RM{{ $cartTotal + 10.00}} 
+											@endif 
 										@else
-											RM{{ $cartTotal }} 
-										@endif 
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 15.00}} 
+											@else
+												RM{{ $cartTotal + 15.00}} 
+											@endif
+										@endif
 									</button>
 								</form>
 							</div>
@@ -92,48 +139,58 @@ Stripe Payment Page
 </div><!-- /.body-content -->
 
 <script type="text/javascript">
-    var style = {
-        base: {
-            // Add your base input styles here. For example:
-            padding: '10px 12px',
-            color: '#32325d',
-            fontSize: '16px',
-        },
-    };
+    document.addEventListener('DOMContentLoaded', async() => {
+		const stripe = Stripe('sk_test_51Kl2mfAXlhPfw81sbjS5rLjGKHGq4Ehi19jkQnxYlMxvBYESfXsJgLNq5eOefDoUtU5kIlykvdkdisPP1BdGx5wy008MtvwEON');
 
-// Create an instance of the fpxBank Element.
-    var fpxBank = elements.create(
-    'fpxBank',
-    {
-        style: style,
-        accountHolderType: 'individual',
-    }
-    );
+		const elements = stripe.elements();
+		const fpxBank = elements.create('fpxBank',{
+			accountHolderType: 'individual',
+		})
+		fpxBank.mount('#fpx-bank-element');
 
-    // Add an instance of the fpxBank Element into the container with id `fpx-bank-element`.
-    fpxBank.mount('#fpx-bank-element');
+		const form = document.querySelector('#payment-form');
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
 
-    var form = document.getElementById('payment-form');
+			//Create a payment intent on the server
+			const {
+				error: backendError,
+				clientSecret
+			} = await fetch('/create-payment-intent', {
+				method: 'POST',
+				header: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					paymentMethodType: 'fpx',
+					currency: 'myr',
+				}),
+			}).then(r => r.json());
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+			if(backendError){
+				addMessage(backendError.message);
+				return;
+			}
 
-        var fpxButton = document.getElementById('fpx-button');
-        var clientSecret = fpxButton.dataset.secret;
-        stripe.confirmFpxPayment(clientSecret, {
-            payment_method: {
-            fpx: fpxBank,
-            },
-            // Return URL where the customer should be redirected after the authorization
-            return_url: `${window.location.href}`,
-        }).then((result) => {
-            if (result.error) {
-            // Inform the customer that there was an error.
-            var errorElement = document.getElementById('error-message');
-            errorElement.textContent = result.error.message;
-            }
-        });
-    });
+			//Confirm the payment on the client
+			const nameInput = document.querySelector('#name');
+			const {error, paymentIntent} = await Stripe.confirmFpxPayment(
+				clientSecret, {
+					payment_method:{
+						fpx: fpxBank,
+						billing_details:{
+							name: nameInput.value,
+						},
+					},
+					return_url: `${window.location.origin}/return.html`
+				}
+			)
+			if(error) {
+				addMessage(error.message);
+				return;
+			}
+		});
+	});
 </script>
 
 @endsection 

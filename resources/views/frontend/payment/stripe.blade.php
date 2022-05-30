@@ -38,7 +38,7 @@ Stripe Payment Page
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
-				<li class='active'>Stripe</li>
+				<li class='active'>Stripe Payment</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -61,17 +61,45 @@ Stripe Payment Page
 										<hr>
 										<li>
 											@if(Session::has('coupon'))
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
-												( {{ session()->get('coupon')['coupon_discount'] }} % )
-												<hr>
-												<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
-												<hr>
-												<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] }} 
-												<hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 10.00 }} 
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
+													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
+													( {{ session()->get('coupon')['coupon_discount'] }} % )
+													<hr>
+													<strong>Coupon Discount : </strong> RM{{ session()->get('coupon')['discount_amount'] }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ session()->get('coupon')['total_amount'] + 15.00 }} 
+													<hr>
+												@endif
 											@else
-												<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-												<strong>Grand Total : </strong> RM{{ $cartTotal }} <hr>
+												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 10.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal + 10.00}}
+													<hr>
+												@else
+													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<hr>
+													<strong>Shipping Price : </strong> RM 15.00
+													<hr>
+													<strong>Grand Total : </strong> RM{{ $cartTotal +15.00}}
+													<hr>
+												@endif
 											@endif 
 										</li>
 									</ul>		
@@ -104,7 +132,7 @@ Stripe Payment Page
 											<input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
 											<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
 										</label>
-										<input type="text" name="holdername" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Holder Bank Name" required="">
+										<input type="text" name="holdername" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Name on Card" required="">
 										<br>
 										<input type="text" name="bankname" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Bank Name" required="">
 										<br>
@@ -116,11 +144,19 @@ Stripe Payment Page
 									</div>
 									<br>
 									<button class="btn btn-primary">Pay
-										@if(Session::has('coupon'))
-											RM{{ session()->get('coupon')['total_amount'] }} 
+										@if($data['state_id'] != '3' && $data['state_id'] != '4')
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 10.00}} 
+											@else
+												RM{{ $cartTotal + 10.00}} 
+											@endif 
 										@else
-											RM{{ $cartTotal }} 
-										@endif 
+											@if(Session::has('coupon'))
+												RM{{ session()->get('coupon')['total_amount'] + 15.00}} 
+											@else
+												RM{{ $cartTotal + 15.00}} 
+											@endif
+										@endif
 									</button>
 								</form>
 								

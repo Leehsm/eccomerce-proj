@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\User;
@@ -159,7 +160,7 @@ class IndexController extends Controller
         $multiImag = MultiImg::where('product_id',$id)->get();
 
         $cat_id = $product->category_id;
-		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->where('product_qty','>=',1)->orderBy('id','DESC')->get();
 	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_my','product_size_en','product_size_my','relatedProduct'));
 
 	}
@@ -168,6 +169,13 @@ class IndexController extends Controller
 		$products = Product::where('status',1)->where('product_tags_en',$tag)->where('product_tags_my',$tag)->orderBy('id','DESC')->paginate(3);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontend.tags.tags_view',compact('products','categories'));
+
+	}
+
+    public function ColorWiseProduct($color){
+		$products = Product::where('status',1)->where('product_color_en',$color)->orderBy('id','DESC')->paginate(3);
+		$categories = Category::orderBy('category_name_en','ASC')->get();
+		return view('frontend.tags.colors_view',compact('products','categories'));
 
 	}
 
@@ -204,5 +212,36 @@ class IndexController extends Controller
 		));
 
     }
-    
+
+    public function ContactUs(){
+        return view('frontend.others.contactUs');
+    }
+    public function Faq(){
+        return view('frontend.others.faq');
+    }
+    public function Delivery(){
+        return view('frontend.others.delivery');
+    }
+    public function Blog(){
+        $blogs = Blog::where('status',1)
+                        ->orderBy('id','DESC')
+                        ->get();
+        return view('frontend.others.blog', compact('blogs'));
+    }
+    public function BlogDetail($id){
+        $blogs = Blog::findOrFail($id);
+
+        $image = $blogs->blogImg;
+		$title = $blogs->title;
+
+		$date = $blogs->date;
+		$description = $blogs->description;
+		$description2 = $blogs->long_description;
+
+        return view('frontend.others.blogDetails', compact('blogs','image','title','date','description','description2'));
+    }
+
+    public function UserReg(){
+        return view('auth.register');
+    }
 }

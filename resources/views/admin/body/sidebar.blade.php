@@ -11,11 +11,17 @@
       <div class="ulogo">
         <a href="index.html">
           <!-- logo for regular state and mobile devices -->
-          <div class="d-flex align-items-center justify-content-center">					 	
-              <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
+          <div class="d-flex align-items-center justify-content-center">			
+            <img src="{{ asset('backend/images/logo.png') }}" alt="" style="width: 25%">
               <h3><b>Sahira</b> Shop</h3>
           </div>
         </a>
+        <!-- item-->
+        {{-- <a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a> --}}
+        <!-- item-->
+        <a href="{{ route('stock-cart') }}" class="link" data-toggle="tooltip" title="" data-original-title="Stock Cart"><i class="ti-agenda"></i></a>
+        <!-- item-->
+        <a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
       </div>
     </div>
     <!-- sidebar menu-->
@@ -103,6 +109,8 @@
           <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship Country</a></li>  
         </ul>
       </li>
+
+
       <li class="header nav-small-cap">Sales</li>
       <li class="treeview {{ ($prefix == '/orders')?'active':'' }}  ">
         <a href="#">
@@ -147,14 +155,32 @@
           <li class="{{ ($route == 'all-user')? 'active':'' }}"><a href="{{ route('all-user') }}"><i class="ti-more"></i>All User</a></li>
         </ul>
       </li> 
+
+
+      <li class="header nav-small-cap">Others</li>
+      <li class="treeview {{ ($prefix == '/blog')?'active':'' }}  ">
+        <a href="#">
+          <i data-feather="book-open"></i>
+          <span>Blog</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ ($route == 'all-blog')? 'active':'' }}"><a href="{{ route('all-blog') }}"><i class="ti-more"></i>All Blog</a></li>
+          <li class="{{ ($route == 'blog.add')? 'active':'' }}"><a href="{{ route('blog.add') }}"><i class="ti-more"></i>Add Blog</a></li>
+        </ul>
+      </li>
     </ul>
+
+
   </section>
-	<div class="sidebar-footer">
+	{{-- <div class="sidebar-footer">
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
 		<!-- item-->
-		<a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title="" data-original-title="Email"><i class="ti-email"></i></a>
+		<a href="{{ route('stock-cart') }}" class="link" data-toggle="tooltip" title="" data-original-title="Stock Cart"><i class="ti-agenda"></i></a>
 		<!-- item-->
 		<a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
-	</div>
+	</div> --}}
 </aside>

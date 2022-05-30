@@ -34,6 +34,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
 
 <script src="https://js.stripe.com/v3/"></script>
+<script src="./utils.js"></script>
+<script src="./fpx.js"></script>
 
 </head>
 <body class="cnt-home">

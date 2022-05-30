@@ -3,12 +3,15 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ToyyibpayController;
 
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubSubCategoryController;
+use App\Http\Controllers\Backend\StockController;
+
 // use App\Http\Controllers\Backend\SubSubSubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
@@ -16,6 +19,7 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\BlogController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -71,6 +75,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 //USER ALL ROUTE
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/user/reg', [IndexController::class, 'UserReg'])->name('user.register');
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
 Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
 Route::get('/user/profile/edit', [IndexController::class, 'UserProfileEdit'])->name('user.profile.edit');
@@ -174,6 +179,10 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDeta
 // Frontend Product Tags Page 
 Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
 
+//Color wise
+Route::get('/product/color/{color}', [IndexController::class, 'ColorWiseProduct']);
+
+
 // Frontend SubCategory wise Data
 Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
 
@@ -182,6 +191,14 @@ Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::cl
 
 // Product View Modal with Ajax
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+//frontend others
+Route::get('/contact-us', [IndexController::class, 'ContactUs'])->name('contact-us');
+Route::get('/faq', [IndexController::class, 'Faq'])->name('faq');
+Route::get('/delivery', [IndexController::class, 'Delivery'])->name('delivery');
+Route::get('/blog', [IndexController::class, 'Blog'])->name('blog');
+Route::get('/blog/blog-details/{id}', [IndexController::class, 'BlogDetail'])->name('blog-details');
+
 
 // Add to Cart Store Data
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
@@ -203,7 +220,12 @@ Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWish
 
 //Payment Page
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
-Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+// Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+
+//ToyyibPay
+Route::post('/user/toyyibpay', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create'); //fpx
+Route::post('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
+Route::post('/user/toyyibpay/callback', [ToyyibpayController::class, 'callBack'])->name('toyyibpay-callback'); //fpx
 
 //Order History
 Route::get('/user/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
@@ -308,4 +330,71 @@ Route::prefix('report')->group(function(){
  //User List Route
  Route::prefix('alluser')->group(function(){ 
     Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-user'); 
+});
+
+Route::prefix('blog')->group(function(){
+    // Ship Division 
+    Route::get('/view', [BlogController::class, 'BlogView'])->name('all-blog');
+    Route::get('/add', [BlogController::class, 'BlogAdd'])->name('blog.add');
+    Route::post('/store', [BlogController::class, 'BlogStore'])->name('blog.store');
+    Route::get('/edit/{id}', [BlogController::class, 'BlogEdit'])->name('blog.edit');
+    Route::post('/update/{id}', [BlogController::class, 'BlogUpdate'])->name('blog.update');
+    Route::get('/delete/{id}', [BlogController::class, 'BlogDelete'])->name('blog.delete');
+
+    Route::get('/inactive/{id}', [BlogController::class, 'BlogInactive'])->name('blog.inactive');
+    Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
+});   
+
+//Search route
+Route::post('/product/search', [CartController::class, 'Search'])->name('product.search');
+
+//Stock cart route
+Route::get('/stock-cart', [StockController::class, 'StockCart'])->name('stock-cart');
+Route::get('/edit/{id}', [StockController::class, 'StockCartEdit'])->name('stock.edit');
+Route::post('/update', [StockController::class, 'StockCartUpdate'])->name('stock.update');
+Route::get('/delete/{id}', [StockController::class, 'StockCartDelete'])->name('stock.delete'); 
+
+
+//Stock Cart search route
+Route::post('/stock/search', [StockController::class, 'Search'])->name('stock.search');
+
+//Bag Stock All Route
+Route::prefix('bag')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'BagView'])->name('manage-bag');
+    Route::get('/add', [StockController::class, 'AddBag'])->name('add-bag');
+    Route::post('/store', [StockController::class, 'BagStore'])->name('bag.store');
+    Route::get('/edit/{id}', [StockController::class, 'BagEdit'])->name('bag.edit');
+    Route::post('/update', [StockController::class, 'BagUpdate'])->name('bag.update');
+    Route::get('/delete/{id}', [StockController::class, 'BagDelete'])->name('bag.delete');  
+});
+//Clothing Stock All Route
+Route::prefix('clothing')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'ClothView'])->name('manage-cloth');
+    Route::get('/add', [StockController::class, 'AddCloth'])->name('add-cloth');
+    Route::post('/store', [StockController::class, 'ClothStore'])->name('cloth.store');
+    Route::get('/edit/{id}', [StockController::class, 'ClothEdit'])->name('cloth.edit');
+    Route::post('/update', [StockController::class, 'ClothUpdate'])->name('cloth.update');
+    Route::get('/delete/{id}', [StockController::class, 'ClothDelete'])->name('cloth.delete');  
+});
+//Wallet Stock All Route
+Route::prefix('wallet')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'WalletView'])->name('manage-wallet');
+    Route::get('/add', [StockController::class, 'AddWallet'])->name('add-wallet');
+    Route::post('/store', [StockController::class, 'WalletStore'])->name('wallet.store');
+    Route::get('/edit/{id}', [StockController::class, 'WalletEdit'])->name('wallet.edit');
+    Route::post('/update', [StockController::class, 'WalletUpdate'])->name('wallet.update');
+    Route::get('/delete/{id}', [StockController::class, 'WalletDelete'])->name('wallet.delete');  
+});
+//Skincare Stock All Route
+Route::prefix('skincare')->group(function(){
+    
+    Route::get('/manage', [StockController::class, 'SkincareView'])->name('manage-skincare');
+    Route::get('/add', [StockController::class, 'AddSkincare'])->name('add-skincare');
+    Route::post('/store', [StockController::class, 'SkincareStore'])->name('skincare.store');
+    Route::get('/edit/{id}', [StockController::class, 'SkincareEdit'])->name('skincare.edit');
+    Route::post('/update', [StockController::class, 'SkincareUpdate'])->name('skincare.update');
+    Route::get('/delete/{id}', [StockController::class, 'SkincareDelete'])->name('skincare.delete');  
 });
