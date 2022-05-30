@@ -16,6 +16,12 @@
               <h3><b>Sahira</b> Shop</h3>
           </div>
         </a>
+        <!-- item-->
+        {{-- <a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a> --}}
+        <!-- item-->
+        <a href="{{ route('stock-cart') }}" class="link" data-toggle="tooltip" title="" data-original-title="Stock Cart"><i class="ti-agenda"></i></a>
+        <!-- item-->
+        <a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
       </div>
     </div>
     <!-- sidebar menu-->
@@ -169,12 +175,12 @@
 
 
   </section>
-	<div class="sidebar-footer">
+	{{-- <div class="sidebar-footer">
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
 		<!-- item-->
 		<a href="{{ route('stock-cart') }}" class="link" data-toggle="tooltip" title="" data-original-title="Stock Cart"><i class="ti-agenda"></i></a>
 		<!-- item-->
 		<a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
-	</div>
+	</div> --}}
 </aside>

@@ -36,7 +36,7 @@
                                         </div><!-- /.single-product-gallery-item -->
                                     @endforeach
                                 </div><!-- /.single-product-slider -->
-                                <div class="single-product-gallery-thumbs gallery-thumbs">
+                                {{-- <div class="single-product-gallery-thumbs gallery-thumbs">
                                     <div id="owl-single-product-thumbnails">
                                         @foreach($multiImag as $img)
                                             <div class="item">
@@ -47,7 +47,7 @@
                                         @endforeach
                                     </div><!-- /#owl-single-product-thumbnails -->
 
-                                </div><!-- /.gallery-thumbs -->
+                                </div><!-- /.gallery-thumbs --> --}}
                             </div><!-- /.single-product-gallery -->
                         </div><!-- /.gallery-holder -->        			
                         <div class='col-sm-6 col-md-7 product-info-block'>
@@ -266,7 +266,7 @@
                         <div class="col-sm-3">
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                 <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                                <li><a data-toggle="tab" href="#review">REVIEW</a></li>
+                                {{-- <li><a data-toggle="tab" href="#review">REVIEW</a></li> --}}
                             </ul><!-- /.nav-tabs #product-tabs -->
                         </div>
                         <div class="col-sm-9">
@@ -293,7 +293,7 @@
                                                 </div>
                                             </div><!-- /.reviews -->
                                         </div><!-- /.product-reviews -->
-                                        <div class="product-add-review">
+                                        {{-- <div class="product-add-review">
                                             <h4 class="title">Write your own review</h4>
                                             <div class="review-table">
                                                 <div class="table-responsive">
@@ -364,7 +364,7 @@
                                                     </form><!-- /.cnt-form -->
                                                 </div><!-- /.form-container -->
                                             </div><!-- /.review-form -->
-                                        </div><!-- /.product-add-review -->										
+                                        </div><!-- /.product-add-review -->										 --}}
                                     </div><!-- /.product-tab -->
                                 </div><!-- /.tab-pane -->
                             </div><!-- /.tab-content -->

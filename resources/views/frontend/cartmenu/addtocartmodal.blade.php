@@ -7,18 +7,19 @@ $stock = DB::table('products')->where('product_color_en', NULL)->get();
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><strong><span id="pname"></span> </strong></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="exampleModalLabel">
+            <strong><span id="pname"></span></strong> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel"><span aria-hidden="true">&times;</span></button>
+          </h5>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-4">
               <div class="card" style="width: 18rem;">
-                <img src=" " class="card-img-top" alt="..." style="height: 200px; width: 200px;" id="pimage">
+                <img src=" " class="card-img-top" alt="..." style="height: 200px; width: 200px;" id="pimage" >
               </div>
             </div><!-- // end col md -->
+            <br>
             <div class="col-md-4">
               <ul class="list-group">
                 <li class="list-group-item">Product Price: <strong class="text-danger">RM<span id="pprice"></span></strong>

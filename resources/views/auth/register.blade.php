@@ -14,9 +14,9 @@
 
 <div class="body-content">
 	<div class="container">
-		<div class="sign-in-page" style="width: 50%; margin-left: auto; margin-right: auto;">
+		<div class="sign-in-page" style="width: 80%; margin-left: auto; margin-right: auto;">
 			<div class="row">
-				<div class="col-md-6 col-sm-6 create-new-account">
+				<div class="col-md-12 col-sm-12 create-new-account">
 					<h4 class="checkout-subtitle">Create a new account</h4>
 					<p class="text title-tag-line">Create your new account.</p>
 					<form method="POST" action="{{ route('register') }}">

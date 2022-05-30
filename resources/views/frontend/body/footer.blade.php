@@ -11,12 +11,21 @@
           <div class="module-body">
             <ul class="toggle-footer" style="">
               <li class="media">
+
                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
                 <div class="media-body">
                   <p><a href="https://goo.gl/maps/CPH4cmsrjp7w77o47">No. 10 Kampung Batu 25, 81500 Pontian Johor</a></p>
                 </div>
+
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p><a href="tel:123-456-7890"> 123-4567</a>
+                </div>
+                
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body"> <span><a href="mailto: sahirashop25@gmail.com">sahirashop@gmail.com</a></span> </div>
               </li>
-              <li class="media">
+              {{-- <li class="media">
                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
                 <div class="media-body">
                   <p><a href="tel:123-456-7890"> 123-4567</a><br>
@@ -25,7 +34,7 @@
               <li class="media">
                 <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
                 <div class="media-body"> <span><a href="mailto: sahirashop25@gmail.com">sahirashop@gmail.com</a></span> </div>
-              </li>
+              </li> --}}
             </ul>
           </div>
           <!-- /.module-body --> 

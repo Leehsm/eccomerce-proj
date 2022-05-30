@@ -14,7 +14,7 @@
 
 <div class="body-content">
 	<div class="container">
-		<div class="sign-in-page" style="width: 50%; margin-left: auto; margin-right: auto;">
+		<div class="sign-in-page" style="width: 80%; margin-left: auto; margin-right: auto;">
 			<div class="row">
 				<!-- Sign-in -->			
 				<div class="col-md-12 col-sm-12 sign-in">
@@ -38,6 +38,7 @@
 						<div class="form-group">
 							<label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
 							<input type="password" id="password" name="password" class="form-control unicase-form-control text-input" >
+							<a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
 							@error('email')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -49,7 +50,6 @@
 								<input type="checkbox" name="rememberMe" id="rememberMe" value="Remember Me">
 								<label for="rememberMe"> Remember Me!</label><br>
 							</label>
-							<a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your Password?</a>
 						</div>
 						<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
 						<button type="button" class="btn-upper btn btn-primary checkout-page-button"><a href="{{ route('user.register') }}" style="color: aliceblue">Sign Up</a></button>

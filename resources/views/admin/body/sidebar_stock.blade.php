@@ -16,6 +16,12 @@
               <h3><b>Stock </b> Cart</h3>
           </div>
         </a>
+        <!-- item-->
+        {{-- <a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a> --}}
+        <!-- item-->
+        <a href="{{ url('/admin/dashboard') }}" class="link" data-toggle="tooltip" title="" data-original-title="Manage Shop"><i class="ti-shopping-cart-full"></i></a>
+        <!-- item-->
+        <a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
       </div>
     </div>
     <!-- sidebar menu-->
@@ -81,12 +87,12 @@
 
 
   </section>
-	<div class="sidebar-footer">
+	{{-- <div class="sidebar-footer">
 		<!-- item-->
 		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
 		<!-- item-->
 		<a href="{{ url('/admin/dashboard') }}" class="link" data-toggle="tooltip" title="" data-original-title="Manage Shop"><i class="ti-shopping-cart-full"></i></a>
 		<!-- item-->
 		<a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
-	</div>
+	</div> --}}
 </aside>

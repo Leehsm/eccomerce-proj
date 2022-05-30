@@ -7,24 +7,6 @@ Subcategory Product
 <div class="body-content outer-top-xs">
     <div class='container'>
         <div class='row'>
-            <div class='col-md-3 sidebar'> 
-                <!-- ===== == TOP NAVIGATION ======= ==== -->
-                {{-- @include('frontend.common.vertical_menu') --}}
-                <!-- = ==== TOP NAVIGATION : END === ===== -->
-                <div class="sidebar-module-container">
-                    <div class="sidebar-filter"> 
-                        <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
-                        @include('frontend.common.shopby')
-                        <!-- ============================================== SIDEBAR CATEGORY : END ============================================== --> 
-                        <!-- == ====== PRODUCT TAGS ==== ======= -->
-                        @include('frontend.common.product_tags')
-                        <!-- == ====== END PRODUCT TAGS ==== ======= -->
-                    </div>
-                <!-- /.sidebar-filter --> 
-                </div>
-                <!-- /.sidebar-module-container --> 
-            </div>
-            <!-- /.sidebar -->
             <div class='col-md-9'> 
             <!-- == ==== SECTION – HERO === ====== -->
                 <div class="clearfix filters-container m-t-10">
@@ -362,6 +344,27 @@ Subcategory Product
                 </div>
                 <!-- /.search-result-container --> 
             </div>
+            <br>
+            <div class='col-md-3 sidebar'> 
+                <!-- ===== == TOP NAVIGATION ======= ==== -->
+                {{-- @include('frontend.common.vertical_menu') --}}
+                <!-- = ==== TOP NAVIGATION : END === ===== -->
+                <div class="sidebar-module-container">
+                    <div class="sidebar-filter"> 
+                        <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
+                        @include('frontend.common.shopby')
+                        <!-- ============================================== SIDEBAR CATEGORY : END ============================================== --> 
+                        <br>
+                        <!-- == ====== PRODUCT TAGS ==== ======= -->
+                        @include('frontend.common.product_tags')
+                        <!-- == ====== END PRODUCT TAGS ==== ======= -->
+                    </div>
+                <!-- /.sidebar-filter --> 
+                </div>
+                <!-- /.sidebar-module-container --> 
+            </div>
+            <!-- /.sidebar -->
+            
             <!-- /.col --> 
         </div>
         <!-- /.row --> 

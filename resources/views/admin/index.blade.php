@@ -37,7 +37,7 @@ $orderTrial3 = DB::table('products')
 @endphp
     
 <div class="container-full">
-    {{$orderTrial1}}
+    {{-- {{$orderTrial1}} --}}
     {{-- {{$orderTrial2}} --}}
     {{-- {{$orderTrial3}} --}}
     <!-- Main content -->
