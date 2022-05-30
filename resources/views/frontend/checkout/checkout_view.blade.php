@@ -177,8 +177,8 @@ My Checkout
                                         <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
                                     </div> <!-- end col md 4 -->
                                     <div class="col-md-4">
-                                        <label for="">FPX</label> 		
-                                        <input type="radio" name="payment_method" value="fpx" >	
+                                        <label for="">FPX (Coming Soon)</label> 		
+                                        <input type="radio" name="payment_method" value="fpx" disabled>	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
                                     </div> <!-- end col md 4 -->
                                     {{-- <div class="col-md-4">
