@@ -134,7 +134,7 @@ class StockController extends Controller
     }
 
     public function AddCloth(){
-		return view('backend.stockcart.cloth.add');
+		return view('backend.stockcart.clothing.add');
 	}
     
     public function ClothStore(Request $request){
