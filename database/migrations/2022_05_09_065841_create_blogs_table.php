@@ -20,6 +20,7 @@ class CreateBlogsTable extends Migration
             $table->string('date')->nullable;
             $table->text('description')->nullable;
             $table->text('long_description')->nullable;
+            $table->text('long_description2')->nullable;
             $table->integer('status')->default(1);
             $table->timestamps();
         });

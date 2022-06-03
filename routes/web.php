@@ -343,6 +343,10 @@ Route::prefix('blog')->group(function(){
 
     Route::get('/inactive/{id}', [BlogController::class, 'BlogInactive'])->name('blog.inactive');
     Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
+    Route::post('/image_slider/update', [BlogController::class, 'MultiImageSliderUpdate'])->name('update-blog-slider-image');
+    Route::get('/multiimg_slider/delete/{id}', [BlogController::class, 'MultiImageSliderDelete'])->name('blog-multiimg-slider-delete');
+
+    
 });   
 
 //Search route

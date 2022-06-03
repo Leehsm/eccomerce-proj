@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\MultiImg;
+use App\Models\MultiImgBlog;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Hash;
 use Auth;
@@ -237,8 +238,11 @@ class IndexController extends Controller
 		$date = $blogs->date;
 		$description = $blogs->description;
 		$description2 = $blogs->long_description;
+		$description3 = $blogs->long_description2;
 
-        return view('frontend.others.blogDetails', compact('blogs','image','title','date','description','description2'));
+        $multiImageBlogs = MultiImgBlog::where('blog_id',$id)->get();
+
+        return view('frontend.others.blogDetails', compact('blogs','image','title','date','description','description2','multiImageBlogs','description3'));
     }
 
     public function UserReg(){
