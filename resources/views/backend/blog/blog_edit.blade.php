@@ -47,11 +47,21 @@
                             <div class="form-group">
                                 <h5>Blog Long Decription </h5>
                                 <div class="controls">
-                                    <textarea id="description2" name="description2" rows="16" cols="100" required="">
-                                    {!! $blogs->description2 !!} 
+                                    <textarea id="long_description" name="long_description" rows="16" cols="100" required="">
+                                    {!! $blogs->long_description !!} 
                                     </textarea>     
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <h5>Blog Long Decription 2</h5>
+                                <div class="controls">
+                                    <textarea id="long_description2" name="long_description2" rows="16" cols="100" >
+                                    {!! $blogs->long_description2 !!} 
+                                    </textarea>     
+                                </div>
+                            </div>
+
                             <div class="text-xs-right">
                                 <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">					 
                             </div>

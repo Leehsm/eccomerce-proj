@@ -46,9 +46,18 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <h5>Blog Long Description 2</h5>
+                                    <h5>Blog Long Description </h5>
                                     <div class="controls">
                                         <textarea id="long_description" name="long_description" rows="10" cols="130">
+                                            Blog Long Description  
+                                        </textarea>     
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h5>Blog Long Description 2</h5>
+                                    <div class="controls">
+                                        <textarea id="long_description2" name="long_description2" rows="10" cols="130">
                                             Blog Long Description  2
                                         </textarea>     
                                     </div>
