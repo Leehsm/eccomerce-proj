@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
@@ -248,6 +249,15 @@ Route::prefix('coupons')->group(function(){
     Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
 }); 
 
+// Admin Contact All Routes 
+Route::prefix('contacts')->group(function(){ 
+    Route::get('/view', [ContactController::class, 'ContactView'])->name('manage-contact'); 
+    Route::post('/store', [ContactController::class, 'ContactStore'])->name('contact.store');
+    Route::get('/edit/{id}', [ContactController::class, 'ContactEdit'])->name('contact.edit');
+    Route::post('/update/{id}', [ContactController::class, 'ContactUpdate'])->name('contact.update');
+    Route::get('/delete/{id}', [ContactController::class, 'ContactDelete'])->name('contact.delete');
+}); 
+
 // Admin Shipping All Routes 
 Route::prefix('shipping')->group(function(){
     // Ship Division 
@@ -333,7 +343,6 @@ Route::prefix('report')->group(function(){
 });
 
 Route::prefix('blog')->group(function(){
-    // Ship Division 
     Route::get('/view', [BlogController::class, 'BlogView'])->name('all-blog');
     Route::get('/add', [BlogController::class, 'BlogAdd'])->name('blog.add');
     Route::post('/store', [BlogController::class, 'BlogStore'])->name('blog.store');
@@ -345,8 +354,15 @@ Route::prefix('blog')->group(function(){
     Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
     Route::post('/image_slider/update', [BlogController::class, 'MultiImageSliderUpdate'])->name('update-blog-slider-image');
     Route::get('/multiimg_slider/delete/{id}', [BlogController::class, 'MultiImageSliderDelete'])->name('blog-multiimg-slider-delete');
+});   
 
-    
+Route::prefix('contact')->group(function(){
+    Route::get('/view', [ContactController::class, 'ContactView'])->name('all-contact');
+    Route::get('/add', [ContactController::class, 'ContactAdd'])->name('contact.add');
+    Route::post('/store', [ContactController::class, 'ContactStore'])->name('contact.store');
+    Route::get('/edit/{id}', [ContactController::class, 'ContactEdit'])->name('contact.edit');
+    Route::post('/update/{id}', [ContactController::class, 'ContactUpdate'])->name('contact.update');
+    Route::get('/delete/{id}', [ContactController::class, 'ContactDelete'])->name('contact.delete');    
 });   
 
 //Search route

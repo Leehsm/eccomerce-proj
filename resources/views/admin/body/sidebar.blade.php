@@ -171,6 +171,20 @@
           <li class="{{ ($route == 'blog.add')? 'active':'' }}"><a href="{{ route('blog.add') }}"><i class="ti-more"></i>Add Blog</a></li>
         </ul>
       </li>
+
+      <li class="treeview {{ ($prefix == '/contact')?'active':'' }}  ">
+        <a href="#">
+          <i data-feather="phone-call"></i>
+          <span>Contact</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ ($route == 'all-contact')? 'active':'' }}"><a href="{{ route('all-contact') }}"><i class="ti-more"></i>All Contact</a></li>
+          <li class="{{ ($route == 'contact.add')? 'active':'' }}"><a href="{{ route('contact.add') }}"><i class="ti-more"></i>Add Contact</a></li>
+        </ul>
+      </li>
     </ul>
 
 
