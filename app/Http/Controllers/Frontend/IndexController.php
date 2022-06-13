@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\MultiImg;
 use App\Models\MultiImgBlog;
 use App\Models\Blog;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\User;
@@ -215,7 +216,8 @@ class IndexController extends Controller
     }
 
     public function ContactUs(){
-        return view('frontend.others.contactUs');
+    	$contacts = Contact::first();
+        return view('frontend.others.contactUs',compact('contacts'));
     }
     public function Faq(){
         return view('frontend.others.faq');
