@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <h5> Contact call  <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_call" class="form-control" > 
+                                        <input type="text"  name="contact_call" class="form-control" > 
                                         @error('contact_call') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <h5> Contact company  <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_company" class="form-control" > 
+                                        <input type="text"  name="contact_company" class="form-control" > 
                                         @error('contact_company') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <h5> Contact location  <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_location" class="form-control" > 
+                                        <input type="text"  name="contact_location" class="form-control" > 
                                         @error('contact_location') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
