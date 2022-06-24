@@ -29,18 +29,20 @@ class CheckoutController extends Controller
     } // end method 
 
     public function CheckoutStore(Request $request){
-        // dd($request->all());
+        dd($request->all());
     	$data = array();
-    	$data['shipping_name'] = $request->shipping_name;
-    	$data['shipping_email'] = $request->shipping_email;
+    	$data['shipping_name'] = strtoupper($request->shipping_name);
+    	$data['shipping_email'] = strtoupper($request->shipping_email);
     	$data['shipping_phone'] = $request->shipping_phone;
-    	$data['address1'] = $request->address1;
-    	$data['address2'] = $request->address2;
-    	$data['post_code'] = $request->post_code;
-    	$data['division_id'] = $request->division_id;
-    	$data['district_id'] = $request->district_id;
-    	$data['state_id'] = $request->state_id;
+    	$data['address1'] = strtoupper($request->address1);
+    	$data['address2'] = strtoupper($request->address2);
+    	$data['post_code'] = strtoupper($request->post_code);
+    	$data['district'] = strtoupper($request->district);
+    	$data['state'] = strtoupper($request->state);
+    	$data['country'] = strtoupper($request->country);
     	$data['notes'] = $request->notes;
+    	$data['amount'] = $request->cartTotal;
+
 
         $cartTotal = Cart::total();
 

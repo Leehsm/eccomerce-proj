@@ -95,7 +95,7 @@
           <li class="{{ ($route == 'manage-coupon')? 'active':'' }}"><a href="{{ route('manage-coupon') }}"><i class="ti-more"></i>Manage Coupon</a></li>
         </ul>
       </li>      
-      <li class="treeview {{ ($prefix == '/shipping')?'active':'' }}  ">
+      {{-- <li class="treeview {{ ($prefix == '/shipping')?'active':'' }}  ">
         <a href="#">
           <i data-feather="bookmark"></i>
           <span>Shipping Area</span>
@@ -108,7 +108,7 @@
           <li class="{{ ($route == 'manage-district')? 'active':'' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a></li>
           <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship Country</a></li>  
         </ul>
-      </li>
+      </li> --}}
 
 
       <li class="header nav-small-cap">Sales</li>

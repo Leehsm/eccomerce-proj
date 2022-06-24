@@ -15,12 +15,15 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 
+use App\Http\Requests\BillplzFormCreationRequest;
+use Billplz\Client;
+
 // require 'vendor/autoload.php';
 
 class PaymentController extends Controller
 {
     public function StripeOrder(Request $request){
-        if ($request->state_id != 3 && $request->state_id != 4){
+        if ($request->state != 'SABAH' && $request->state != 'SARAWAK'){
             if (Session::has('coupon')) {
                 $total_amount = Session::get('coupon')['total_amount'] + 10.00;
             }else{
@@ -40,9 +43,9 @@ class PaymentController extends Controller
                 
             $order_id = Order::insertGetId([
                 'user_id' => Auth::id(),
-                'division_id' => $request->division_id,
-                'district_id' => $request->district_id,
-                'state_id' => $request->state_id,
+                'district' => $request->district,
+                'state' => $request->state,
+                'country' => $request->country,
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
@@ -130,9 +133,9 @@ class PaymentController extends Controller
                 
             $order_id = Order::insertGetId([
                 'user_id' => Auth::id(),
-                'division_id' => $request->division_id,
-                'district_id' => $request->district_id,
-                'state_id' => $request->state_id,
+                'district' => $request->district,
+                'state' => $request->state,
+                'country' => $request->country,
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
@@ -198,9 +201,91 @@ class PaymentController extends Controller
             return redirect()->route('my.orders')->with($notification);
         }
 
-        
-
     } // end method 
+
+    public function FPXOrder(Request $request){
+        dd($request->all());
+        if ($request->state != 'SABAH' && $request->state != 'SARAWAK'){
+            if (Session::has('coupon')) {
+                $total_amount = Session::get('coupon')['total_amount'] + 10.00;
+            }else{
+                $total_amount = round(Cart::total() + 10.00);
+            }
+
+            $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+
+            if(config('billplz.billplz_sandbox')){
+                $billplz->useSandbox();
+            }
+
+            // dd($request->all());
+
+            $bill = $billplz->bill();
+            // dd(config('billplz.billplz_collection_id'));
+
+            $bill = $bill->create(
+                config('billplz.billplz_collection_id'),
+                $request->Auth::id(),
+                $request->name,
+                $request->email,
+                $request->phone,
+                $request->address1,
+                $request->address2,
+                $request->post_code,
+                $request->district,
+                $request->state,
+                $request->country,
+                $request->notes,
+                \Duit\MYR::given($total_amount),   
+                url('/'),
+                'Any Description because we dont have description dynamically.',
+                ['redirect_url' => url('/redirect')]
+            );
+
+        return redirect($bill->toArray()['url']);
+
+        }else{
+            if (Session::has('coupon')) {
+                $total_amount = Session::get('coupon')['total_amount'] + 15.00;
+            }else{
+                $total_amount = round(Cart::total() + 15.00);
+            }
+            $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+
+            if(config('billplz.billplz_sandbox')){
+                $billplz->useSandbox();
+            }
+
+            $bill = $billplz->bill();
+            // dd(config('billplz.billplz_collection_id'));
+
+            $bill = $bill->create([
+                config('billplz.billplz_collection_id'),
+                // $request->Auth::id(),
+                $request->name,
+                $request->email,
+                $request->phone,
+                $request->address1,
+                $request->address2,
+                $request->post_code,
+                $request->district,
+                $request->state,
+                $request->country,
+                $request->notes,
+                \Duit\MYR::given($total_amount),   
+                url('/'),             
+                'FPX payment method for prchasing item from Sahira',
+                ['redirect_url' => url('/redirect')]
+            ]);
+
+            dd($bill);
+
+        }
+    }
+
+
+
+
 
     // public function FPXOrder(Request $request){
     //     $stripe = new \Stripe\StripeClient('sk_test_51Kl2mfAXlhPfw81sbjS5rLjGKHGq4Ehi19jkQnxYlMxvBYESfXsJgLNq5eOefDoUtU5kIlykvdkdisPP1BdGx5wy008MtvwEON');

@@ -33,9 +33,16 @@ FPX Payment Page
 								<div class="">
 									<ul class="nav nav-checkout-progress list-unstyled">
 										<hr>
+										<strong>Name : </strong>  {{ $data['shipping_name'] }} <hr>
+										<strong>Email : </strong>  {{ $data['shipping_email'] }} <hr>
+										<strong>Phone : </strong>  {{ $data['shipping_phone'] }} <hr>
+										<strong>Address : </strong> {{ $data['address1'] }}, {{ $data['address2'] }}, 
+																	{{ $data['post_code'] }}, {{ $data['district'] }}, 
+																	{{$data['state'] }}, {{ $data['country'] }} <hr>
+										<strong>Notes : </strong>  {{ $data['notes'] }} <hr>									
 										<li>
 											@if(Session::has('coupon'))
-												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+												@if($data['state'] != 'SABAH' && $data['state'] != 'SARAWAK')
 													<strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
 													<strong>Coupon Name : </strong> {{ session()->get('coupon')['coupon_name'] }}
 													( {{ session()->get('coupon')['coupon_discount'] }} % )
@@ -59,7 +66,7 @@ FPX Payment Page
 													<hr>
 												@endif
 											@else
-												@if($data['state_id'] != '3' && $data['state_id'] != '4')
+												@if($data['state'] != 'SABAH' && $data['state'] != 'SARAWAK')
 													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
 													<hr>
 													<strong>Shipping Price : </strong> RM 10.00
@@ -88,10 +95,10 @@ FPX Payment Page
 						<div class="panel-group">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="unicase-checkout-title">FPX Payment</h4>
+									<h4 class="unicase-checkout-title">Go To FPX Payment</h4>
 								</div>
 								{{-- <form id="payment-form" action="{{route('toyyibpay-create')}} " method="post" id="payment-form"> --}}
-								<form id="payment-form" >
+								<form method="POST" action="{{route('fpx.order')}}" id="payment-form" >
 									@csrf
 									<div class="form-row">
 										<label for="card-element">
@@ -101,19 +108,19 @@ FPX Payment Page
 											<input type="hidden" name="address1" value="{{ $data['address1'] }}">
 											<input type="hidden" name="address2" value="{{ $data['address2'] }}">
 											<input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
-											<input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
-											<input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
-											<input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
+											<input type="hidden" name="division_id" value="{{ $data['district'] }}">
+											<input type="hidden" name="district_id" value="{{ $data['state'] }}">
+											<input type="hidden" name="state_id" value="{{ $data['country'] }}">
 											<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
 										</label>
 									</div>
 									<br>
-									<label for="fpx-bank-element">FPX Bank</label>
+									{{-- <label for="fpx-bank-element">FPX Bank</label>
 									<div id="fpx-bank-element">
 										<!-- A Stripe Element will be inserted here. -->ini fpx
-									</div>
+									</div> --}}
 									<button class="btn btn-primary">Pay
-										@if($data['state_id'] != '3' && $data['state_id'] != '4')
+										@if($data['state'] != 'SABAH' && $data['state'] != 'SARAWAK')
 											@if(Session::has('coupon'))
 												RM{{ session()->get('coupon')['total_amount'] + 10.00}} 
 											@else
