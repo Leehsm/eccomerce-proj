@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateFPXOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('f_p_x_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('billExtNo')->nullable();
+            $table->string('billExtRef');
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('email');
@@ -59,6 +59,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('f_p_x_orders');
     }
 }
