@@ -16,11 +16,11 @@ $dailyOrder = DB::table('orders')->where('order_date',$date)->count();
 $monthlyOrder = DB::table('orders')->where('order_month', 'LIKE', "$month2")->count();
 $totalOrder = DB::table('orders')->count();
 
-$dailySales = DB::table('orders')->where('order_date',$date)->sum('amount');
-$monthlySales = DB::table('orders')->where('order_date', 'LIKE', "%$month2%")->sum('amount');
-$totalSales = DB::table('orders')->sum('amount');
+$dailySales = DB::table('orders')->where('order_date',$date)->where('status', '!=', 'CANCEL / UNSUCCESSFUL')->sum('amount');
+$monthlySales = DB::table('orders')->where('order_date', 'LIKE', "%$month2%")->where('status', '!=', 'CANCEL / UNSUCCESSFUL')->sum('amount');
+$totalSales = DB::table('orders')->where('status', '!=', 'CANCEL / UNSUCCESSFUL')->sum('amount');
 
-$orders = DB::table('orders')->orderBy('order_date','DESC')->get();
+$orders = DB::table('orders')->orderBy('order_date','ASC')->get();
 
 $orderTrial1 = DB::table('products')
                 ->join('order_items', 'products.id', '=', 'order_items.product_id')
