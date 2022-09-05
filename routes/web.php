@@ -4,6 +4,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ToyyibpayController;
+use App\Http\Controllers\SocialShareController;
+
 
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -48,8 +50,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin:admin']], function(){
-    Route::get('/login', [AdminController::class, 'loginForm']);
-    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
+    Route::get('/mantap/admin/login', [AdminController::class, 'loginForm']);
+    Route::post('/mantap/admin/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 Route::middleware(['auth:admin'])->group(function(){
@@ -73,6 +75,12 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     $user = User::find($id);
     return view('dashboard', compact('user'));
 })->name('dashboard');
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
 
 //USER ALL ROUTE
 Route::get('/', [IndexController::class, 'index']);
@@ -221,11 +229,13 @@ Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWish
 
 //Payment Page
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
-Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+Route::post('/user/fpx/create/bill', [PaymentController::class, 'FPXCreateBill'])->name('fpx:bill'); //fpx
+Route::get('/bill/payment/{bill_code}', [PaymentController::class, 'billPaymentLink'])->name('fpx:payment');
+Route::post('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
 
 //ToyyibPay
-Route::post('/user/toyyibpay', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create'); //fpx
-Route::post('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
+Route::post('/user/toyyibpay', [ToyyibpayController::class, 'FPXCreateBill'])->name('toyyibpay-create'); //fpx
+Route::get('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
 Route::post('/user/toyyibpay/callback', [ToyyibpayController::class, 'callBack'])->name('toyyibpay-callback'); //fpx
 
 //Order History
@@ -418,3 +428,8 @@ Route::prefix('skincare')->group(function(){
     Route::post('/update', [StockController::class, 'SkincareUpdate'])->name('skincare.update');
     Route::get('/delete/{id}', [StockController::class, 'SkincareDelete'])->name('skincare.delete');  
 });
+
+Route::get('/billplz', [FormController::class, 'FormControllerView']);
+
+//Share Button
+// Route::get('social-share', [SocialShareController::class, 'index']);
