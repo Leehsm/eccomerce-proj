@@ -12,6 +12,8 @@ use App\Models\MultiImg;
 use App\Models\MultiImgBlog;
 use App\Models\Blog;
 use App\Models\Contact;
+use App\Models\Size;
+use App\Models\Quantity;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Models\User;
@@ -146,6 +148,10 @@ class IndexController extends Controller
 
     public function ProductDetails($id,$slug){
 		$product = Product::findOrFail($id);
+		$size = Size::where('product_id',$id)->get();
+		// $size2 = Size::where('product_id',$id)->pluck('size_id');
+		$quantity = Quantity::where('product_id',$id)->get();
+		// $quantity2 = Quantity::where('size_id',$size2)->get('quantity');
 
         $color_en = $product->product_color_en;
 		$product_color_en = explode(',', $color_en);
@@ -153,8 +159,8 @@ class IndexController extends Controller
 		$color_my = $product->product_color_my;
 		$product_color_my = explode(',', $color_my);
 
-		$size_en = $product->product_size_en;
-		$product_size_en = explode(',', $size_en);
+		// $size_en = $size->size_type;
+		$product_size_en = explode(',', $size);
 
 		$size_my = $product->product_size_my;
 		$product_size_my = explode(',', $size_my);
@@ -163,7 +169,7 @@ class IndexController extends Controller
 
         $cat_id = $product->category_id;
 		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->where('product_qty','>=',1)->orderBy('id','DESC')->get();
-	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_my','product_size_en','product_size_my','relatedProduct'));
+	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_my','size','quantity','product_size_my','relatedProduct'));
 
 	}
 
