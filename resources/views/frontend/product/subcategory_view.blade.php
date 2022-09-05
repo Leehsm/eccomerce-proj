@@ -56,7 +56,7 @@ Subcategory Product
                             <div class="category-product">
                                 <div class="row">
                                     @foreach($products as $product)
-                                    @if($product->product_qty >= 1)
+                                    @if($product->product_qty > 0)
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
                                                 <div class="product">
@@ -73,7 +73,7 @@ Subcategory Product
                                                         @endphp     
                                                         <div>
                                                             @if ($product->discount_price == NULL)
-                                                                <div class="tag new"><span>new</span></div>
+                                                                {{-- <div class="tag new"><span>new</span></div> --}}
                                                             @else
                                                                 <div class="tag hot"><span>{{ round($discount) }}%</span></div>
                                                             @endif
@@ -93,19 +93,19 @@ Subcategory Product
                                                         <!-- /.product-price --> 
                                                     </div>
                                                     <!-- /.product-info -->
-                                                    <div class="cart clearfix animate-effect">
+                                                    {{-- <div class="cart clearfix animate-effect">
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
                                                                     <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
                                                                     <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                                     </li>
-                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
+                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button> --}}
                                                                     {{-- <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
-                                                            </ul>
-                                                        </div>
+                                                            {{-- </ul>
+                                                        </div> --}}
                                                         <!-- /.action --> 
-                                                    </div>
+                                                    {{-- </div> --}}
                                                         <!-- /.cart --> 
                                                 </div>
                                                 <!-- /.product --> 
@@ -142,19 +142,19 @@ Subcategory Product
                                                         <!-- /.product-price --> 
                                                     </div>
                                                     <!-- /.product-info -->
-                                                    <div class="cart clearfix animate-effect">
+                                                    {{-- <div class="cart clearfix animate-effect">
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
                                                                     <button class="btn btn-primary icon" type="button" title="Add Cart" data-toggle="modal"  disabled> <i class="fa fa-shopping-cart"></i> </button>
                                                                     <button class="btn btn-primary cart-btn" type="button">SOLD OUT</button>
                                                                     </li>
-                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
+                                                                    <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button> --}}
                                                                     {{-- <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
-                                                            </ul>
-                                                        </div>
+                                                            {{-- </ul>
+                                                        </div> --}}
                                                         <!-- /.action --> 
-                                                    </div>
+                                                    {{-- </div> --}}
                                                         <!-- /.cart --> 
                                                 </div>
                                                 <!-- /.product --> 
@@ -217,7 +217,7 @@ Subcategory Product
                                                                     {{ $product->short_descp_en }} 
                                                                 @endif
                                                             </div>
-                                                            <div class="cart clearfix animate-effect">
+                                                            {{-- <div class="cart clearfix animate-effect">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         <li class="add-cart-button btn-group">
@@ -226,9 +226,9 @@ Subcategory Product
                                                                         </li>
                                                                         <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                     </ul>
-                                                                </div>
+                                                                </div> --}}
                                                             <!-- /.action --> 
-                                                            </div>
+                                                            {{-- </div> --}}
                                                             <!-- /.cart --> 
                                                         </div>
                                                     <!-- /.product-info --> 
@@ -293,15 +293,15 @@ Subcategory Product
                                                                     {{ $product->short_descp_en }} 
                                                                 @endif
                                                             </div>
-                                                            <div class="cart clearfix animate-effect">
+                                                            {{-- <div class="cart clearfix animate-effect">
                                                                 <div class="action">
                                                                     <ul class="list-unstyled">
                                                                         
                                                                         <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                     </ul>
-                                                                </div>
+                                                                </div> --}}
                                                             <!-- /.action --> 
-                                                            </div>
+                                                            {{-- </div> --}}
                                                             <!-- /.cart --> 
                                                         </div>
                                                     <!-- /.product-info --> 

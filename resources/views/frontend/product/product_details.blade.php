@@ -36,6 +36,7 @@
                                         </div><!-- /.single-product-gallery-item -->
                                     @endforeach
                                 </div><!-- /.single-product-slider -->
+                                <h6 style="padding-left: 40%"> Swipe for more</h6>
                                 {{-- <div class="single-product-gallery-thumbs gallery-thumbs">
                                     <div id="owl-single-product-thumbnails">
                                         @foreach($multiImag as $img)
@@ -99,9 +100,9 @@
                                                         <i class="fa fa-heart"></i>
                                                     </a>
                                                     
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
-                                                        <i class="fa fa-share"></i>
-                                                    </a>
+                                                    {{-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
+                                                        <i class="fa fa-share">{{ $shareButtons }}</i>
+                                                    </a> --}}
                                                 </div>
                                             </div>
 
@@ -120,19 +121,20 @@
                                                 </select> 
                                             </div> <!-- // end form group -->
                                         </div> <!-- // end col 6 -->
+                                        
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                @if($product->product_size_en == null)
-
-                                                @else
-                                                    <label class="info-title control-label">Choose Size <span> </span></label>
-                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
-                                                        {{-- <option selected="" disabled="">--Choose Size--</option> --}}
-                                                        @foreach($product_size_en as $size)
-                                                            <option value="{{ $size }}">{{ ucwords($size) }}</option>
-                                                        @endforeach
-                                                    </select> 
-                                                @endif
+                                                <label class="info-title control-label">Choose Size <span> </span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
+                                                    {{-- <option selected="" disabled="">--Choose Size--</option> --}}
+                                                    @foreach($size as $sizes)
+                                                        @if($sizes->quantity > 0)
+                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) }}</option>
+                                                        @else
+                                                            <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select> 
                                             </div> <!-- // end form group -->
                                         </div> <!-- // end col 6 -->
                                     </div><!-- /.row -->
@@ -140,16 +142,17 @@
                                     <div class="quantity-container info-container">
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <span class="label">Qty :</span>
+                                                <span class="label">Quantity :</span>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="cart-quantity">
                                                     <div class="quant-input">
-                                                        <div class="arrows">
+                                                        {{-- <div class="arrows">
                                                             <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                                        </div>
-                                                        <input type="text" id="qty" value="1" min="1">
+                                                        </div> --}}
+                                                        <input type="number" id="qty" name="quantity" min="1" max="100" step="1" value="1">
+                                                        {{-- <input type="integer" id="qty" value="1" min="1" > --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,9 +200,9 @@
                                                     <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
-                                                    <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
-                                                        <i class="fa fa-share"></i>
-                                                    </a>
+                                                    {{-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="{{ $shareButtons }}">
+                                                        <i class="fa fa-share">{{ $shareButtons }}</i>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </div><!-- /.row -->
@@ -219,17 +222,17 @@
                                         </div> <!-- // end col 6 -->
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                @if($product->product_size_en == null)
-
-                                                @else
-                                                    <label class="info-title control-label">Choose Size <span> </span></label>
-                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
-                                                        <option selected="" disabled="">--Choose Size--</option>
-                                                        @foreach($product_size_en as $size)
-                                                            <option value="{{ $size }}" disabled>{{ ucwords($size) }}</option>
-                                                        @endforeach
-                                                    </select> 
-                                                @endif
+                                                <label class="info-title control-label">Choose Size <span> </span></label>
+                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
+                                                    <option selected="" disabled="">--Choose Size--</option>
+                                                    @foreach($size as $sizes)
+                                                        @if($sizes->quantity > 0)
+                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) }}</option>
+                                                        @else
+                                                            <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select> 
                                             </div> <!-- // end form group -->
                                         </div> <!-- // end col 6 -->
                                     </div><!-- /.row -->
@@ -237,16 +240,17 @@
                                     <div class="quantity-container info-container">
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <span class="label">Qty :</span>
+                                                <span class="label">Quantity :</span>
                                             </div>
                                             <div class="col-sm-2">
                                                 <div class="cart-quantity">
                                                     <div class="quant-input">
-                                                        <div class="arrows">
+                                                        {{-- <div class="arrows">
                                                             <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                                        </div>
-                                                        <input type="text" id="qty" value="1" min="1">
+                                                        </div> --}}
+                                                        <input type="number" id="qty" name="quantity" min="1" max="100" step="1" value="1">
+                                                        {{-- <input type="integer" id="qty" value="1" min="1" > --}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -266,7 +270,7 @@
                         <div class="col-sm-3">
                             <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
                                 <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                                {{-- <li><a data-toggle="tab" href="#review">REVIEW</a></li> --}}
+                                <li><a data-toggle="tab" href="#review">Size Chart</a></li>
                             </ul><!-- /.nav-tabs #product-tabs -->
                         </div>
                         <div class="col-sm-9">
@@ -288,7 +292,7 @@
                                             <h4 class="title">Customer Reviews</h4>
                                             <div class="reviews">
                                                 <div class="review">
-                                                    <div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
+                                                    <div class="review-title"><span class="summary">Sizing Chart</span></div>
                                                     <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
                                                 </div>
                                             </div><!-- /.reviews -->
@@ -409,7 +413,7 @@
                                                     </div><!-- /.product-price -->
                                                 @endif
                                             </div><!-- /.product-info -->
-                                            <div class="cart clearfix animate-effect">
+                                            {{-- <div class="cart clearfix animate-effect">
                                                 <div class="action">
                                                     <ul class="list-unstyled">
                                                         <li class="add-cart-button btn-group">
@@ -417,9 +421,9 @@
                                                             <button class="btn btn-primary cart-btn" type="button" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)">Add to cart</button>
                                                         </li>
                                                         <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
-                                                    </ul>
-                                                </div><!-- /.action -->
-                                            </div><!-- /.cart -->
+                                                    </ul> --}}
+                                                {{-- </div><!-- /.action --> --}}
+                                            {{-- </div><!-- /.cart --> --}}
                                         </div><!-- /.product -->
                                     </div><!-- /.products -->
                                 </div><!-- /.item -->

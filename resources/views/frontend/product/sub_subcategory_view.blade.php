@@ -73,7 +73,7 @@ Sub - Subcategory Product
                                                             <!-- /.product-price --> 
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
+                                                        {{-- <div class="cart clearfix animate-effect">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
@@ -82,9 +82,9 @@ Sub - Subcategory Product
                                                                     </li>
                                                                     <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
                                                                 </ul>
-                                                            </div>
+                                                            </div> --}}
                                                             <!-- /.action --> 
-                                                        </div>
+                                                        {{-- </div> --}}
                                                         <!-- /.cart --> 
                                                     </div>
                                                 <!-- /.product --> 
@@ -120,7 +120,7 @@ Sub - Subcategory Product
                                                             <!-- /.product-price --> 
                                                         </div>
                                                         <!-- /.product-info -->
-                                                        <div class="cart clearfix animate-effect">
+                                                        {{-- <div class="cart clearfix animate-effect">
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
@@ -129,9 +129,9 @@ Sub - Subcategory Product
                                                                     </li>
                                                                     <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)" > <i class="fa fa-heart"></i> </button>
                                                                   </ul>
-                                                            </div>
+                                                            </div> --}}
                                                             <!-- /.action --> 
-                                                        </div>
+                                                        {{-- </div> --}}
                                                         <!-- /.cart --> 
                                                     </div>
                                                 <!-- /.product --> 
@@ -179,19 +179,20 @@ Sub - Subcategory Product
                                                                 @endif
                                                                 <!-- /.product-price -->
                                                                 <div class="description m-t-10">
-                                                                    @if(session()->get('language') == 'malay') {{ $product->short_descp_my }} @else {{ $product->short_descp_en }} @endif</div>
-                                                                <div class="cart clearfix animate-effect">
+                                                                    @if(session()->get('language') == 'malay') {{ $product->short_descp_my }} @else {{ $product->short_descp_en }} @endif
+                                                                </div>
+                                                                {{-- <div class="cart clearfix animate-effect">
                                                                     <div class="action">
                                                                         <ul class="list-unstyled">
-                                                                            <li class="add-cart-button btn-group">
+                                                                            <li class="add-cart-button btn-group"> --}}
                                                                                 {{-- <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button> --}}
-                                                                                <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                                                                {{-- <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                                                             </li>
                                                                             <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> Add to Wishlist </button>
                                                                         </ul>
-                                                                    </div>
+                                                                    </div> --}}
                                                                 <!-- /.action --> 
-                                                                </div>
+                                                                {{-- </div> --}}
                                                                 <!-- /.cart --> 
                                                             </div>
                                                         <!-- /.product-info --> 
@@ -243,7 +244,7 @@ Sub - Subcategory Product
                                                                 <!-- /.product-price -->
                                                                 <div class="description m-t-10">
                                                                     @if(session()->get('language') == 'malay') {{ $product->short_descp_my }} @else {{ $product->short_descp_en }} @endif</div>
-                                                                <div class="cart clearfix animate-effect">
+                                                                {{-- <div class="cart clearfix animate-effect">
                                                                     <div class="action">
                                                                         <ul class="list-unstyled">
                                                                             <li class="add-cart-button btn-group">
@@ -251,9 +252,9 @@ Sub - Subcategory Product
                                                                             </li>
                                                                             
                                                                         </ul>
-                                                                    </div>
+                                                                    </div> --}}
                                                                 <!-- /.action --> 
-                                                                </div>
+                                                                {{-- </div> --}}
                                                                 <!-- /.cart --> 
                                                             </div>
                                                         <!-- /.product-info --> 
