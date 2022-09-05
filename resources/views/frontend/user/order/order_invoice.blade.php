@@ -144,7 +144,7 @@
                 <td align="right" >
                     <h2><span style="color: rgb(0, 0, 0);">Subtotal (+ Shipping Fee):</span> {{ $order->amount }}</h2>
                     <h2><span style="color: rgb(0, 0, 0);">Total :</span> {{ $order->amount }}</h2>
-                    <h2><span style="color: rgb(0, 0, 0);">Full Payment PAID</h2>
+                    <h2><span style="color: rgb(0, 0, 0);">{{ $order->status }}</h2>
                 </td>
             </tr>
         </table>
