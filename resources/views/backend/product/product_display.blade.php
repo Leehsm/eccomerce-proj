@@ -76,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             {{-- 2ND ROW --}}
                             <div class="row">
                                 <div class="col-md-4">
@@ -110,22 +111,6 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Product Name Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_name_my" class="form-control" required="" value="{{ $products->product_name_my }}" readonly> 
-                                            @error('product_name_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- 3RD ROW --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <h5>Product Code <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="product_code" class="form-control" required="" value="{{ $products->product_code }}" readonly> 
@@ -137,12 +122,43 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            {{-- 3RD ROW --}}
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Product size <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" required="" value="{{ $size }}" readonly> 
+                                            @error('product_size_en')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <h5>Product Quantity <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_qty" class="form-control" required="" value="{{ $products->product_qty }}" readonly> 
+                                            <input type="text" name="product_qty" class="form-control" data-role="tagsinput" required="" value="{{ $quantity }}" readonly> 
                                             @error('product_qty')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Product Color <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_en }}" readonly> 
+                                            @error('product_color_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -164,6 +180,7 @@
                                         </div>                                       
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <h5>Product tag Malay <span class="text-danger">*</span></h5>
@@ -177,63 +194,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" required="" value="{{ $products->product_size_en }}" readonly> 
-                                            @error('product_size_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
                             </div>
 
                             {{-- 5TH ROW --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_my" class="form-control" value="kecil,sederhana,besar" data-role="tagsinput" required="" value="{{ $products->product_size_my }}" readonly> 
-                                            @error('product_size_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_en }}" readonly> 
-                                            @error('product_color_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_my" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_my }}" readonly> 
-                                            @error('product_color_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- 6TH ROW --}}
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -260,6 +223,7 @@
                                             
                                     </div>
                                 </div>
+
                             </div>
                             
                             {{-- 7TH ROW --}}
@@ -286,7 +250,7 @@
                                     </div>
                                 </div> 
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <h5>Short Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -295,14 +259,14 @@
                                             </textarea>     
                                         </div>
                                     </div>
-                                </div> 	
+                                </div> 	 --}}
                             </div> 
 
                             {{-- 9TH ROW --}}
                             <div class="row"> 
                                 <div class="col-md-6">                
                                     <div class="form-group">
-                                        <h5>Long Description English <span class="text-danger">*</span></h5>
+                                        <h5>Long Description <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <textarea id="long_desc_en" name="long_desc_en" rows="10" cols="80" required="" readonly>
                                             {!! $products->long_desc_en !!} 
@@ -311,7 +275,7 @@
                                     </div>
                                 </div> 
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <h5>Long Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -320,7 +284,7 @@
                                             </textarea>    
                                         </div>
                                     </div>
-                                </div> 	
+                                </div> 	 --}}
                             </div> 
                         
                             <div class="row">

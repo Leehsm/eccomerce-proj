@@ -20,9 +20,10 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Image</th>
-                                <th>Product En</th>
-								<th>Product Price </th>
+                                <th>Product </th>
+								<th>Price </th>
                                 <th>Quantity</th>
                                 <th>Discount </th>
 								<th>Status </th>
@@ -32,6 +33,7 @@
                         <tbody>
                             @foreach($products as $item)
                             <tr>
+                                <td>{{ $item->id }}</td>
                                 <td> <img src="{{ asset($item->product_thambnail) }}" style="width: 100px; height: 100px;">  </td>
                                 <td>{{ $item->product_name_en }}</td>
                                 <td>RM {{ $item->selling_price }} </td>
