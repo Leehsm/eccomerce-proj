@@ -39,7 +39,7 @@ FPX Payment Page
 										<strong>Address : </strong> {{ $data['address1'] }}, {{ $data['address2'] }}, 
 																	{{ $data['post_code'] }}, {{ $data['district'] }}, 
 																	{{$data['state'] }}, {{ $data['country'] }} <hr>
-										<strong>Notes : </strong>  {{ $data['notes'] }} <hr>									
+										<strong>Notes : </strong>  {{ $data['notes'] }} <hr>								
 										<li>
 											@if(Session::has('coupon'))
 												@if($data['state'] != 'SABAH' && $data['state'] != 'SARAWAK')
@@ -67,18 +67,22 @@ FPX Payment Page
 												@endif
 											@else
 												@if($data['state'] != 'SABAH' && $data['state'] != 'SARAWAK')
-													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<strong>SubTotal: </strong> RM{{ $cartTotal}} 
+													<hr>
+													<strong>Coupon Discount : </strong> 0 
 													<hr>
 													<strong>Shipping Price : </strong> RM 10.00
 													<hr>
-													<strong>Grand Total : </strong> RM{{ $cartTotal + 10.00}}
+													<strong>Grand Total : </strong> RM{{ $data['amount']}}
 													<hr>
 												@else
-													<strong>SubTotal: </strong> RM{{ $cartTotal }} 
+													<strong>SubTotal: </strong> RM{{ $cartTotal}} 
+													<hr>
+													<strong>Coupon Discount : </strong> 0
 													<hr>
 													<strong>Shipping Price : </strong> RM 15.00
 													<hr>
-													<strong>Grand Total : </strong> RM{{ $cartTotal +15.00}}
+													<strong>Grand Total : </strong> RM{{ $data['amount']}}
 													<hr>
 												@endif
 											@endif 
@@ -98,22 +102,19 @@ FPX Payment Page
 									<h4 class="unicase-checkout-title">Go To FPX Payment</h4>
 								</div>
 								{{-- <form id="payment-form" action="{{route('toyyibpay-create')}} " method="post" id="payment-form"> --}}
-								<form method="POST" action="{{route('fpx.order')}}" id="payment-form" >
+								<form method="POST" action="{{route('toyyibpay-create')}}" id="payment-form" >
 									@csrf
-									<div class="form-row">
-										<label for="card-element">
-											<input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
-											<input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
-											<input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
-											<input type="hidden" name="address1" value="{{ $data['address1'] }}">
-											<input type="hidden" name="address2" value="{{ $data['address2'] }}">
-											<input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
-											<input type="hidden" name="division_id" value="{{ $data['district'] }}">
-											<input type="hidden" name="district_id" value="{{ $data['state'] }}">
-											<input type="hidden" name="state_id" value="{{ $data['country'] }}">
-											<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
-										</label>
-									</div>
+									<input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
+									<input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
+									<input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
+									<input type="hidden" name="address1" value="{{ $data['address1'] }}">
+									<input type="hidden" name="address2" value="{{ $data['address2'] }}">
+									<input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
+									<input type="hidden" name="division_id" value="{{ $data['district'] }}">
+									<input type="hidden" name="district_id" value="{{ $data['state'] }}">
+									<input type="hidden" name="state_id" value="{{ $data['country'] }}">
+									<input type="hidden" name="notes" value="{{ $data['notes'] }}"> 
+									{{-- <input type="hidden" name="amount" value="{{ $data['amount'] }}">  --}}
 									<br>
 									{{-- <label for="fpx-bank-element">FPX Bank</label>
 									<div id="fpx-bank-element">
@@ -124,13 +125,13 @@ FPX Payment Page
 											@if(Session::has('coupon'))
 												RM{{ session()->get('coupon')['total_amount'] + 10.00}} 
 											@else
-												RM{{ $cartTotal + 10.00}} 
+												RM{{ $amount+ 10.00}} 
 											@endif 
 										@else
 											@if(Session::has('coupon'))
 												RM{{ session()->get('coupon')['total_amount'] + 15.00}} 
 											@else
-												RM{{ $cartTotal + 15.00}} 
+												RM{{ $amount+ 15.00}} 
 											@endif
 										@endif
 									</button>
@@ -144,60 +145,5 @@ FPX Payment Page
 		</div><!-- /.checkout-box -->
 	</div><!-- /.container -->
 </div><!-- /.body-content -->
-
-<script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', async() => {
-		const stripe = Stripe('sk_test_51Kl2mfAXlhPfw81sbjS5rLjGKHGq4Ehi19jkQnxYlMxvBYESfXsJgLNq5eOefDoUtU5kIlykvdkdisPP1BdGx5wy008MtvwEON');
-
-		const elements = stripe.elements();
-		const fpxBank = elements.create('fpxBank',{
-			accountHolderType: 'individual',
-		})
-		fpxBank.mount('#fpx-bank-element');
-
-		const form = document.querySelector('#payment-form');
-		form.addEventListener('submit', async (e) => {
-			e.preventDefault();
-
-			//Create a payment intent on the server
-			const {
-				error: backendError,
-				clientSecret
-			} = await fetch('/create-payment-intent', {
-				method: 'POST',
-				header: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					paymentMethodType: 'fpx',
-					currency: 'myr',
-				}),
-			}).then(r => r.json());
-
-			if(backendError){
-				addMessage(backendError.message);
-				return;
-			}
-
-			//Confirm the payment on the client
-			const nameInput = document.querySelector('#name');
-			const {error, paymentIntent} = await Stripe.confirmFpxPayment(
-				clientSecret, {
-					payment_method:{
-						fpx: fpxBank,
-						billing_details:{
-							name: nameInput.value,
-						},
-					},
-					return_url: `${window.location.origin}/return.html`
-				}
-			)
-			if(error) {
-				addMessage(error.message);
-				return;
-			}
-		});
-	});
-</script>
 
 @endsection 

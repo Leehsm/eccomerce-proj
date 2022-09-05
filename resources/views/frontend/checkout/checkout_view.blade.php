@@ -73,6 +73,9 @@ My Checkout
                                                     <input type="text" name="country" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Country" required="" style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
 
+                                                <input type="hidden" name="amount" value="{{ $cartTotal }}">
+                                                   
+
                                                 {{-- <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>State</b> <span>*</span></label>
                                                     <div class="controls">
