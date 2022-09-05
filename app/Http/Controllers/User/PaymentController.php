@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\TempCheckoutData;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use Carbon\Carbon;
@@ -17,13 +19,14 @@ use App\Mail\OrderMail;
 
 use App\Http\Requests\BillplzFormCreationRequest;
 use Billplz\Client;
+use Toyyibpay;
 
 // require 'vendor/autoload.php';
 
 class PaymentController extends Controller
 {
     public function StripeOrder(Request $request){
-        if ($request->state != 'SABAH' && $request->state != 'SARAWAK'){
+        if ($request->state_id != 3 && $request->state_id != 4){
             if (Session::has('coupon')) {
                 $total_amount = Session::get('coupon')['total_amount'] + 10.00;
             }else{
@@ -81,6 +84,7 @@ class PaymentController extends Controller
                 'name' => $invoice->name,
                 'email' => $invoice->email,
             ];
+
             Mail::to($request->email)->send(new OrderMail($data));
             // End Send Email 
 
@@ -201,96 +205,92 @@ class PaymentController extends Controller
             return redirect()->route('my.orders')->with($notification);
         }
 
+        
+
     } // end method 
 
-    public function FPXOrder(Request $request){
-        dd($request->all());
-        if ($request->state != 'SABAH' && $request->state != 'SARAWAK'){
+    public function FPXCreateBill(Request $request){
+
+        if ($request->state_id != 3 && $request->state_id != 4){
             if (Session::has('coupon')) {
-                $total_amount = Session::get('coupon')['total_amount'] + 10.00;
+                $total_amount = Session::get('coupon')['total_amount'] + 10;
             }else{
-                $total_amount = round(Cart::total() + 10.00);
+                $total_amount = round(Cart::total() + 10);
             }
+            
+            $code = config('toyyibpay.code');
 
-            $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+            $bill_object = array(
+                'billName' => 'SahiraShop.com',
+                'billDescription' => 'Payment from ' .$request->name .' on ' .Carbon::now()->format('d F Y'),
+                'billPriceSetting' => 1,
+                'billPayorInfo' => 1,
+                'billAmount' => $total_amount * 100,
+                'billExternalReferenceNo' => 'SSOP'.mt_rand(10000000,99999999),
+                'billTo' => $request->name,
+                'billEmail' => $request->email,
+                'billPhone' => $request->phone,
+            );  
 
-            if(config('billplz.billplz_sandbox')){
-                $billplz->useSandbox();
-            }
+            $data = Toyyibpay::createBill($code, (object)$bill_object);
 
-            // dd($request->all());
-
-            $bill = $billplz->bill();
-            // dd(config('billplz.billplz_collection_id'));
-
-            $bill = $bill->create(
-                config('billplz.billplz_collection_id'),
-                $request->Auth::id(),
-                $request->name,
-                $request->email,
-                $request->phone,
-                $request->address1,
-                $request->address2,
-                $request->post_code,
-                $request->district,
-                $request->state,
-                $request->country,
-                $request->notes,
-                \Duit\MYR::given($total_amount),   
-                url('/'),
-                'Any Description because we dont have description dynamically.',
-                ['redirect_url' => url('/redirect')]
-            );
-
-        return redirect($bill->toArray()['url']);
-
-        }else{
-            if (Session::has('coupon')) {
-                $total_amount = Session::get('coupon')['total_amount'] + 15.00;
-            }else{
-                $total_amount = round(Cart::total() + 15.00);
-            }
-            $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
-
-            if(config('billplz.billplz_sandbox')){
-                $billplz->useSandbox();
-            }
-
-            $bill = $billplz->bill();
-            // dd(config('billplz.billplz_collection_id'));
-
-            $bill = $bill->create([
-                config('billplz.billplz_collection_id'),
-                // $request->Auth::id(),
-                $request->name,
-                $request->email,
-                $request->phone,
-                $request->address1,
-                $request->address2,
-                $request->post_code,
-                $request->district,
-                $request->state,
-                $request->country,
-                $request->notes,
-                \Duit\MYR::given($total_amount),   
-                url('/'),             
-                'FPX payment method for prchasing item from Sahira',
-                ['redirect_url' => url('/redirect')]
-            ]);
-
-            dd($bill);
+            $bill_code = $data[0]->BillCode;
 
         }
+        else {
+            if (Session::has('coupon')) {
+                $total_amount = Session::get('coupon')['total_amount'] + 10;
+            }else{
+                $total_amount = round(Cart::total() + 10);
+            }
+
+            $code = config('toyyibpay.code');
+
+            $bill_object = array(
+                'billName' => 'SahiraShop.com',
+                'billDescription' => 'Payment for purchased item from SahiraShop website',
+                'billPriceSetting' => 1,
+                'billPayorInfo' => 1,
+                'billAmount' => $total_amount * 100,
+                'billExternalReferenceNo' => 'SSOP'.mt_rand(10000000,99999999),
+                'billTo' => $request->name,
+                'billEmail' => $request->email,
+                'billPhone' => $request->phone,
+            );  
+
+            $data = Toyyibpay::createBill($code, (object)$bill_object);
+
+            $bill_code = $data[0]->BillCode;
+
+        }
+
+        // dd($bill_object['billExternalReferenceNo']);      
+        return redirect()->route('fpx:payment',$bill_code);
     }
 
+    public function billPaymentLink($bill_code){
 
+        $data = Toyyibpay::billPaymentLink($bill_code);
+        return redirect($data);
 
+    }
 
+    public function billplzHandleRedirect(Request $request){
 
-    // public function FPXOrder(Request $request){
-    //     $stripe = new \Stripe\StripeClient('sk_test_51Kl2mfAXlhPfw81sbjS5rLjGKHGq4Ehi19jkQnxYlMxvBYESfXsJgLNq5eOefDoUtU5kIlykvdkdisPP1BdGx5wy008MtvwEON');
-    //     $stripe->paymentIntents->create(
-    //         ['payment_method_types' => ['fpx'], 'amount' => 1099, 'currency' => 'myr']
-    //         );
-    // }
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+
+        if(config('billplz.billplz_sandbox')){
+            $billplz->useSandbox();
+        }
+
+        $bill = $billplz->bill();
+
+        try{
+            $bill = $bill->redirect($request->all());
+        }catch(\exception $e){
+            dd($e->getMessage());
+        }
+        dd($bill);
+    }
+
 }
