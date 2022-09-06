@@ -74,9 +74,9 @@
                 <strong>Address:</strong> {{ $order->address1 }}, 
                                           {{ $order->address2 }}, 
                                           {{ $order->post_code }}, 
-                                          {{ $order->district->district_name }},
-                                          {{ $order->division->division_name }}, 
-                                          {{ $order->state->state_name }} <br>
+                                          {{ $order->district }},
+                                          {{ $order->state }}, 
+                                          {{ $order->country }} <br>
 
                 <strong>Note:</strong> {{ $order->notes }} 
                 
@@ -144,7 +144,7 @@
                 <td align="right" >
                     <h2><span style="color: rgb(0, 0, 0);">Subtotal (+ Shipping Fee):</span> {{ $order->amount }}</h2>
                     <h2><span style="color: rgb(0, 0, 0);">Total :</span> {{ $order->amount }}</h2>
-                    <h2><span style="color: rgb(0, 0, 0);">Full Payment PAID</h2>
+                    <h2><span style="color: rgb(0, 0, 0);">{{ $order->status }}</h2>
                 </td>
             </tr>
         </table>

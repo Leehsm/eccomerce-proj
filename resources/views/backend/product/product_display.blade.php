@@ -76,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             {{-- 2ND ROW --}}
                             <div class="row">
                                 <div class="col-md-4">
@@ -110,22 +111,6 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Product Name Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_name_my" class="form-control" required="" value="{{ $products->product_name_my }}" readonly> 
-                                            @error('product_name_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- 3RD ROW --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <h5>Product Code <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="product_code" class="form-control" required="" value="{{ $products->product_code }}" readonly> 
@@ -137,12 +122,43 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            {{-- 3RD ROW --}}
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Product size <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" required="" value="{{ $size }}" readonly> 
+                                            @error('product_size_en')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <h5>Product Quantity <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_qty" class="form-control" required="" value="{{ $products->product_qty }}" readonly> 
+                                            <input type="text" name="product_qty" class="form-control" data-role="tagsinput" required="" value="{{ $quantity }}" readonly> 
                                             @error('product_qty')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Product Color <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_en }}" readonly> 
+                                            @error('product_color_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -164,6 +180,7 @@
                                         </div>                                       
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <h5>Product tag Malay <span class="text-danger">*</span></h5>
@@ -177,63 +194,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" required="" value="{{ $products->product_size_en }}" readonly> 
-                                            @error('product_size_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
                             </div>
 
                             {{-- 5TH ROW --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_my" class="form-control" value="kecil,sederhana,besar" data-role="tagsinput" required="" value="{{ $products->product_size_my }}" readonly> 
-                                            @error('product_size_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_en" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_en }}" readonly> 
-                                            @error('product_color_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_my" class="form-control" data-role="tagsinput" required="" value="{{ $products->product_color_my }}" readonly> 
-                                            @error('product_color_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- 6TH ROW --}}
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -260,6 +223,7 @@
                                             
                                     </div>
                                 </div>
+
                             </div>
                             
                             {{-- 7TH ROW --}}
@@ -286,7 +250,7 @@
                                     </div>
                                 </div> 
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <h5>Short Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -295,14 +259,14 @@
                                             </textarea>     
                                         </div>
                                     </div>
-                                </div> 	
+                                </div> 	 --}}
                             </div> 
 
                             {{-- 9TH ROW --}}
                             <div class="row"> 
                                 <div class="col-md-6">                
                                     <div class="form-group">
-                                        <h5>Long Description English <span class="text-danger">*</span></h5>
+                                        <h5>Long Description <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <textarea id="long_desc_en" name="long_desc_en" rows="10" cols="80" required="" readonly>
                                             {!! $products->long_desc_en !!} 
@@ -311,7 +275,7 @@
                                     </div>
                                 </div> 
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="form-group">
                                         <h5>Long Description Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -320,7 +284,7 @@
                                             </textarea>    
                                         </div>
                                     </div>
-                                </div> 	
+                                </div> 	 --}}
                             </div> 
                         
                             <div class="row">
@@ -387,7 +351,7 @@
             <div class="col-md-12">
                <div class="box bt-3 border-info">
                     <div class="box-header">
-                        <h4 class="box-title">Product Multiple Image <strong>Update</strong></h4>
+                        <h4 class="box-title">Product Multiple Image <strong></strong></h4>
                     </div>
 
                     <form method="post" action="{{ route('update-product-image') }}" enctype="multipart/form-data">
@@ -428,7 +392,7 @@
             <div class="col-md-12">
                <div class="box bt-3 border-info">
                 <div class="box-header">
-                    <h4 class="box-title">Product Thambnail Image <strong>Update</strong></h4>
+                    <h4 class="box-title">Product Thambnail Image <strong></strong></h4>
                 </div>
                 <form method="post" action="{{ route('update-product-thambnail') }}" enctype="multipart/form-data">
                 @csrf
@@ -462,6 +426,47 @@
         </div> <!-- // end row  -->
     </section>
     <!-- ///////////////// End Start Thambnail Image Update Area ///////// -->
+
+    <!-- ///////////////// Start Size Chart Image Update Area ///////// -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="box bt-3 border-info">
+                <div class="box-header">
+                    <h4 class="box-title">Product Size Chart Image <strong></strong></h4>
+                </div>
+                <form method="post" action="{{ route('update-sizeChart') }}" enctype="multipart/form-data">
+                @csrf
+
+                    <input type="hidden" name="id" value="{{ $products->id }}">
+                    <input type="hidden" name="old_img" value="{{ $products->size_chart }}">
+
+                    <div class="row row-sm">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="{{ asset($products->size_chart) }}" class="card-img-top" style="height: 130px; width: 280px;">
+                                <div class="card-body">
+                                    <p class="card-text"> 
+                                        <div class="form-group">
+                                            <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
+                                            <input type="file" name="size_chart" class="form-control" onChange="sizeChart(this)"  disabled>
+                                            <img src="" id="sizeChart">
+                                        </div> 
+                                    </p>
+                                </div>
+                            </div> 		
+                        </div><!--  end col md 3		 -->	
+                    </div>			
+                    {{-- <div class="text-xs-right">
+                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+                    </div> --}}
+                    <br><br>
+                </form>		   
+            </div>
+        </div>
+        </div> <!-- // end row  -->
+    </section>
+    <!-- ///////////////// End Start Size Chart Image Update Area ///////// -->
 
 </div>
 
@@ -514,6 +519,16 @@
             var reader = new FileReader()
             reader.onload = function(e){
                 $('#mainThumb').attr('src',e.target.result).width(80).height(80);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function sizeChart(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function(e){
+                $('#sizeChart').attr('src',e.target.result).width(80).height(80);
             };
             reader.readAsDataURL(input.files[0]);
         }

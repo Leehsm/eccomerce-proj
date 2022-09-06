@@ -22,8 +22,6 @@
                                         <th>Blog Image </th>
                                         <th>Title</th>
                                         <th>Date (DD/MM/YYYY) </th>
-                                        <th>Decription</th>
-                                        <th>Long Decription</th>
                                         <th>Status</th>
                                         <th>Action</th>
 
@@ -41,8 +39,6 @@
                                             @endif
                                         </td>
                                         <td>{{ $item->date }}</td>
-                                        <td>{{ $item->description }}</td>
-                                        <td>{{ $item->long_description }}</td>
                                         <td>
                                             @if($item->status == 1)
                                                 <span class="badge badge-pill badge-success"> Active </span>

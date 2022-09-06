@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 use App\Models\Coupon;
+use App\Models\Size;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class CartPageController extends Controller
 {
     public function MyCart(){
-    	return view('frontend.wishlist.view_mycart');
+
+        $product = Product::latest()->get();
+        $size = Size::latest()->get();
+
+    	return view('frontend.wishlist.view_mycart', compact('product','size'));
 
     }
 

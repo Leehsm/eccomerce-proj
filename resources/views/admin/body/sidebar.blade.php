@@ -95,7 +95,7 @@
           <li class="{{ ($route == 'manage-coupon')? 'active':'' }}"><a href="{{ route('manage-coupon') }}"><i class="ti-more"></i>Manage Coupon</a></li>
         </ul>
       </li>      
-      <li class="treeview {{ ($prefix == '/shipping')?'active':'' }}  ">
+      {{-- <li class="treeview {{ ($prefix == '/shipping')?'active':'' }}  ">
         <a href="#">
           <i data-feather="bookmark"></i>
           <span>Shipping Area</span>
@@ -108,7 +108,7 @@
           <li class="{{ ($route == 'manage-district')? 'active':'' }}"><a href="{{ route('manage-district') }}"><i class="ti-more"></i>Ship District</a></li>
           <li class="{{ ($route == 'manage-state')? 'active':'' }}"><a href="{{ route('manage-state') }}"><i class="ti-more"></i>Ship Country</a></li>  
         </ul>
-      </li>
+      </li> --}}
 
 
       <li class="header nav-small-cap">Sales</li>
@@ -169,6 +169,20 @@
         <ul class="treeview-menu">
           <li class="{{ ($route == 'all-blog')? 'active':'' }}"><a href="{{ route('all-blog') }}"><i class="ti-more"></i>All Blog</a></li>
           <li class="{{ ($route == 'blog.add')? 'active':'' }}"><a href="{{ route('blog.add') }}"><i class="ti-more"></i>Add Blog</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview {{ ($prefix == '/contact')?'active':'' }}  ">
+        <a href="#">
+          <i data-feather="phone-call"></i>
+          <span>Contact</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ ($route == 'all-contact')? 'active':'' }}"><a href="{{ route('all-contact') }}"><i class="ti-more"></i>All Contact</a></li>
+          <li class="{{ ($route == 'contact.add')? 'active':'' }}"><a href="{{ route('contact.add') }}"><i class="ti-more"></i>Add Contact</a></li>
         </ul>
       </li>
     </ul>

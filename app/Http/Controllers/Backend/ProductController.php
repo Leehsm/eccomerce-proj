@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\MultiImg;
 use App\Models\Brand;
+use App\Models\Size;
+use App\Models\Quantity;
 use Carbon\Carbon;
 use Image;
 
@@ -25,9 +27,16 @@ class ProductController extends Controller
     public function StoreProduct(Request $request){
 
         $image = $request->file('product_thambnail');
+        $image2 = $request->file('size_chart');
+
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        $name_gen2 = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+
         Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
+        Image::make($image2)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+
         $save_url = 'upload/products/thumbnail/'.$name_gen;
+        $save_url2 = 'upload/products/sizeChart/'.$name_gen;
 
         $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
@@ -40,10 +49,10 @@ class ProductController extends Controller
             'product_slug_en' => strtolower(str_replace(' ', '-', $request->product_name_en)),
             'product_slug_my' => str_replace(' ', '-', $request->product_name_my),
             'product_code' => $request->product_code,
-            'product_qty' => $request->product_qty,
+            'product_qty' => 1,
             'product_tags_en' => $request->product_tags_en,
             'product_tags_my' => $request->product_tags_my,
-            'product_size_en' => $request->product_size_en,
+            'product_size_en' => 1,
             'product_size_my' => $request->product_size_my,
             'product_color_en' => $request->product_color_en,
             'product_color_my' => $request->product_color_my,
@@ -63,9 +72,28 @@ class ProductController extends Controller
       	    // 'best_seller' => $request->best_seller,
 
             'product_thambnail' => $save_url,
+            'size_chart' => $save_url2,
             'status' => 1,
             'created_at' => Carbon::now(), 
-            ]);
+        ]);
+
+        // dd($product_id);
+        
+        $quantity = explode(',',$request->product_qty);
+        $size = explode(',', $request->product_size_en);
+        $prod_id = $product_id;
+
+        $arrayCount = max(count($quantity), count($size));
+
+        for ($i = 0; $i < $arrayCount; $i++) {
+            if(isset($size[$i])) {
+                $size_id = Size::insertGetId([
+                    'product_id' => $product_id,
+                    'Size_type' => $size[$i],
+                    'quantity' => $quantity[$i],
+                ]);
+            }
+        }
 
         ////////// Multiple Image Upload Start ///////////
         $images = $request->file('multi_img');
@@ -96,14 +124,16 @@ class ProductController extends Controller
     }
 
     public function EditProduct($id){
-
+        
         $categories = Category::latest()->get();
 		$brands = Brand::latest()->get();
 		$subcategory = SubCategory::latest()->get();
 		$subsubcategory = SubSubCategory::latest()->get();
 		$products = Product::findOrFail($id);
+        $size = Size::where('product_id',$id)->get('size_type');
+        $quantity = Size::where('product_id',$id)->get('quantity'); //->implode(',', all())
         $multiImgs = MultiImg::where('product_id',$id)->get();
-		return view('backend.product.product_edit',compact('categories','brands','subcategory','subsubcategory','products','multiImgs'));
+		return view('backend.product.product_edit',compact('categories','brands','subcategory','subsubcategory','products','size','quantity','multiImgs'));
 
     }
 
@@ -114,8 +144,11 @@ class ProductController extends Controller
 		$subcategory = SubCategory::latest()->get();
 		$subsubcategory = SubSubCategory::latest()->get();
 		$products = Product::findOrFail($id);
+        $size = Size::where('product_id',$id)->get('size_type');
+        $quantity = Size::where('product_id',$id)->get('quantity'); //->implode(',', all())
         $multiImgs = MultiImg::where('product_id',$id)->get();
-		return view('backend.product.product_display',compact('categories','brands','subcategory','subsubcategory','products','multiImgs'));
+
+		return view('backend.product.product_display',compact('categories','brands','subcategory','subsubcategory','products','size','quantity','multiImgs'));
 
     }
 
@@ -124,45 +157,61 @@ class ProductController extends Controller
         $product_id = $request->id;
 
         Product::findOrFail($product_id)->update([
-      	'brand_id' => $request->brand_id,
-      	'category_id' => $request->category_id,
-      	'subcategory_id' => $request->subcategory_id,
-      	'subsubcategory_id' => $request->subsubcategory_id,
-      	'product_name_en' => $request->product_name_en,
-      	'product_name_my' => $request->product_name_my,
-      	'product_slug_en' =>  strtolower(str_replace(' ', '-', $request->product_name_en)),
-      	'product_slug_my' => str_replace(' ', '-', $request->product_name_my),
-      	'product_code' => $request->product_code,
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_id' => $request->subsubcategory_id,
+            'product_name_en' => $request->product_name_en,
+            'product_name_my' => $request->product_name_my,
+            'product_slug_en' =>  strtolower(str_replace(' ', '-', $request->product_name_en)),
+            'product_slug_my' => str_replace(' ', '-', $request->product_name_my),
+            'product_code' => $request->product_code,
 
-      	'product_qty' => $request->product_qty,
-      	'product_tags_en' => $request->product_tags_en,
-      	'product_tags_my' => $request->product_tags_my,
-      	'product_size_en' => $request->product_size_en,
-      	'product_size_my' => $request->product_size_my,
-      	'product_color_en' => $request->product_color_en,
-      	'product_color_my' => $request->product_color_my,
+            // 'product_qty' => $request->product_qty,
+            'product_tags_en' => $request->product_tags_en,
+            'product_tags_my' => $request->product_tags_my,
+            // 'product_size_en' => $request->product_size_en,
+            // 'product_size_my' => $request->product_size_my,
+            'product_color_en' => $request->product_color_en,
+            'product_color_my' => $request->product_color_my,
 
-      	'selling_price' => $request->selling_price,
-      	'discount_price' => $request->discount_price,
-      	'short_desc_en' => $request->short_desc_en,
-      	'short_desc_my' => $request->short_desc_my,
-      	'long_desc_en' => $request->long_desc_en,
-      	'long_desc_my' => $request->long_desc_my,
+            'selling_price' => $request->selling_price,
+            'discount_price' => $request->discount_price,
+            'short_desc_en' => $request->short_desc_en,
+            'short_desc_my' => $request->short_desc_my,
+            'long_desc_en' => $request->long_desc_en,
+            'long_desc_my' => $request->long_desc_my,
 
-      	'hot_deals' => $request->hot_deals,
-      	'featured' => $request->featured,
-      	'special_offer' => $request->special_offer,
-      	'special_deals' => $request->special_deals, 
-      	// 'new_arrival' => $request->new_arrival,
-      	// 'best_seller' => $request->best_seller,      	 
-      	'status' => 1,
-      	'created_at' => Carbon::now(),   
+            'hot_deals' => $request->hot_deals,
+            'featured' => $request->featured,
+            'special_offer' => $request->special_offer,
+            'special_deals' => $request->special_deals, 
+            // 'new_arrival' => $request->new_arrival,
+            // 'best_seller' => $request->best_seller,      	 
+            'status' => 1,
+            'created_at' => Carbon::now(),   
+        ]);
 
-      ]);
+        // $quantity = explode(',',$request->product_qty);
+        // $size = explode(',', $request->product_size_en);
+        // // dd($size);
+        // $prod_id = $product_id;
 
-          $notification = array(
-			'message' => 'Product Updated Without Image Successfully',
-			'alert-type' => 'success'
+        // $arrayCount = max(count($quantity), count($size));
+
+        // for ($i = 0; $i < $arrayCount; $i++) {
+        //     if(isset($size[$i])) {
+        //         $size_id = Size::insertGetId([
+        //             'product_id' => $product_id,
+        //             'Size_type' => $size[$i],
+        //             'quantity' => $quantity[$i],
+        //         ]);
+        //     }
+        // }
+
+        $notification = array(
+            'message' => 'Product Updated Without Image Successfully',
+            'alert-type' => 'success'
 		);
 
 		return redirect()->route('product-manage')->with($notification);
@@ -198,25 +247,68 @@ class ProductController extends Controller
         $oldImage = $request->old_img;
         unlink($oldImage);
    
-       $image = $request->file('product_thambnail');
-           $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-           Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
-           $save_url = 'upload/products/thumbnail/'.$name_gen;
+        $image = $request->file('product_thambnail');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
+        $save_url = 'upload/products/thumbnail/'.$name_gen;
+
+        Product::findOrFail($pro_id)->update([
+            'product_thambnail' => $save_url,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        $notification = array(
+            'message' => 'Product Image Thambnail Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
    
-           Product::findOrFail($pro_id)->update([
-               'product_thambnail' => $save_url,
-               'updated_at' => Carbon::now(),
+    } // end method
+
+    public function SizeChartUpdate(Request $request){
+
+        $pro_id = $request->id;
+        $oldImage = $request->old_img;
+
+        if(empty($oldImage)){
+            
+            $image = $request->file('size_chart');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+            $save_url = 'upload/products/sizeChart/'.$name_gen;
+    
+            Product::findOrFail($pro_id)->update([
+                'size_chart' => $save_url,
+                'updated_at' => Carbon::now(),
+    
+            ]);
+
+        }else{
+
+            unlink($oldImage);
+
+            $image = $request->file('size_chart');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+            $save_url = 'upload/products/sizeChart/'.$name_gen;
+
+            Product::findOrFail($pro_id)->update([
+                'size_chart' => $save_url,
+                'updated_at' => Carbon::now(),
+
+            ]);
+        }
+
+        $notification = array(
+            'message' => 'Product Image size Chart Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
    
-           ]);
-   
-            $notification = array(
-               'message' => 'Product Image Thambnail Updated Successfully',
-               'alert-type' => 'info'
-           );
-   
-           return redirect()->back()->with($notification);
-   
-        } // end method
+    } // end method
 
     //// Multi Image Delete ////
     public function MultiImageDelete($id){
@@ -257,8 +349,18 @@ class ProductController extends Controller
 
     public function ProductDelete($id){
         $product = Product::findOrFail($id);
-        unlink($product->product_thambnail);
+        
+        if(!empty($product->product_thambnail)){
+            unlink($product->product_thambnail);
+        }
+        
+
+        if(!empty($product->size_chart)){
+            unlink($product->size_chart);
+        }
+
         Product::findOrFail($id)->delete();
+        Size::where('product_id',$id)->delete();
 
         $images = MultiImg::where('product_id',$id)->get();
         foreach ($images as $img) {

@@ -15,16 +15,17 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('billExtNo')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('division_id');
-            $table->unsignedBigInteger('district_id');
-            $table->unsignedBigInteger('state_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->string('address1')->nullable();
             $table->string('address2')->nullable();
             $table->integer('post_code')->nullable();
+            $table->string('district');
+            $table->string('state');
+            $table->string('country');
             $table->text('notes')->nullable();
             $table->text('holdername')->nullable();
             $table->text('bankname')->nullable();

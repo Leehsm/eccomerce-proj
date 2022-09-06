@@ -773,10 +773,10 @@ a {
   background: #12cca7;
 }
 .latest-tweet .re-twitter .comment a {
-  color: #12cca7;
+  color: #db4a39;
 }
 .latest-tweet .re-twitter .comment .icon .fa-stack-2x {
-  color: #12cca7;
+  color: #db4a39;
 }
 .footer .contact-information .media .icon .fa-stack-2x {
   color: #12cca7;
@@ -984,7 +984,7 @@ a {
   color: #12cca7;
 }
 .blog-page .blog-post-author-details .author-social-network button .twitter-icon {
-  background-color: #12cca7;
+  background-color: #db4a39;
 }
 .blog-page .blog-review .review-action a,
 .blog-page .blog-review .review-action a:hover,
@@ -5800,11 +5800,11 @@ age-container #owl-main .owl-next {
   background-color: #153470;
 }
 .body-content .sign-in-page .sign-in .social-sign-in .twitter-sign-in {
-  background-color: #22aadf;
+  background-color: #db4a39;
 }
 .body-content .sign-in-page .sign-in .social-sign-in .twitter-sign-in:hover,
 .body-content .sign-in-page .sign-in .social-sign-in .twitter-sign-in:focus {
-  background-color: #0084B9;
+  background-color: #db4a39;
 }
 .body-content .sign-in-page .create-new-account > span {
   font-size: 20px;

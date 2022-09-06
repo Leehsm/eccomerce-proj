@@ -4,6 +4,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ToyyibpayController;
+use App\Http\Controllers\SocialShareController;
+
 
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -16,6 +18,7 @@ use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ReportController;
@@ -47,8 +50,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin:admin']], function(){
-    Route::get('/login', [AdminController::class, 'loginForm']);
-    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
+    Route::get('/mantap/admin/login', [AdminController::class, 'loginForm']);
+    Route::post('/mantap/admin/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 Route::middleware(['auth:admin'])->group(function(){
@@ -72,6 +75,12 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     $user = User::find($id);
     return view('dashboard', compact('user'));
 })->name('dashboard');
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
 
 //USER ALL ROUTE
 Route::get('/', [IndexController::class, 'index']);
@@ -145,6 +154,7 @@ Route::prefix('product')->group(function(){
     Route::post('/data/update', [ProductController::class, 'UpdateDataProduct'])->name('product-update');
     Route::post('/image/update', [ProductController::class, 'MultiImageUpdate'])->name('update-product-image');
     Route::post('/thambnail/update', [ProductController::class, 'ThambnailImageUpdate'])->name('update-product-thambnail');
+    Route::post('/sizeChart/update', [ProductController::class, 'SizeChartUpdate'])->name('update-sizeChart');
     Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product-multiimg-delete');
     Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product-inactive');
     Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product-active');
@@ -220,11 +230,13 @@ Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWish
 
 //Payment Page
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
-// Route::post('/user/fpx/order', [PaymentController::class, 'FPXOrder'])->name('fpx.order'); //fpx
+Route::post('/user/fpx/create/bill', [PaymentController::class, 'FPXCreateBill'])->name('fpx:bill'); //fpx
+Route::get('/bill/payment/{bill_code}', [PaymentController::class, 'billPaymentLink'])->name('fpx:payment');
+Route::post('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
 
 //ToyyibPay
-Route::post('/user/toyyibpay', [ToyyibpayController::class, 'createBill'])->name('toyyibpay-create'); //fpx
-Route::post('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
+Route::post('/user/toyyibpay', [ToyyibpayController::class, 'FPXCreateBill'])->name('toyyibpay-create'); //fpx
+Route::get('/user/toyyibpay/status', [ToyyibpayController::class, 'paymentStatus'])->name('toyyibpay-status'); //fpx
 Route::post('/user/toyyibpay/callback', [ToyyibpayController::class, 'callBack'])->name('toyyibpay-callback'); //fpx
 
 //Order History
@@ -248,29 +260,38 @@ Route::prefix('coupons')->group(function(){
     Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
 }); 
 
+// Admin Contact All Routes 
+Route::prefix('contacts')->group(function(){ 
+    Route::get('/view', [ContactController::class, 'ContactView'])->name('manage-contact'); 
+    Route::post('/store', [ContactController::class, 'ContactStore'])->name('contact.store');
+    Route::get('/edit/{id}', [ContactController::class, 'ContactEdit'])->name('contact.edit');
+    Route::post('/update/{id}', [ContactController::class, 'ContactUpdate'])->name('contact.update');
+    Route::get('/delete/{id}', [ContactController::class, 'ContactDelete'])->name('contact.delete');
+}); 
+
 // Admin Shipping All Routes 
-Route::prefix('shipping')->group(function(){
-    // Ship Division 
-    Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('manage-division');
-    Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
-    Route::get('/division/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
-    Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
-    Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
+// Route::prefix('shipping')->group(function(){
+//     // Ship Division 
+//     Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('manage-division');
+//     Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
+//     Route::get('/division/edit/{id}', [ShippingAreaController::class, 'DivisionEdit'])->name('division.edit');
+//     Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
+//     Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
 
-    // Ship District 
-    Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage-district');
-    Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
-    Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
-    Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
-    Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+//     // Ship District 
+//     Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage-district');
+//     Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
+//     Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
+//     Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
+//     Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
 
-    // Ship State 
-    Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
-    Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
-    Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
-    Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
-    Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
-});    
+//     // Ship State 
+//     Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage-state');
+//     Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
+//     Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
+//     Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
+//     Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
+// });    
 
 // Frontend Coupon Option
 Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
@@ -333,7 +354,6 @@ Route::prefix('report')->group(function(){
 });
 
 Route::prefix('blog')->group(function(){
-    // Ship Division 
     Route::get('/view', [BlogController::class, 'BlogView'])->name('all-blog');
     Route::get('/add', [BlogController::class, 'BlogAdd'])->name('blog.add');
     Route::post('/store', [BlogController::class, 'BlogStore'])->name('blog.store');
@@ -343,6 +363,17 @@ Route::prefix('blog')->group(function(){
 
     Route::get('/inactive/{id}', [BlogController::class, 'BlogInactive'])->name('blog.inactive');
     Route::get('/active/{id}', [BlogController::class, 'BlogActive'])->name('blog.active');
+    Route::post('/image_slider/update', [BlogController::class, 'MultiImageSliderUpdate'])->name('update-blog-slider-image');
+    Route::get('/multiimg_slider/delete/{id}', [BlogController::class, 'MultiImageSliderDelete'])->name('blog-multiimg-slider-delete');
+});   
+
+Route::prefix('contact')->group(function(){
+    Route::get('/view', [ContactController::class, 'ContactView'])->name('all-contact');
+    Route::get('/add', [ContactController::class, 'ContactAdd'])->name('contact.add');
+    Route::post('/store', [ContactController::class, 'ContactStore'])->name('contact.store');
+    Route::get('/edit/{id}', [ContactController::class, 'ContactEdit'])->name('contact.edit');
+    Route::post('/update/{id}', [ContactController::class, 'ContactUpdate'])->name('contact.update');
+    Route::get('/delete/{id}', [ContactController::class, 'ContactDelete'])->name('contact.delete');    
 });   
 
 //Search route
@@ -398,3 +429,8 @@ Route::prefix('skincare')->group(function(){
     Route::post('/update', [StockController::class, 'SkincareUpdate'])->name('skincare.update');
     Route::get('/delete/{id}', [StockController::class, 'SkincareDelete'])->name('skincare.delete');  
 });
+
+Route::get('/billplz', [FormController::class, 'FormControllerView']);
+
+//Share Button
+// Route::get('social-share', [SocialShareController::class, 'index']);

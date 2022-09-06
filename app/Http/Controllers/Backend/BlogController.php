@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\MultiImgBlog;
+use App\Models\MultiImg;
 use App\Models\Blog;
 use Carbon\Carbon;
 use Image;
@@ -32,13 +34,28 @@ class BlogController extends Controller
     	Image::make($image)->resize(780,433)->save('upload/blogs/'.$name_gen);
     	$save_url = 'upload/blogs/'.$name_gen;
 
-	    Blog::insert([
+	    $blog_id = Blog::insertGetId([
             'title' => $request->title,
             'date' => $request->date,
             'description' => $request->description,
             'long_description' => $request->long_description,
+            'long_description2' => $request->long_description2,
             'blogImg' => $save_url,
     	]);
+
+        ////////// Multiple Image Upload Start ///////////
+        $images = $request->file('multi_img_blog');
+        foreach ($images as $img) {
+            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(917,1000)->save('upload/blogs/multi-image/'.$make_name);
+            $uploadPath = 'upload/blogs/multi-image/'.$make_name;
+
+            MultiImgBlog::insert([
+                'blog_id' => $blog_id,
+                'photo_name' => $uploadPath,
+                'created_at' => Carbon::now(), 
+            ]);
+        }////////// End Multiple Image Upload///////////
 
 	    $notification = array(
 			'message' => 'Blog Inserted Successfully',
@@ -50,7 +67,8 @@ class BlogController extends Controller
 
     public function BlogEdit($id){
         $blogs = Blog::findOrFail($id);
-        return view('backend.blog.blog_edit',compact('blogs'));
+        $multiImgSliders = MultiImgBlog::where('blog_id',$id)->get();
+        return view('backend.blog.blog_edit',compact('blogs','multiImgSliders'));
     }
 
     public function BlogUpdate(Request $request){
@@ -68,7 +86,8 @@ class BlogController extends Controller
                 'title' => $request->title,
                 'date' => $request->date,
                 'description' => $request->description,
-                'description2' => $request->long_description,
+                'long_description' => $request->long_description,
+                'long_description2' => $request->long_description2,
                 'blogImg' => $save_url,
         ]);
 
@@ -81,10 +100,11 @@ class BlogController extends Controller
 
         }else{
             Blog::findOrFail($blog_id)->update([
-            'title' => $request->title,
-            'date' => $request->date,
-            'description' => $request->description,
-            'description2' => $request->long_description,
+                'title' => $request->title,
+                'date' => $request->date,
+                'description' => $request->description,
+                'long_description' => $request->long_description,
+                'long_description2' => $request->long_description2,
         ]);
 
         $notification = array(
@@ -134,4 +154,42 @@ class BlogController extends Controller
 
     }
 
+    public function MultiImageSliderUpdate(Request $request){
+		$imgs = $request->multi_img;
+
+		foreach ($imgs as $id => $img) {
+            $imgDel = MultiImgBlog::findOrFail($id);
+            unlink($imgDel->photo_name);
+
+            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+            Image::make($img)->resize(917,1000)->save('upload/blogs/multi-image/'.$make_name);
+            $uploadPath = 'upload/blogs/multi-image/'.$make_name;
+
+            MultiImgBlog::where('id',$id)->update([
+                'photo_name' => $uploadPath,
+                'updated_at' => Carbon::now(),
+            ]);
+	    } 
+
+       $notification = array(
+			'message' => 'Product Image Updated Successfully',
+			'alert-type' => 'info'
+		);
+		return redirect()->back()->with($notification);
+	}
+
+    //// Multi Image Delete ////
+    public function MultiImageSliderDelete($id){
+        $oldimg = MultiImgBlog::findOrFail($id);
+        unlink($oldimg->photo_name);
+        MultiImgBlog::findOrFail($id)->delete();
+
+        $notification = array(
+           'message' => 'Product Image Deleted Successfully',
+           'alert-type' => 'success'
+       );
+
+       return redirect()->back()->with($notification);
+
+    } // end method 
 }

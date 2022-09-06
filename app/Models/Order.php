@@ -25,4 +25,8 @@ class Order extends Model
       public function user(){
     	return $this->belongsTo(User::class,'user_id','id');
     }
+
+    // public function tempOrder(){
+    //   return $this->belongsTo(tempOrder::class,'user_id','id');
+    // }
 }

@@ -19,7 +19,7 @@ class OrderController extends Controller
     }
 
     public function PendingOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with('user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.pending.pending_order_details',compact('order','orderItem'));
     }
@@ -31,7 +31,7 @@ class OrderController extends Controller
     }
 
     public function ConfirmedOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with('user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.confirmed.confirmed_order_details',compact('order','orderItem'));
     }
@@ -43,7 +43,7 @@ class OrderController extends Controller
     }
 
     public function ProcessingOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.processing.processing_order_details',compact('order','orderItem'));
     }
@@ -55,7 +55,7 @@ class OrderController extends Controller
     }
 
     public function PickedOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.picked.picked_order_details',compact('order','orderItem'));
     }
@@ -67,7 +67,7 @@ class OrderController extends Controller
     }
 
     public function ShippedOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.shipped.shipped_order_details',compact('order','orderItem'));
     }
@@ -79,7 +79,7 @@ class OrderController extends Controller
     }
 
     public function DeliveredOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.delivered.delivered_order_details',compact('order','orderItem'));
     }
@@ -91,7 +91,7 @@ class OrderController extends Controller
     }
 
     public function CancelOrderDetails($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	return view('backend.orders.cancel.cancel_order_details',compact('order','orderItem'));
     }
@@ -144,7 +144,7 @@ class OrderController extends Controller
     }
 
     public function InvoiceDownload($order_id){
-        $order = Order::with('division','district','state','user')->where('id',$order_id)->first();
+        $order = Order::with( 'user')->where('id',$order_id)->first();
     	$orderItem = OrderItem::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
     	// return view('frontend.user.order.order_invoice',compact('order','orderItem'));
 		$pdf = PDF::loadView('backend.orders.order_invoice', compact('order','orderItem'))->setPaper('a4')->setOptions([ 'tempDir' => public_path(),'chroot' => public_path(), ]);

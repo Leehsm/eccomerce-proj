@@ -20,9 +20,10 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Image</th>
-                                <th>Product En</th>
-								<th>Product Price </th>
+                                <th>Product </th>
+								<th>Price </th>
                                 <th>Quantity</th>
                                 <th>Discount </th>
 								<th>Status </th>
@@ -32,6 +33,7 @@
                         <tbody>
                             @foreach($products as $item)
                             <tr>
+                                <td>{{ $item->id }}</td>
                                 <td> <img src="{{ asset($item->product_thambnail) }}" style="width: 100px; height: 100px;">  </td>
                                 <td>{{ $item->product_name_en }}</td>
                                 <td>RM {{ $item->selling_price }} </td>
@@ -57,8 +59,7 @@
                                 <td width="30%">
                                     <a href="{{ route('product-review',$item->id) }}" class="btn btn-primary" title="Product Details Data"><i class="fa fa-eye"></i> </a>
                                     <a href="{{ route('product-edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i> </a>
-                                    <a href="{{ route('product-delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete">
-                                    <i class="fa fa-trash"></i></a>
+                                    <a href="{{ route('product-delete',$item->id) }}" class="btn btn-danger" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
 
                                     @if($item->status == 1)
                                         <a href="{{ route('product-inactive',$item->id) }}" class="btn btn-danger" title="Inactive Now"><i class="fa fa-arrow-down"></i> </a>

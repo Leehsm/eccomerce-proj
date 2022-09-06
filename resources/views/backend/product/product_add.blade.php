@@ -72,6 +72,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             {{-- 2ND ROW --}}
                             <div class="row">
                                 <div class="col-md-4">
@@ -91,7 +92,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Product Name English <span class="text-danger">*</span></h5>
+                                        <h5>Product Name <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="product_name_en" class="form-control" required=""> 
                                             @error('product_name_en')
@@ -104,10 +105,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Product Name Malay <span class="text-danger">*</span></h5>
+                                        <h5>Product Code <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_name_my" class="form-control" > 
-                                            @error('product_name_my')
+                                            <input type="text" name="product_code" class="form-control" required=""> 
+                                            @error('product_code')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -120,10 +121,10 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Product Code <span class="text-danger">*</span></h5>
+                                        <h5>Product size English <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_code" class="form-control" required=""> 
-                                            @error('product_code')
+                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" value="One size"> 
+                                            @error('product_size_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -135,8 +136,21 @@
                                     <div class="form-group">
                                         <h5>Product Quantity <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" name="product_qty" class="form-control" required=""> 
+                                            <input type="text" name="product_qty" class="form-control" data-role="tagsinput" required=""> 
                                             @error('product_qty')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Product Color <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="text" name="product_color_en" class="form-control"  data-role="tagsinput" > 
+                                            @error('product_color_en')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -158,67 +172,13 @@
                                         </div>                                       
                                     </div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <h5>Product tag Malay <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" name="product_tags_my" class="form-control"  data-role="tagsinput" > 
                                             @error('product_tags_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_en" class="form-control"  data-role="tagsinput" > 
-                                            @error('product_size_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- 5TH ROW --}}
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product size Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_size_my" class="form-control"  data-role="tagsinput" > 
-                                            @error('product_size_my')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color English <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_en" class="form-control"  data-role="tagsinput" > 
-                                            @error('product_color_en')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                            
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <h5>Product Color Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" name="product_color_my" class="form-control"  data-role="tagsinput" > 
-                                            @error('product_color_my')
                                             <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -244,7 +204,7 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <h5>Discount Price <span class="text-danger">*</span></h5>
+                                        <h5>Discount Price <span class="text-danger"></span></h5>
                                         <div class="controls">
                                             <input type="text" name="discount_price" class="form-control" > 
                                             @error('discount_price')
@@ -283,52 +243,45 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Size Chart <span class="text-danger"></span></h5>
+                                        <div class="controls">
+                                            <input type="file" name="size_chart" class="form-control" onchange="sizeChart(this)">
+                                            @error('size_chart') 
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                            <img src="" id="sizeChart">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             {{-- 8TH ROW --}}
                             <div class="row"> 
                                 <div class="col-md-6">                
                                     <div class="form-group">
-                                        <h5>Short Description English <span class="text-danger">*</span></h5>
+                                        <h5>Short Description <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <textarea name="short_desc_en" id="textarea" class="form-control" required placeholder="Textarea text" required=""></textarea>     
                                         </div>
                                     </div>
                                 </div> 
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <h5>Short Description Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <textarea name="short_desc_my" id="textarea" class="form-control"  placeholder="Textarea text" ></textarea>     
-                                        </div>
-                                    </div>
-                                </div> 	
                             </div> 
 
                             {{-- 9TH ROW --}}
                             <div class="row"> 
                                 <div class="col-md-6">                
                                     <div class="form-group">
-                                        <h5>Long Description English <span class="text-danger">*</span></h5>
+                                        <h5>Long Description <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <textarea id="long_desc_en" name="long_desc_en" rows="10" cols="80" required="">
-                                                Long Description English 
+                                                Long Description 
                                             </textarea>     
                                         </div>
                                     </div>
                                 </div> 
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <h5>Long Description Malay <span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <textarea id="long_desc_my" name="long_desc_my" rows="10" cols="80" >
-                                                Long Description Malay
-                                            </textarea>    
-                                        </div>
-                                    </div>
-                                </div> 	
                             </div> 
                         
                             <div class="row">
@@ -434,7 +387,7 @@
   });
   </script>
 
-  <script type="text/javascript">
+<script type="text/javascript">
     function mainThumUrl(input){
         if (input.files && input.files[0]) {
             var reader = new FileReader()
@@ -444,7 +397,20 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-  </script>
+    
+</script>
+
+<script type="text/javascript">
+    function sizeChart(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function(e){
+                $('#sizeChart').attr('src',e.target.result).width(80).height(80);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
 
 {{-- ---------------------------Show Multi Image JavaScript Code ------------------------ --}}
 

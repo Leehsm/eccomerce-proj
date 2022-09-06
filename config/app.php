@@ -178,6 +178,9 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        // Billplz\Laravel\BillplzServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
     ],
 
     /*
@@ -234,6 +237,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facades::class,
+        // 'Billplz' => Billplz\Laravel\Billplz::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
 
     ],
 

@@ -33,11 +33,11 @@ My Checkout
                                     <div class="row">		
                                         <!-- guest-login -->			
                                         <div class="col-md-12 col-sm-6 already-registered-login">
-                                            <form class="register-form" action="{{ route('checkout.store') }}" method="POST">
+                                            <form class="register-form" action="{{ route('checkout.store') }}" method="POST" >
                                                 @csrf
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Full Name</b>  <span>*</span></label>
-                                                    <input type="text" name="shipping_name" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Full Name" value="{{ Auth::user()->name }}" required="">
+                                                    <input type="text" name="shipping_name" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Full Name" value="{{ Auth::user()->name }}" required="" style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Email </b> <span>*</span></label>
@@ -49,17 +49,34 @@ My Checkout
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Address Line 1</b> <span>*</span></label>
-                                                    <input type="text" name="address1" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 1" required="">
+                                                    <input type="text" name="address1" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 1" required="" style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Address Line 2</b> <span>*</span></label>
-                                                    <input type="text" name="address2" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 2" required="">
+                                                    <input type="text" name="address2" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 2" required="" style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
-                                                    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="">
+                                                    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="" style="text-transform:uppercase">
+                                                </div>  <!-- // end form group  -->
+
+                                                <div class="form-group">
+                                                    <label class="info-title" for="exampleInputEmail1"><b>District </b> <span>*</span></label>
+                                                    <input type="text" name="district" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="District" required="" style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
+                                                    <label class="info-title" for="exampleInputEmail1"><b>State </b> <span>*</span></label>
+                                                    <input type="text" name="state" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="State" required="" style="text-transform:uppercase">
+                                                </div>  <!-- // end form group  -->
+                                                <div class="form-group">
+                                                    <label class="info-title" for="exampleInputEmail1"><b>Country </b> <span>*</span></label>
+                                                    <input type="text" name="country" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Country" required="" style="text-transform:uppercase">
+                                                </div>  <!-- // end form group  -->
+
+                                                <input type="hidden" name="amount" value="{{ $cartTotal }}">
+                                                   
+
+                                                {{-- <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>State</b> <span>*</span></label>
                                                     <div class="controls">
                                                         <select name="division_id" class="form-control" required="" >
@@ -94,7 +111,8 @@ My Checkout
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror 
                                                     </div>
-                                                </div> <!-- // end form group -->
+                                                </div> <!-- // end form group --> --}}
+
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1">Notes</label>
                                                     <textarea class="form-control" cols="30" rows="5" placeholder="Notes" name="notes"></textarea>
@@ -154,9 +172,15 @@ My Checkout
                                                 <hr>
                                             @else
                                                 <strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
-                                                <strong>Grand Total : </strong> RM{{ $cartTotal }} <hr>
+                                                <strong>Grand Total : </strong> RM{{ $cartTotal }} 
+                                                <br>
+                                                <strong>+ Shipping : </strong> Penisular Malaysia RM10
+                                                <br>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;East Malaysia RM15 <hr> 
                                             @endif 
                                         </li>
+                                        {{-- <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Next</button> --}}
                                     </ul>		
                                 </div>
                             </div>
@@ -173,22 +197,17 @@ My Checkout
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="">Stripe</label> 		
-                                        <input type="radio" name="payment_method" value="stripe">
+                                        <input type="radio" name="payment_method" value="stripe" required>
                                         <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
-                                    </div> <!-- end col md 4 -->
+                                    </div>
                                     <div class="col-md-4">
                                         <label for="">FPX (Coming Soon)</label> 		
-                                        <input type="radio" name="payment_method" value="fpx" disabled>	
+                                        <input type="radio" name="payment_method" value="fpx" >	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
-                                    </div> <!-- end col md 4 -->
-                                    {{-- <div class="col-md-4">
-                                        <label for="">Cash</label> 		
-                                        <input type="radio" name="payment_method" value="cash">	
-                                        <img src="{{ asset('frontend/assets/images/payments/2.png') }}">  		
-                                    </div> <!-- end col md 4 --> --}}
-                                </div> <!-- // end row  -->
+                                    </div>
+                                </div> 
                                 <hr>
-                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Payment Step</button>
+                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Next</button>
                             </div>
                         </div>
                     </div> 

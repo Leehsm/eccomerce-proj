@@ -16,7 +16,7 @@ class CreateMultiImgsTable extends Migration
         Schema::create('multi_imgs', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->string('photo_name');
+            $table->string('photo_name')->nullable;
             $table->timestamps();
         });
     }
