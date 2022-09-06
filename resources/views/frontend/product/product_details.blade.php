@@ -289,11 +289,14 @@
                                 <div id="review" class="tab-pane">
                                     <div class="product-tab">
                                         <div class="product-reviews">
-                                            <h4 class="title">Customer Reviews</h4>
+                                            <h4 class="title">Sizing Information</h4>
                                             <div class="reviews">
                                                 <div class="review">
-                                                    <div class="review-title"><span class="summary">Sizing Chart</span></div>
-                                                    <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
+                                                    <div class="review-title"><span class="summary">Sizing Chart</span></div><div id="owl-single-product">
+                                                        <div class="single-product-gallery-item">
+                                                            <img style="width: 50%" class="img-responsive" alt="" src="{{ asset($product->size_chart ) }} " data-echo="{{ asset($product->size_chart ) }} " />
+                                                        </div>
+                                                    </div><!-- /.single-product-slider -->
                                                 </div>
                                             </div><!-- /.reviews -->
                                         </div><!-- /.product-reviews -->

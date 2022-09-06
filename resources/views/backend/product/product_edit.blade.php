@@ -390,6 +390,47 @@
     </section>
     <!-- ///////////////// End Start Thambnail Image Update Area ///////// -->
 
+    <!-- ///////////////// Start Size Chart Image Update Area ///////// -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="box bt-3 border-info">
+                <div class="box-header">
+                    <h4 class="box-title">Product Size Chart Image <strong>Update</strong></h4>
+                </div>
+                <form method="post" action="{{ route('update-sizeChart') }}" enctype="multipart/form-data">
+                @csrf
+
+                    <input type="hidden" name="id" value="{{ $products->id }}">
+                    <input type="hidden" name="old_img" value="{{ $products->size_chart }}">
+
+                    <div class="row row-sm">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img src="{{ asset($products->size_chart) }}" class="card-img-top" style="height: 130px; width: 280px;">
+                                <div class="card-body">
+                                    <p class="card-text"> 
+                                        <div class="form-group">
+                                            <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
+                                            <input type="file" name="size_chart" class="form-control" onChange="sizeChart(this)"  >
+                                            <img src="" id="sizeChart">
+                                        </div> 
+                                    </p>
+                                </div>
+                            </div> 		
+                        </div><!--  end col md 3		 -->	
+                    </div>			
+                    <div class="text-xs-right">
+                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Image">
+                    </div>
+                    <br><br>
+                </form>		   
+            </div>
+        </div>
+        </div> <!-- // end row  -->
+    </section>
+    <!-- ///////////////// End Start Size Chart Image Update Area ///////// -->
+
 </div>
 
 <script type="text/javascript">
@@ -441,6 +482,16 @@
             var reader = new FileReader()
             reader.onload = function(e){
                 $('#mainThumb').attr('src',e.target.result).width(80).height(80);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function sizeChart(input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader()
+            reader.onload = function(e){
+                $('#sizeChart').attr('src',e.target.result).width(80).height(80);
             };
             reader.readAsDataURL(input.files[0]);
         }

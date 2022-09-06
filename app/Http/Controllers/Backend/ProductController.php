@@ -27,9 +27,16 @@ class ProductController extends Controller
     public function StoreProduct(Request $request){
 
         $image = $request->file('product_thambnail');
+        $image2 = $request->file('size_chart');
+
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        $name_gen2 = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+
         Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
+        Image::make($image2)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+
         $save_url = 'upload/products/thumbnail/'.$name_gen;
+        $save_url2 = 'upload/products/sizeChart/'.$name_gen;
 
         $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
@@ -65,6 +72,7 @@ class ProductController extends Controller
       	    // 'best_seller' => $request->best_seller,
 
             'product_thambnail' => $save_url,
+            'size_chart' => $save_url2,
             'status' => 1,
             'created_at' => Carbon::now(), 
         ]);
@@ -239,25 +247,68 @@ class ProductController extends Controller
         $oldImage = $request->old_img;
         unlink($oldImage);
    
-       $image = $request->file('product_thambnail');
-           $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-           Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
-           $save_url = 'upload/products/thumbnail/'.$name_gen;
+        $image = $request->file('product_thambnail');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
+        $save_url = 'upload/products/thumbnail/'.$name_gen;
+
+        Product::findOrFail($pro_id)->update([
+            'product_thambnail' => $save_url,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        $notification = array(
+            'message' => 'Product Image Thambnail Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
    
-           Product::findOrFail($pro_id)->update([
-               'product_thambnail' => $save_url,
-               'updated_at' => Carbon::now(),
+    } // end method
+
+    public function SizeChartUpdate(Request $request){
+
+        $pro_id = $request->id;
+        $oldImage = $request->old_img;
+
+        if(empty($oldImage)){
+            
+            $image = $request->file('size_chart');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+            $save_url = 'upload/products/sizeChart/'.$name_gen;
+    
+            Product::findOrFail($pro_id)->update([
+                'size_chart' => $save_url,
+                'updated_at' => Carbon::now(),
+    
+            ]);
+
+        }else{
+
+            unlink($oldImage);
+
+            $image = $request->file('size_chart');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
+            $save_url = 'upload/products/sizeChart/'.$name_gen;
+
+            Product::findOrFail($pro_id)->update([
+                'size_chart' => $save_url,
+                'updated_at' => Carbon::now(),
+
+            ]);
+        }
+
+        $notification = array(
+            'message' => 'Product Image size Chart Updated Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->back()->with($notification);
    
-           ]);
-   
-            $notification = array(
-               'message' => 'Product Image Thambnail Updated Successfully',
-               'alert-type' => 'info'
-           );
-   
-           return redirect()->back()->with($notification);
-   
-        } // end method
+    } // end method
 
     //// Multi Image Delete ////
     public function MultiImageDelete($id){
@@ -298,8 +349,16 @@ class ProductController extends Controller
 
     public function ProductDelete($id){
         $product = Product::findOrFail($id);
+        
+        if(!empty($product->product_thambnail)){
+            unlink($product->product_thambnail);
+        }
+        
 
-        unlink($product->product_thambnail);
+        if(!empty($product->size_chart)){
+            unlink($product->size_chart);
+        }
+
         Product::findOrFail($id)->delete();
         Size::where('product_id',$id)->delete();
 
