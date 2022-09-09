@@ -291,13 +291,11 @@
                                         <div class="product-reviews">
                                             <h4 class="title">Sizing Information</h4>
                                             <div class="reviews">
-                                                <div class="review">
-                                                    <div class="review-title"><span class="summary">Sizing Chart</span></div><div id="owl-single-product">
-                                                        <div class="single-product-gallery-item">
-                                                            <img style="width: 50%" class="img-responsive" alt="" src="{{ asset($product->size_chart ) }} " data-echo="{{ asset($product->size_chart ) }} " />
-                                                        </div>
-                                                    </div><!-- /.single-product-slider -->
-                                                </div>
+                                                {{-- <div class="review-title"><span class="summary">Sizing Chart</span></div><div id="owl-single-product"> --}}
+                                                    <div class="single-product-gallery-item">
+                                                        <img style="width: 50%" class="img-responsive" alt="" src="{{ asset($product->size_chart ) }} " data-echo="{{ asset($product->size_chart ) }} " />
+                                                    {{-- </div> --}}
+                                                </div><!-- /.single-product-slider -->
                                             </div><!-- /.reviews -->
                                         </div><!-- /.product-reviews -->
                                         {{-- <div class="product-add-review">

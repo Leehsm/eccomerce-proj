@@ -18,15 +18,15 @@
                             <div class="table-responsive">
                             <form method="post" action="{{ route('cloth.store') }}" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <h5>Category<span class="text-danger">*</span></h5>
-                                    <div class="controls">
-                                        <input type="text"  name="category" class="form-control" value="Clothing" disabled> 
-                                        @error('category') 
+                                    <div class="controls"> --}}
+                                        <input type="hidden"  name="category" class="form-control" value="Clothing"> 
+                                        {{-- @error('category') 
                                         <span class="text-danger">{{ $message }}</span>
-                                        @enderror 
-                                    </div>
-                                </div>
+                                        @enderror  --}}
+                                    {{-- </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <h5>Name<span class="text-danger">*</span></h5>
                                     <div class="controls">

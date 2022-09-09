@@ -249,41 +249,17 @@ class ToyyibpayController extends Controller
                     //decrement process for product quantity in Product DB, base on id and quantity that we get before
                     $orderQty = Size::where('product_id', $orderItem[$i])->where('size_type', $sizeItem[$i])->decrement('quantity', $orderItem3);
                     // dd($orderQty);
+
+                    $orderQty = Size::where('product_id', $orderItem[$i])->sum('quantity');
+                    // dd($orderQty);
+
+                    if($orderQty < 1){
+                        Product::findOrFail($orderItem[$i])->update([
+                            'product_qty' => 0,
+                        ]);
+                    }
                 }
             }
-
-            // foreach($orderItem as $orderItems){
-            //     //get size_type from order item 
-            //     $sizeItem = OrderItem::where('buyRefNo', request()->order_id)->where('product_id', $orderItem)->pluck('size');
-            //     // dd($sizeItem);
-
-            //     foreach($sizeItem as $sizeItems){
-            //         //get size_type from db using product_id
-            //         $sizeType = Size::where('product_id',$orderItem)->where('size_type',$sizeItems)->pluck('quantity');  
-            //         // dd($sizeType);
-
-            //         //get quantity base on product id purchased before from OrderItem DB
-            //         $orderItem3 = OrderItem::where('buyRefNo', request()->order_id)->where('product_id', $orderItems)->value('qty');
-            //         // dd($orderItem3);
-
-            //         //decrement process for product quantity in Product DB, base on id and quantity that we get before
-            //         $orderQty = Size::where('product_id', $orderItems)->where('size_type', $sizeItems)->decrement('quantity', $orderItem3);
-            //         // dd($orderQty);
-            //     }
-
-                
-
-                // foreach($orderItem2 as $orderItem2s){
-                //     $orderItem3 = OrderItem::where('buyRefNo', request()->order_id)->where('product_id', $orderItems)->value('qty');
-                    //decrement process for product quantity in Product DB, base on id and quantity that we get before
-                    // $orderQty = Product::where('id', $orderItems)->decrement('product_qty', $orderItem3);
-
-                    // Product::findOrFail('id',$orderItems)->update([
-                    //     'product_qty' => $orderQty - $orderItem2,
-                    // ]);
-                // }
-            // }
-            // dd($orderItem2);
 
             $notification = array(
                 'message' => 'Your Order Place Successfully',
