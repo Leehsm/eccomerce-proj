@@ -94,17 +94,17 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            {{-- <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
                                                     <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
                                                         <i class="fa fa-heart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     
                                                     {{-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="#">
                                                         <i class="fa fa-share">{{ $shareButtons }}</i>
                                                     </a> --}}
-                                                </div>
-                                            </div>
+                                                {{-- </div>
+                                            </div> --}}
 
                                         </div><!-- /.row -->
                                     </div><!-- /.price-container -->
@@ -129,7 +129,7 @@
                                                     {{-- <option selected="" disabled="">--Choose Size--</option> --}}
                                                     @foreach($size as $sizes)
                                                         @if($sizes->quantity > 0)
-                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) }}</option>
+                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) . " ( " . $sizes->quantity . " left " .")"}}</option>
                                                         @else
                                                             <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
                                                         @endif
@@ -195,16 +195,16 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            {{-- <div class="col-sm-6">
                                                 <div class="favorite-button m-t-10">
                                                     <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)">
                                                         <i class="fa fa-heart"></i>
-                                                    </a>
+                                                    </a> --}}
                                                     {{-- <a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="share" href="{{ $shareButtons }}">
                                                         <i class="fa fa-share">{{ $shareButtons }}</i>
                                                     </a> --}}
-                                                </div>
-                                            </div>
+                                                {{-- </div>
+                                            </div> --}}
                                         </div><!-- /.row -->
                                     </div><!-- /.price-container -->
                                     <!--     /// Add Product Color And Product Size ///// -->
