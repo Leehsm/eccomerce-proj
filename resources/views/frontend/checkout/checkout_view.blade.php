@@ -74,44 +74,6 @@ My Checkout
                                                 </div>  <!-- // end form group  -->
 
                                                 <input type="hidden" name="amount" value="{{ $cartTotal }}">
-                                                   
-
-                                                {{-- <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1"><b>State</b> <span>*</span></label>
-                                                    <div class="controls">
-                                                        <select name="division_id" class="form-control" required="" >
-                                                            <option value="" selected="" disabled="">State</option>
-                                                            @foreach($divisions as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->division_name }}</option>	
-                                                            @endforeach
-                                                        </select>
-                                                        @error('division_id') 
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror 
-                                                    </div>
-                                                </div> <!-- // end form group -->
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1"><b>District</b>  <span>*</span></label>
-                                                    <div class="controls">
-                                                        <select name="district_id" class="form-control" required="" >
-                                                            <option value="" selected="" disabled="">District</option>
-                                                        </select>
-                                                        @error('district_id') 
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror 
-                                                    </div>
-                                                </div> <!-- // end form group -->
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1"><b>Country</b> <span>*</span></label>
-                                                    <div class="controls">
-                                                        <select name="state_id" class="form-control" required="" >
-                                                            <option value="" selected="" disabled="">Country</option>
-                                                        </select>
-                                                        @error('state_id') 
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror 
-                                                    </div>
-                                                </div> <!-- // end form group --> --}}
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1">Notes</label>
@@ -174,10 +136,10 @@ My Checkout
                                                 <strong>SubTotal: </strong> RM{{ $cartTotal }} <hr>
                                                 <strong>Grand Total : </strong> RM{{ $cartTotal }} 
                                                 <br>
-                                                <strong>+ Shipping : </strong> Penisular Malaysia RM10
+                                                <strong>+ Shipping : </strong> RM10 (Penisular Malaysia)
                                                 <br>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;East Malaysia RM15 <hr> 
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RM15 (East Malaysia) <hr> 
                                             @endif 
                                         </li>
                                         {{-- <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Next</button> --}}

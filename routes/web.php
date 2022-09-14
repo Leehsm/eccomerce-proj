@@ -50,8 +50,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'admin', 'middleware'=>['admin:admin']], function(){
-    Route::get('/mantap/admin/login', [AdminController::class, 'loginForm']);
-    Route::post('/mantap/admin/login', [AdminController::class, 'store'])->name('admin.login');
+    Route::get('/sahira/login', [AdminController::class, 'loginForm']);
+    Route::post('/sahira/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 Route::middleware(['auth:admin'])->group(function(){
@@ -77,10 +77,10 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 // Google URL
-Route::prefix('google')->name('google.')->group( function(){
-    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
-});
+// Route::prefix('google')->name('google.')->group( function(){
+//     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+//     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+// });
 
 //USER ALL ROUTE
 Route::get('/', [IndexController::class, 'index']);
@@ -220,13 +220,13 @@ Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
 Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 
 // Add to Wishlist
-Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
+// Route::post('/add-to-wishlist/{product_id}', [CartController::class, 'AddToWishlist']);
 
 
 // Wishlist page
-Route::get('/user/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
-Route::get('/user/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
-Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']); 
+// Route::get('/user/wishlist', [WishlistController::class, 'ViewWishlist'])->name('wishlist');
+// Route::get('/user/get-wishlist-product', [WishlistController::class, 'GetWishlistProduct']);
+// Route::get('/user/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']); 
 
 //Payment Page
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
@@ -430,7 +430,7 @@ Route::prefix('skincare')->group(function(){
     Route::get('/delete/{id}', [StockController::class, 'SkincareDelete'])->name('skincare.delete');  
 });
 
-Route::get('/billplz', [FormController::class, 'FormControllerView']);
+// Route::get('/billplz', [FormController::class, 'FormControllerView']);
 
 //Share Button
 // Route::get('social-share', [SocialShareController::class, 'index']);
