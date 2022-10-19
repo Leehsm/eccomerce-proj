@@ -232,7 +232,9 @@ Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMi
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
 Route::post('/user/fpx/create/bill', [PaymentController::class, 'FPXCreateBill'])->name('fpx:bill'); //fpx
 Route::get('/bill/payment/{bill_code}', [PaymentController::class, 'billPaymentLink'])->name('fpx:payment');
-Route::post('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
+
+Route::post('/billplzcheckout', [PaymentController::class, 'billplzCreateBill']); //fpx
+Route::get('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
 
 //ToyyibPay
 Route::post('/user/toyyibpay', [ToyyibpayController::class, 'FPXCreateBill'])->name('toyyibpay-create'); //fpx
