@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -27,16 +28,20 @@ class ProductController extends Controller
     public function StoreProduct(Request $request){
 
         $image = $request->file('product_thambnail');
-        $image2 = $request->file('size_chart');
-
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        $name_gen2 = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-
         Image::make($image)->resize(917,1000)->save('upload/products/thumbnail/'.$name_gen);
-        Image::make($image2)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen);
-
         $save_url = 'upload/products/thumbnail/'.$name_gen;
-        $save_url2 = 'upload/products/sizeChart/'.$name_gen;
+
+        $image2 = $request->file('size_chart');
+        if(!empty($image2)){
+            $name_gen2 = hexdec(uniqid()).'.'.$image2->getClientOriginalExtension();
+            Image::make($image2)->resize(917,1000)->save('upload/products/sizeChart/'.$name_gen2);
+            $save_url2 = 'upload/products/sizeChart/'.$name_gen2;
+        }else{
+            $save_url2 = null;
+        }
+        
+        // dd($image2);
 
         $product_id = Product::insertGetId([
             'brand_id' => $request->brand_id,
@@ -147,6 +152,14 @@ class ProductController extends Controller
         $size = Size::where('product_id',$id)->get('size_type');
         $quantity = Size::where('product_id',$id)->get('quantity'); //->implode(',', all())
         $multiImgs = MultiImg::where('product_id',$id)->get();
+
+        $join = DB::table('sizes')
+        ->join('products', 'sizes.product_id', '=', 'products.id')
+        ->where('products.id', $id)
+        ->select('products.*', 'sizes.id as size_id', 'sizes.*')
+        ->get();
+
+        // dd($join);
 
 		return view('backend.product.product_display',compact('categories','brands','subcategory','subsubcategory','products','size','quantity','multiImgs'));
 
