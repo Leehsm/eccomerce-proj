@@ -8,13 +8,10 @@ Contact Us
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
-			<ul class="list-inline list-unstyled">
-				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>Contact Us</li>
-			</ul>
-		</div><!-- /.breadcrumb-inner -->
-	</div><!-- /.container -->
-</div><!-- /.breadcrumb -->
+			
+		</div>
+	</div>
+</div>
 
 <div class="body-content outer-top-xs">
 	<div class="container">
@@ -84,10 +81,10 @@ Contact Us
             <div class="logo-slider-inner">	
                 <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
                     
-                </div><!-- /.owl-carousel #logo-slider -->
-            </div><!-- /.logo-slider-inner -->
-        </div><!-- /.logo-slider -->
-<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	
+                </div>
+            </div>
+        </div>
+        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	
 	</div>
 </div>
 @endsection
