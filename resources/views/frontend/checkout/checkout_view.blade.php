@@ -157,19 +157,19 @@ My Checkout
                                     <h4 class="unicase-checkout-title">Select Payment Method</h4>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label for="">Stripe</label> 		
                                         <input type="radio" name="payment_method" value="stripe" required>
                                         <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-4">
-                                        <label for="">FPX (Coming Soon)</label> 		
+                                        <label for="">FPX</label> 		
                                         <input type="radio" name="payment_method" value="fpx" >	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
                                     </div>
                                 </div> 
                                 <hr>
-                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Next</button>
+                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Continue For Payment</button>
                             </div>
                         </div>
                     </div> 
