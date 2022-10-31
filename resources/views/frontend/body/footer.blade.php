@@ -54,7 +54,7 @@
               <li><a href="{{ route('my.orders') }}" title="Order History">Order History</a></li>
               @endauth
               <li><a href="{{ route('faq') }}" title="faq">FAQ</a></li>
-              <li><a href="{{ route('delivery') }}" title="Delivery">Delivery</a></li>
+              {{-- <li><a href="{{ route('delivery') }}" title="Delivery">Delivery</a></li> --}}
               <li class="last"><a href="{{ route('contact-us') }}" title="Contact Us">Contact Us</a></li>
             </ul>
           </div>
