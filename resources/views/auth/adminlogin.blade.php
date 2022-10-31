@@ -18,7 +18,7 @@
 						<a href="#" class="twitter-sign-in"><i class="fa fa-google"></i> Sign In with Google</a> --}}
 					</div>
 					{{-- <br> --}}
-					<form method="POST" action="{{ isset($guard) ? url($guard.'/mantap/admin/login') : route('login') }}">
+					<form method="POST" action="{{ isset($guard) ? url($guard.'/sahira/login') : route('login') }}">
 						@csrf
 						<div class="form-group">
 							<label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>

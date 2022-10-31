@@ -5,8 +5,8 @@
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
-				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>Sign Up</li>
+				{{-- <li><a href="{{ url('/') }}">Home</a></li>
+				<li class='active'>Sign Up</li> --}}
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -18,7 +18,6 @@
 			<div class="row">
 				<div class="col-md-12 col-sm-12 create-new-account">
 					<h4 class="checkout-subtitle">Create a new account</h4>
-					<p class="text title-tag-line">Create your new account.</p>
 					<form method="POST" action="{{ route('register') }}">
 						@csrf
 						<div class="form-group">
