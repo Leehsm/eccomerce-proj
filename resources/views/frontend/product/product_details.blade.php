@@ -5,7 +5,7 @@
 {{ $product->product_name_en }} Product Details
 @endsection
 
-<div class="breadcrumb">
+{{-- <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
@@ -14,7 +14,7 @@
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
-</div><!-- /.breadcrumb -->
+</div><!-- /.breadcrumb --> --}}
 <div class="body-content outer-top-xs">
 	<div class='container'>
 		<div class='row single-product'>
@@ -109,59 +109,90 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.price-container -->
                                     <!--     /// Add Product Color And Product Size ///// -->
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="info-title control-label">Choose Color <span> </span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
-                                                    {{-- <option selected="" disabled="">--Choose Color--</option> --}}
-                                                    @foreach($product_color_en as $color)
-                                                        <option value="{{ $color }}">{{ ucwords($color) }}</option>
-                                                    @endforeach
-                                                </select> 
-                                            </div> <!-- // end form group -->
-                                        </div> <!-- // end col 6 -->
-                                        
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="info-title control-label">Choose Size <span> </span></label>
-                                                <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
-                                                    {{-- <option selected="" disabled="">--Choose Size--</option> --}}
-                                                    @foreach($size as $sizes)
-                                                        @if($sizes->quantity > 0)
-                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) . " ( " . $sizes->quantity . " left " .")"}}</option>
-                                                        @else
-                                                            <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
-                                                        @endif
-                                                    @endforeach
-                                                </select> 
-                                            </div> <!-- // end form group -->
-                                        </div> <!-- // end col 6 -->
-                                    </div><!-- /.row -->
-                                    <!--     /// End Add Product Color And Product Size ///// -->
-                                    <div class="quantity-container info-container">
+                                    
+                                    @if ($product->category_id != '22')
                                         <div class="row">
-                                            <div class="col-sm-2">
-                                                <span class="label">Quantity :</span>
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <div class="cart-quantity">
-                                                    <div class="quant-input">
-                                                        {{-- <div class="arrows">
-                                                            <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-                                                            <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-                                                        </div> --}}
-                                                        <input type="number" id="qty" name="quantity" min="1" max="100" step="1" value="1">
-                                                        {{-- <input type="integer" id="qty" value="1" min="1" > --}}
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="info-title control-label">Color <span> </span></label>
+                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
+                                                        {{-- <option selected="" disabled="">--Choose Color--</option> --}}
+                                                        @foreach($product_color_en as $color)
+                                                            <option value="{{ $color }}">{{ ucwords($color) }}</option>
+                                                        @endforeach
+                                                    </select> 
+                                                </div> <!-- // end form group -->
+                                            </div> <!-- // end col 6 -->
+                                            
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label class="info-title control-label">Choose Size <span> </span></label>
+                                                    <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
+                                                        {{-- <option selected="" disabled="">--Choose Size--</option> --}}
+                                                        @foreach($size as $sizes)
+                                                            @if($sizes->quantity > 0)
+                                                                <option value="{{ $sizes->size_type }}" data-max="{{ $sizes->quantity }}">{{ ucwords($sizes->size_type ) . " ( " . $sizes->quantity . " left " .")"}}</option>
+                                                            @else
+                                                                <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select> 
+                                                </div> <!-- // end form group -->
+                                            </div> <!-- // end col 6 -->
+                                        </div><!-- /.row -->
+                                        <!--     /// End Add Product Color And Product Size ///// -->
+                                        
+                                        <label> !! Do not enter quantity more than stock left !! </label>
+                                        
+                                        <div class="quantity-container info-container">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <span class="label">Quantity :</span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="cart-quantity">
+                                                        <div class="quant-input">
+                                                            {{-- <div class="arrows">
+                                                                <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+                                                                <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                                            </div> --}}
+                                                            <input type="number" id="qty" name="quantity" min="1" max="" />
+                                                            {{-- <input type="integer" id="qty" value="1" min="1" > --}}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
-                                            <div class="col-sm-7">
-                                                <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
-                                            </div>
-                                        </div><!-- /.row -->
-                                    </div><!-- /.quantity-container -->
+                                                <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                                                <div class="col-sm-7">
+                                                    <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+                                                </div>
+                                            </div><!-- /.row -->
+                                        </div><!-- /.quantity-container -->
+                                    @else
+                                        <div class="quantity-container info-container">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <span class="label">Quantity :</span>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <div class="cart-quantity">
+                                                        <div class="quant-input">
+                                                            {{-- <div class="arrows">
+                                                                <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+                                                                <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+                                                            </div> --}}
+                                                            <input type="number" id="qty" name="quantity" min="1" max="" />
+                                                            {{-- <input type="integer" id="qty" value="1" min="1" > --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+                                                <div class="col-sm-7">
+                                                    <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+                                                </div>
+                                            </div><!-- /.row -->
+                                        </div><!-- /.quantity-container -->
+                                    @endif
+                                    
                                 @else
                                     <div class="stock-container info-container m-t-10">
                                         <div class="row">
@@ -211,7 +242,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label class="info-title control-label">Choose Color <span> </span></label>
+                                                <label class="info-title control-label">Color <span> </span></label>
                                                 <select class="form-control unicase-form-control selectpicker" style="display: none;" id="color" required>
                                                     <option selected="" disabled="">--Choose Color--</option>
                                                     @foreach($product_color_en as $color)
@@ -226,12 +257,12 @@
                                                 <select class="form-control unicase-form-control selectpicker" style="display: none;" id="size" required>
                                                     <option selected="" disabled="">--Choose Size--</option>
                                                     @foreach($size as $sizes)
-                                                        @if($sizes->quantity > 0)
-                                                            <option value="{{ $sizes->size_type }}">{{ ucwords($sizes->size_type ) }}</option>
-                                                        @else
-                                                            <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
-                                                        @endif
-                                                    @endforeach
+                                                    @if($sizes->quantity > 0)
+                                                        <option value="{{ $sizes->size_type }}" data-max="{{ $sizes->quantity }}">{{ ucwords($sizes->size_type ) . " ( " . $sizes->quantity . " left " .")"}}</option>
+                                                    @else
+                                                        <option value="{{ $sizes->size_type }}" disabled>{{ ucwords($sizes->size_type ) . " (SOLD OUT) " }}</option>
+                                                    @endif
+                                                @endforeach
                                                 </select> 
                                             </div> <!-- // end form group -->
                                         </div> <!-- // end col 6 -->
@@ -249,7 +280,7 @@
                                                             <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
                                                             <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
                                                         </div> --}}
-                                                        <input type="number" id="qty" name="quantity" min="1" max="100" step="1" value="1">
+                                                        <input type="number" id="qty" name="quantity" min="1" max="" >
                                                         {{-- <input type="integer" id="qty" value="1" min="1" > --}}
                                                     </div>
                                                 </div>
@@ -265,117 +296,141 @@
                         </div><!-- /.col-sm-7 -->
                     </div><!-- /.row -->
                 </div>
-                <div class="product-tabs inner-bottom-xs  wow fadeInUp">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
-                                <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
-                                <li><a data-toggle="tab" href="#review">Size Chart</a></li>
-                            </ul><!-- /.nav-tabs #product-tabs -->
-                        </div>
-                        <div class="col-sm-9">
-                            <div class="tab-content">
-                                <div id="description" class="tab-pane in active">
-                                    <div class="product-tab">
-                                        <p class="text">
-                                            @if(session()->get('language') == 'malay') 
-                                                {!! $product->long_desc_my !!} 
-                                            @else 
+                @if ($product->category_id != 22)
+                    <div class="product-tabs inner-bottom-xs  wow fadeInUp">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+                                    <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
+                                    <li><a data-toggle="tab" href="#review">Size Chart</a></li>
+                                </ul><!-- /.nav-tabs #product-tabs -->
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="tab-content">
+                                    <div id="description" class="tab-pane in active">
+                                        <div class="product-tab">
+                                            <p class="text">
+                                                @if(session()->get('language') == 'malay') 
+                                                    {!! $product->long_desc_my !!} 
+                                                @else 
+                                                    {!! $product->long_desc_en !!} 
+                                                @endif
+                                            </p>
+                                        </div>		
+                                    </div><!-- /.tab-pane -->
+                                    <div id="review" class="tab-pane">
+                                        <div class="product-tab">
+                                            <div class="product-reviews">
+                                                <h4 class="title">Sizing Information</h4>
+                                                <div class="reviews">
+                                                    {{-- <div class="review-title"><span class="summary">Sizing Chart</span></div><div id="owl-single-product"> --}}
+                                                        <div class="single-product-gallery-item">
+                                                            <img style="width: 50%" class="img-responsive" alt="" src="{{ asset($product->size_chart ) }} " data-echo="{{ asset($product->size_chart ) }} " />
+                                                        {{-- </div> --}}
+                                                    </div><!-- /.single-product-slider -->
+                                                </div><!-- /.reviews -->
+                                            </div><!-- /.product-reviews -->
+                                            {{-- <div class="product-add-review">
+                                                <h4 class="title">Write your own review</h4>
+                                                <div class="review-table">
+                                                    <div class="table-responsive">
+                                                        <table class="table">	
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="cell-label">&nbsp;</th>
+                                                                    <th>1 star</th>
+                                                                    <th>2 stars</th>
+                                                                    <th>3 stars</th>
+                                                                    <th>4 stars</th>
+                                                                    <th>5 stars</th>
+                                                                </tr>
+                                                            </thead>	
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="cell-label">Quality</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="cell-label">Price</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="cell-label">Value</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table><!-- /.table .table-bordered -->
+                                                    </div><!-- /.table-responsive -->
+                                                </div><!-- /.review-table -->
+                                                <div class="review-form">
+                                                    <div class="form-container">
+                                                        <form role="form" class="cnt-form">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputName">Your Name <span class="astk">*</span></label>
+                                                                        <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
+                                                                    </div><!-- /.form-group -->
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
+                                                                        <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
+                                                                    </div><!-- /.form-group -->
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="exampleInputReview">Review <span class="astk">*</span></label>
+                                                                        <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
+                                                                    </div><!-- /.form-group -->
+                                                                </div>
+                                                            </div><!-- /.row -->
+                                                            <div class="action text-right">
+                                                                <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+                                                            </div><!-- /.action -->
+                                                        </form><!-- /.cnt-form -->
+                                                    </div><!-- /.form-container -->
+                                                </div><!-- /.review-form -->
+                                            </div><!-- /.product-add-review -->										 --}}
+                                        </div><!-- /.product-tab -->
+                                    </div><!-- /.tab-pane -->
+                                </div><!-- /.tab-content -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.product-tabs -->
+                @else
+                    <div class="product-tabs inner-bottom-xs  wow fadeInUp">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
+                                    <li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
+                                </ul><!-- /.nav-tabs #product-tabs -->
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="tab-content">
+                                    <div id="description" class="tab-pane in active">
+                                        <div class="product-tab">
+                                            <p class="text">
                                                 {!! $product->long_desc_en !!} 
-                                            @endif
-                                        </p>
-                                    </div>		
-                                </div><!-- /.tab-pane -->
-                                <div id="review" class="tab-pane">
-                                    <div class="product-tab">
-                                        <div class="product-reviews">
-                                            <h4 class="title">Sizing Information</h4>
-                                            <div class="reviews">
-                                                {{-- <div class="review-title"><span class="summary">Sizing Chart</span></div><div id="owl-single-product"> --}}
-                                                    <div class="single-product-gallery-item">
-                                                        <img style="width: 50%" class="img-responsive" alt="" src="{{ asset($product->size_chart ) }} " data-echo="{{ asset($product->size_chart ) }} " />
-                                                    {{-- </div> --}}
-                                                </div><!-- /.single-product-slider -->
-                                            </div><!-- /.reviews -->
-                                        </div><!-- /.product-reviews -->
-                                        {{-- <div class="product-add-review">
-                                            <h4 class="title">Write your own review</h4>
-                                            <div class="review-table">
-                                                <div class="table-responsive">
-                                                    <table class="table">	
-                                                        <thead>
-                                                            <tr>
-                                                                <th class="cell-label">&nbsp;</th>
-                                                                <th>1 star</th>
-                                                                <th>2 stars</th>
-                                                                <th>3 stars</th>
-                                                                <th>4 stars</th>
-                                                                <th>5 stars</th>
-                                                            </tr>
-                                                        </thead>	
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="cell-label">Quality</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Price</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="cell-label">Value</td>
-                                                                <td><input type="radio" name="quality" class="radio" value="1"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="2"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="3"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="4"></td>
-                                                                <td><input type="radio" name="quality" class="radio" value="5"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table><!-- /.table .table-bordered -->
-                                                </div><!-- /.table-responsive -->
-                                            </div><!-- /.review-table -->
-                                            <div class="review-form">
-                                                <div class="form-container">
-                                                    <form role="form" class="cnt-form">
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputName">Your Name <span class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt" id="exampleInputName" placeholder="">
-                                                                </div><!-- /.form-group -->
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputSummary">Summary <span class="astk">*</span></label>
-                                                                    <input type="text" class="form-control txt" id="exampleInputSummary" placeholder="">
-                                                                </div><!-- /.form-group -->
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="exampleInputReview">Review <span class="astk">*</span></label>
-                                                                    <textarea class="form-control txt txt-review" id="exampleInputReview" rows="4" placeholder=""></textarea>
-                                                                </div><!-- /.form-group -->
-                                                            </div>
-                                                        </div><!-- /.row -->
-                                                        <div class="action text-right">
-                                                            <button class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
-                                                        </div><!-- /.action -->
-                                                    </form><!-- /.cnt-form -->
-                                                </div><!-- /.form-container -->
-                                            </div><!-- /.review-form -->
-                                        </div><!-- /.product-add-review -->										 --}}
-                                    </div><!-- /.product-tab -->
-                                </div><!-- /.tab-pane -->
-                            </div><!-- /.tab-content -->
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.product-tabs -->
+                                            </p>
+                                        </div>		
+                                    </div><!-- /.tab-pane -->
+                                </div><!-- /.tab-content -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.product-tabs -->
+                @endif
+                
 
                 <!-- ============================================== UPSELL PRODUCTS ============================================== -->
                 <section class="section featured-product wow fadeInUp">
@@ -441,4 +496,29 @@
         </div><!-- /.row -->
     </div>
 </div>
+<script>
+$('select').change(function (e) {
+    var selectedIndex = $('select').prop("selectedIndex");
+    var selectedOption = $('select').find("option")[selectedIndex];
+    $('input[type=number]').attr('max', $(selectedOption).data('max'));
+});
+    // $(document).ready(function() {
+    //     $('select[data-max="max"]').on('change', function(){
+    //         var max = $(this).val();
+    //         $('input[type=number]').attr('max', $('option:selected',this).data('max'));
+    //     });
+    // });
+
+    // $('#form-control').change(function () {
+    //     $('input[type=number]').attr('max', $('option:selected',this).data('max'));
+    // });
+
+    // function check(qty) {
+    //     div.addEventListener('click', function () { });
+    //     var max = select.getAttribute("data-max");
+    //     if (parseInt(qty.value) > parseInt(max)) {
+    //         alert("Amount out of max!");
+    //     }
+    // };
+</script>
 @endsection
