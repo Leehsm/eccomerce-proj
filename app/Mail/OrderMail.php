@@ -31,6 +31,6 @@ class OrderMail extends Mailable
     public function build()
     {
         $order = $this->data;
-        return $this->from('support@sahirashop.com')->view('mail.order_mail',compact('order'))->subject('Email From Sahira Online');
+        return $this->from('gamesajee123@gmail.com')->view('mail.order_mail',compact('order'))->subject('Email From Sahira Online');
     }
 }
