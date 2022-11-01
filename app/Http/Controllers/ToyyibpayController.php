@@ -37,8 +37,8 @@ class ToyyibpayController extends Controller
             }
 
             $some_data = array(
-                'userSecretKey' => 'zo1ckaem-awxf-uz7y-3ekx-pcv6nvn014ai',
-                'categoryCode' => '7solx8zv',
+                'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
+                'categoryCode' => env('TOYYIBPAY_CODE'),
                 'billName' => 'SahiraShop.com',
                 'billDescription' => 'Payment for purchased item from SahiraShop website',
                 'billPriceSetting' => 1,
@@ -117,8 +117,8 @@ class ToyyibpayController extends Controller
             }
             
             $some_data = array(
-                'userSecretKey' => 'zo1ckaem-awxf-uz7y-3ekx-pcv6nvn014ai',
-                'categoryCode' => '7solx8zv',
+                'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
+                'categoryCode' => env('TOYYIBPAY_CODE'),
                 'billName' => 'SahiraShop.com',
                 'billDescription' => 'Payment for purchased item from SahiraShop website',
                 'billPriceSetting' => 1,
@@ -189,10 +189,10 @@ class ToyyibpayController extends Controller
             Cart::destroy();
         }
 
-        $url = 'https://dev.toyyibpay.com/index.php/api/createBill';
+        $url = 'https://toyyibpay.com/index.php/api/createBill';
         $response = Http::asForm()->post($url, $some_data);
         $billCode = $response[0]['BillCode'];
-        return redirect('https://dev.toyyibpay.com/' . $billCode);
+        return redirect('https://toyyibpay.com/' . $billCode);
     }
 
     public function paymentStatus(Request $request){
