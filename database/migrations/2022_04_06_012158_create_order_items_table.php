@@ -22,7 +22,7 @@ class CreateOrderItemsTable extends Migration
             $table->string('size')->nullable();
             $table->integer('qty');
             $table->float('price',8,2);
-            $table->int('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }
