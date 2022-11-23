@@ -1,10 +1,21 @@
 @extends('frontend.main_master')
 @section('content')
+
+<div class="breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-inner">
+			<ul class="list-inline list-unstyled">
+				<li><a href="{{ url('dashboard') }}">Dashboard</a></li>
+				<li class='active'>Order History</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div class="body-content">
 	<div class="container">
 		<div class="row">
-			@include('frontend.common.user_sidebar')
-            <div class="col-md-10">
+			{{-- @include('frontend.common.user_sidebar') --}}
+            <div class="col-md-12">
                 <div class="table-responsive">
                     <table class="table">
                         <tbody>

@@ -114,6 +114,9 @@
                                 <td class="col-md-1">
                                     <label for=""> Price </label>
                                 </td>
+                                <td class="col-md-1">
+                                    <label for=""> Total </label>
+                                </td>
                             </tr>
                             @foreach($orderItem as $item)
                             <tr>
@@ -136,7 +139,10 @@
                                     <label for=""> {{ $item->qty }}</label>
                                 </td>
                                 <td class="col-md-2">
-                                    <label for=""> Rm{{ $item->price }}  ( RM{{ $item->price * $item->qty}} ) </label>
+                                    <label for=""> Rm{{ $item->price }}</label>
+                                </td>
+                                <td class="col-md-2">
+                                    <label for="">RM{{ $item->price * $item->qty}}</label>
                                 </td>
                             </tr>
                             @endforeach
