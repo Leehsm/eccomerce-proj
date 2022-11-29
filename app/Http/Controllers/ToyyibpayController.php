@@ -25,11 +25,14 @@ class ToyyibpayController extends Controller
     public function FPXCreateBill(Request $request){
 
         $billExtRef = 'SSRefNO'.mt_rand(10000000,99999999);
+        // dd(request('billcode'));
+        // dd($request->district_id);
+        
         // $transaction_id = 'SSTNID'.request('billcode'), //SAHIRASHOPTRANSACTIONID
         // $order_number = 'SSON'.request('billcode'), //SAHIRASHOPOEDERNUMBER
         // $invoice_no = 'SSIN'.request('billcode'), //SAHIRASHOPINVOICENUMBER
 
-        if ($request->state_id != 3 && $request->state_id != 4){
+        if ($request->district_id != "SABAH" && $request->district_id != "SARAWAK"){
             if (Session::has('coupon')) {
                 $total_amount = Session::get('coupon')['total_amount'] + 10.00;
             }else{
@@ -37,8 +40,8 @@ class ToyyibpayController extends Controller
             }
 
             $some_data = array(
-                'userSecretKey' => 'zo1ckaem-awxf-uz7y-3ekx-pcv6nvn014ai',
-                'categoryCode' => '7solx8zv',
+                'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
+                'categoryCode' => env('TOYYIBPAY_CODE'),
                 'billName' => 'SahiraShop.com',
                 'billDescription' => 'Payment for purchased item from SahiraShop website',
                 'billPriceSetting' => 1,
@@ -71,19 +74,19 @@ class ToyyibpayController extends Controller
         
                 'payment_type' => 'FPX',
                 'payment_method' => 'FPX Online Transfer',
-                'transaction_id' => 'SSTNID' .request('billcode'), //SAHIRASHOPTRANSACTIONID
+                'transaction_id' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPTRANSACTIONID
                 'currency' => 'myr',
                 'amount' => $total_amount,
-                'order_number' => 'SSON' .request('billcode'), //SAHIRASHOPOEDERNUMBER
+                'order_number' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPOEDERNUMBER
 
                 'holdername' => $request->name,
                 'bankname' => 'FPX Transfer',
         
-                'invoice_no' => 'SSIN' .request('billcode'), //SAHIRASHOPINVOICENUMBER
+                'invoice_no' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPINVOICENUMBER
                 'order_date' => Carbon::now()->format('d F Y'),
                 'order_month' => Carbon::now()->format('F'),
                 'order_year' => Carbon::now()->format('Y'),
-                'status' => 'Pending',
+                'status' => 'Payment Not Complete',
                 'created_at' => Carbon::now(),	
             ]);
             // dd($order_id);
@@ -102,11 +105,11 @@ class ToyyibpayController extends Controller
                 ]);
             }
             // dd(OrderItem::all());
-            if (Session::has('coupon')) {
-                Session::forget('coupon');
-            }
+            // if (Session::has('coupon')) {
+            //     Session::forget('coupon');
+            // }
 
-            Cart::destroy();
+            // Cart::destroy();
 
         }
         else{
@@ -117,8 +120,8 @@ class ToyyibpayController extends Controller
             }
             
             $some_data = array(
-                'userSecretKey' => 'zo1ckaem-awxf-uz7y-3ekx-pcv6nvn014ai',
-                'categoryCode' => '7solx8zv',
+                'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
+                'categoryCode' => env('TOYYIBPAY_CODE'),
                 'billName' => 'SahiraShop.com',
                 'billDescription' => 'Payment for purchased item from SahiraShop website',
                 'billPriceSetting' => 1,
@@ -136,7 +139,7 @@ class ToyyibpayController extends Controller
             );  
 
             $order_id = Order::insertGetId([
-                'billExtRef' => $billExtRef,
+                'billExtNo' => $billExtRef,
                 'user_id' => Auth::id(),
                 'district' => $request->division_id,
                 'state' => $request->district_id,
@@ -151,19 +154,19 @@ class ToyyibpayController extends Controller
         
                 'payment_type' => 'FPX',
                 'payment_method' => 'FPX Online Transfer',
-                'transaction_id' => 'SSTNID' .request('billcode'), //SAHIRASHOPTRANSACTIONID
+                'transaction_id' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPTRANSACTIONID
                 'currency' => 'myr',
                 'amount' => $total_amount,
-                'order_number' => 'SSON' .request('billcode'), //SAHIRASHOPOEDERNUMBER
+                'order_number' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPOEDERNUMBER
 
                 'holdername' => $request->name,
                 'bankname' => 'FPX Transfer',
         
-                'invoice_no' => 'SSIN'.request('billcode'), //SAHIRASHOPINVOICENUMBER
+                'invoice_no' => 'Payment Not Complete', //.request('billcode'), //SAHIRASHOPINVOICENUMBER
                 'order_date' => Carbon::now()->format('d F Y'),
                 'order_month' => Carbon::now()->format('F'),
                 'order_year' => Carbon::now()->format('Y'),
-                'status' => 'Pending',
+                'status' => 'Payment Not Complete',
                 'created_at' => Carbon::now(),	
             ]);
             // dd($order_id);
@@ -182,11 +185,11 @@ class ToyyibpayController extends Controller
                 ]);
             }
             
-            if (Session::has('coupon')) {
-                Session::forget('coupon');
-            }
+            // if (Session::has('coupon')) {
+            //     Session::forget('coupon');
+            // }
 
-            Cart::destroy();
+            // Cart::destroy();
         }
 
         $url = 'https://dev.toyyibpay.com/index.php/api/createBill';
@@ -202,16 +205,17 @@ class ToyyibpayController extends Controller
         //if payment success ipdate transaction id, order num, inv num
         if(request('status_id') == 1){
             Order::where('billExtNo', request()->order_id)->update([
-                'transaction_id' => request()->transaction_id, //SAHIRASHOPTRANSACTIONID
-                'order_number' => request()->order_id, //SAHIRASHOPOEDERNUMBER
-                'invoice_no' => 'SSIN' .request()->billcode, //SAHIRASHOPINVOICENUMBER
+                'transaction_id' => '#STRNID'.request()->billcode, //SAHIRASHOPTRANSACTIONID
+                'order_number' => '#SOD'.request()->billcode, //SAHIRASHOPOEDERNUMBER
+                'invoice_no' => '#INV'.request()->billcode, //SAHIRASHOPINVOICENUMBER
+                'status' => 'Pending'
                  ]);
 
             // collect data from db before sending email
-            $invoice = Order::where('billExtNo', request()->order_id)->get("invoice_no");
-            $total_amount = Order::where('billExtNo', request()->order_id)->get("amount");
-            $name = Order::where('billExtNo', request()->order_id)->get("name");
-            $email = Order::where('billExtNo', request()->order_id)->get("email");
+            $invoice = Order::where('billExtNo', request()->order_id)->pluck('invoice_no');
+            $total_amount = Order::where('billExtNo', request()->order_id)->pluck('amount');
+            $name = Order::where('billExtNo', request()->order_id)->pluck('name');
+            $email = Order::where('billExtNo', request()->order_id)->pluck('email');
             
             $data = [
                 'invoice_no' => $invoice,
@@ -261,6 +265,12 @@ class ToyyibpayController extends Controller
                 }
             }
 
+            if (Session::has('coupon')) {
+                Session::forget('coupon');
+            }
+
+            Cart::destroy();
+
             $notification = array(
                 'message' => 'Your Order Place Successfully',
                 'alert-type' => 'success'
@@ -268,13 +278,19 @@ class ToyyibpayController extends Controller
 
         }else{
             Order::where('billExtNo', request()->order_id)->update([
-                'transaction_id' => request()->transaction_id, //SAHIRASHOPTRANSACTIONID
-                'order_number' => request()->order_id, //SAHIRASHOPOEDERNUMBER
-                'invoice_no' => request()->billcode, //SAHIRASHOPINVOICENUMBER
+                // 'transaction_id' => request()->transaction_id, //SAHIRASHOPTRANSACTIONID
+                // 'order_number' => request()->order_id, //SAHIRASHOPOEDERNUMBER
+                // 'invoice_no' => request()->billcode, //SAHIRASHOPINVOICENUMBER
                 'status' => 'CANCEL / UNSUCCESSFUL'
                     ]);
 
             // OrderItem::where('buyRefNo', request()->order_id)->delete();
+
+            if (Session::has('coupon')) {
+                Session::forget('coupon');
+            }
+
+            Cart::destroy();
 
             $notification = array(
                 'message' => 'Your Order Unsuccessful',

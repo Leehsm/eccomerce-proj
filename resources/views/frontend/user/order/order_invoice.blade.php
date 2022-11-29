@@ -47,11 +47,11 @@
         <tr>
             <td valign="top">
                 <!-- {{-- <img src="" alt="" width="150"/> --}} -->
-                <h2 style="color: rgb(0, 0, 0); font-size: 26px;"><strong>Sahira Shop</strong></h2>
+                <h2 style="color: rgb(0, 0, 0); font-size: 26px;"><strong>Sahira</strong></h2>
             </td>
             <td align="right">
                 <pre class="font" >
-                    Sahira Shop HQ
+                    Sahira HQ
                     +60-191111111
                     support@sahirshop.com
                     No. 10, Kampung Baru 25,
@@ -84,7 +84,7 @@
                 </td>
                 <td>
                 <p class="font">
-                    <h3><span style="color: rgb(0, 0, 0);">Invoice No:</span> #{{ $order->invoice_no }}</h3>
+                    <h3><span style="color: rgb(0, 0, 0);">Invoice No:</span> {{ $order->invoice_no }}</h3>
                     <strong>Order Date: </strong> {{ $order->order_date }} <br>
                     <strong>Delivery Date: </strong> {{ $order->delivered_date }} <br>
                     <strong>Payment Type : </strong> {{ $order->payment_type }} </span>

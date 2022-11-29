@@ -6,7 +6,12 @@
           <div class="cnt-account">
             <ul class="list-unstyled">
               {{-- <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li> --}}
-              <li><a href="{{ route('my.orders') }}"><i class="icon fa fa-history"></i>Order History</a></li>
+              
+
+              @auth
+              <li>
+                <a href="{{ route('my.orders') }}"><i class="icon fa fa-history"></i>Order History</a>
+              </li>
               <li>
                 <a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>
                   @if(session()->get('language') == 'malay') 
@@ -17,7 +22,6 @@
                 </a>
               </li>
 
-              @auth
               <li>
                 <a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>
                   @if(session()->get('language') == 'malay') 

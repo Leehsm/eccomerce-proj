@@ -159,6 +159,9 @@ Route::prefix('product')->group(function(){
     Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product-inactive');
     Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product-active');
     Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product-delete');    
+
+    // Route::post('/size/update', [ProductController::class, 'SizeUpdate'])->name('update-size');
+    // Route::get('/size/delete/{id}', [ProductController::class, 'sizeDelete'])->name('product-size-delete');
 });
 
 
@@ -232,7 +235,9 @@ Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMi
 Route::post('/user/stripe/order', [PaymentController::class, 'StripeOrder'])->name('stripe.order'); //card
 Route::post('/user/fpx/create/bill', [PaymentController::class, 'FPXCreateBill'])->name('fpx:bill'); //fpx
 Route::get('/bill/payment/{bill_code}', [PaymentController::class, 'billPaymentLink'])->name('fpx:payment');
-Route::post('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
+
+Route::post('/billplzcheckout', [PaymentController::class, 'billplzCreateBill']); //fpx
+Route::get('/redirect', [PaymentController::class, 'billplzHandleRedirect']); //fpx
 
 //ToyyibPay
 Route::post('/user/toyyibpay', [ToyyibpayController::class, 'FPXCreateBill'])->name('toyyibpay-create'); //fpx
@@ -331,7 +336,10 @@ Route::prefix('orders')->group(function(){
     Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm'); 
     Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm-processing'); 
     Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing-picked'); 
+
     Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked-shipped'); 
+    Route::post('/picked/shipped/tracking_num/{order_id}', [OrderController::class, 'trackingUpdate'])->name('tracking-update'); 
+
     Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped-delivered'); 
     Route::get('/cancel/{order_id}', [OrderController::class, 'CancelOrder'])->name('cancel-order'); 
     Route::get('/invoice/download/{order_id}', [OrderController::class, 'InvoiceDownload'])->name('invoice-download'); 

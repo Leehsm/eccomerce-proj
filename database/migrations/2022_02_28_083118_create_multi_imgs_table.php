@@ -17,6 +17,8 @@ class CreateMultiImgsTable extends Migration
             $table->id();
             $table->integer('product_id');
             $table->string('photo_name')->nullable;
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

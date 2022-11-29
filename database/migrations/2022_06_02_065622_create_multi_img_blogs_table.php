@@ -17,6 +17,8 @@ class CreateMultiImgBlogsTable extends Migration
             $table->id();
             $table->integer('blog_id');
             $table->string('photo_name')->nullable;
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

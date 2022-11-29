@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -70,7 +71,7 @@ class IndexController extends Controller
                                 ->orderBy('id','DESC')
                                 ->get();
 
-    	$skip_brand_1 = Brand::skip(1)->first();
+    	$skip_brand_1 = Brand::skip(2)->first();
     	$skip_brand_product_1 = Product::where('status',1)
                                         ->where('brand_id',$skip_brand_1->id)
                                         ->where('status',1)
@@ -147,6 +148,18 @@ class IndexController extends Controller
     }
 
     public function ProductDetails($id,$slug){
+
+        // //JOIN TABLE PRODUCT & SIZE
+        $prod = DB::table('sizes')
+        ->join('products', 'sizes.product_id', '=', 'products.id')
+        ->where('products.id', $id)
+        ->select('products.*', 'sizes.id as size_id', 'sizes.*')
+        ->get();
+
+        // dd($prod);
+
+
+
 		$product = Product::findOrFail($id);
 		$size = Size::where('product_id',$id)->get();
 		// $size2 = Size::where('product_id',$id)->pluck('size_id');
@@ -168,20 +181,21 @@ class IndexController extends Controller
         $multiImag = MultiImg::where('product_id',$id)->get();
 
         $cat_id = $product->category_id;
-		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->where('product_qty',1)->orderBy('id','DESC')->get();
-	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_my','size','quantity','product_size_my','relatedProduct'));
+        $prod_code = $product->product_code;
+		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->where('product_code', $prod_code)->where('product_qty',1)->orderBy('id','DESC')->get();
+	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_my','size','quantity','product_size_my','relatedProduct'),['prod'=>$prod]);
 
 	}
 
     public function TagWiseProduct($tag){
-		$products = Product::where('status',1)->where('product_tags_en',$tag)->where('product_tags_my',$tag)->orderBy('id','DESC')->paginate(3);
+		$products = Product::where('status',1)->where('product_tags_en',$tag)->where('product_tags_my',$tag)->orderBy('id','DESC')->paginate(20);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontend.tags.tags_view',compact('products','categories'));
 
 	}
 
     public function ColorWiseProduct($color){
-		$products = Product::where('status',1)->where('product_color_en',$color)->orderBy('id','DESC')->paginate(3);
+		$products = Product::where('status',1)->where('product_color_en',$color)->orderBy('id','DESC')->paginate(20);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontend.tags.colors_view',compact('products','categories'));
 
@@ -189,7 +203,7 @@ class IndexController extends Controller
 
     // Subcategory wise data
 	public function SubCatWiseProduct($subcat_id,$slug){
-		$products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);
+		$products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(20);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontend.product.subcategory_view',compact('products','categories'));
 
@@ -197,7 +211,7 @@ class IndexController extends Controller
     
     // Sub-Subcategory wise data
 	public function SubSubCatWiseProduct($subsubcat_id,$slug){
-		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
+		$products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(20);
 		$categories = Category::orderBy('category_name_en','ASC')->get();
 		return view('frontend.product.sub_subcategory_view',compact('products','categories'));
 

@@ -19,6 +19,8 @@ class CreateCouponsTable extends Migration
             $table->integer('coupon_discount');
             $table->string('coupon_validity');
             $table->integer('status')->default(1);
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

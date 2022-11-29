@@ -20,6 +20,8 @@ class CreateSubCategoriesTable extends Migration
             $table->string('subcategory_name_my');
             $table->string('subcategory_slug_en');
             $table->string('subcategory_slug_my');
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

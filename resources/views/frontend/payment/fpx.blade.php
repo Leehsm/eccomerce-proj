@@ -8,13 +8,13 @@ FPX Payment Page
 
 <div class="breadcrumb">
 	<div class="container">
-		<div class="breadcrumb-inner">
+		{{-- <div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
 				<li class='active'>FPX Payment</li>
 			</ul>
-		</div><!-- /.breadcrumb-inner -->
+		</div><!-- /.breadcrumb-inner --> --}}
 	</div><!-- /.container -->
 </div><!-- /.breadcrumb --> 
 
@@ -99,10 +99,11 @@ FPX Payment Page
 						<div class="panel-group">
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="unicase-checkout-title">Go To FPX Payment</h4>
+									<h4 class="unicase-checkout-title">Proceed Your Payment</h4>
 								</div>
 								{{-- <form id="payment-form" action="{{route('toyyibpay-create')}} " method="post" id="payment-form"> --}}
 								<form method="POST" action="{{route('toyyibpay-create')}}" id="payment-form" >
+								{{-- <form method="POST" action="{{url('/billplzcheckout')}}" id="payment-form" > --}}
 									@csrf
 									<input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
 									<input type="hidden" name="email" value="{{ $data['shipping_email'] }}">

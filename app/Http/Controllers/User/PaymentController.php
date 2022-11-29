@@ -275,6 +275,56 @@ class PaymentController extends Controller
 
     }
 
+    public function billplzCreateBill(Request $req){
+
+        if ($req->state_id != 3 && $req->state_id != 4){
+            if (Session::has('coupon')) {
+                $total_amount = Session::get('coupon')['total_amount'] + 10.00;
+            }else{
+                $total_amount = round(Cart::total() + 10.00);
+            }
+        }
+        else{
+            if (Session::has('coupon')) {
+                $total_amount = Session::get('coupon')['total_amount'] + 15.00;
+            }else{
+                $total_amount = round(Cart::total() + 15.00);
+            }
+        }
+
+        $billExtRef = 'SSRefNO'.mt_rand(10000000,99999999);
+
+        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+
+        if(config('billplz.billplz_sandbox')) {
+            $billplz->useSandbox();
+        }
+
+        $bill = $billplz->bill();
+
+        $bill = $bill->create(
+            config('billplz.billplz_collection_id'),
+            $req->email,
+            $req->phone,
+            $req->name,
+            // 'Payment for pruchasing from Sahira website',
+            \Duit\MYR::given($total_amount * 100),
+            url('/'),
+            'Thank you for purchasing our product!',
+            [
+                'reference_1_label' => 'xxx',
+                'reference_1' => 'ccc',
+                'reference_2_label' => 'xxx',
+                'reference_2' => 'ccc',
+                'redirect_url' => 'http://127.0.0.1:8000/redirect/'
+            ]
+        );
+
+        dd($bill->toArray());
+        return redirect($bill->toArray()['url']);
+    }
+
+
     public function billplzHandleRedirect(Request $request){
 
         $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));

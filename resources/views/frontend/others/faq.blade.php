@@ -25,9 +25,10 @@ FAQ
                     <h3>WHAT PAYMENT OPTIONS CAN I USE?</h3>
                     <h5>We want to make buying your favourite item online fast and easy, and we accept the following payment options:</h5>
                     <ol>
-                        <ol>Visa, Mastercard, American Express, Visa Electron, Maestro</ol>
-                        <ol>FPX (COMING SOON)</ol>
+                        <ol>FPX</ol>
+                        <ol>Visa, Mastercard</ol>
                         <ol>Cash On Delivery (COMING SOON)</ol>
+                        <ol>E-Wallet (COMING SOON)</ol>
                     </ol>
                     <br>
 
@@ -41,7 +42,7 @@ FAQ
                     <br>
                     
                     <h3>WHAT ARE SAHIRA'S DELIVERY OPTIONS?</h3>
-                    <h5>Jnt</h5>
+                    <h5>Jnt</h5><h5>Poslaju</h5>
 
                     <h3>ADDITIONAL INFORMATION</h3>
                     <h5>Orders are processed and delivered Monday–Friday, except for national holidays. Be aware that orders may experience longer processing and delivery times during holidays.</h5>

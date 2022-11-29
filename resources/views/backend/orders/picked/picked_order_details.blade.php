@@ -44,11 +44,11 @@
                         <tr>
                             <th> Address : </th>
                             <th> {{ $order->address1 }}, 
-                                    {{ $order->address2 }}, 
-                                    {{ $order->post_code }}, 
-                                    {{ $order->district->district_name }},
-                                    {{ $order->division->division_name }}, 
-                                    {{ $order->state->state_name }} </th>
+                                {{ $order->address2 }}, 
+                                {{ $order->post_code }}, 
+                                {{ $order->district }},
+                                {{ $order->state }}, 
+                                {{ $order->country }} </th>
                         </tr>
                         <tr>
                             <th> Order Date : </th>
@@ -95,6 +95,22 @@
                                 <span class="badge badge-pill badge-dark">{{ $order->status }} </span> 
                             </th>
                         </tr>
+                        <form method="post" action="{{ route('tracking-update',$order->id) }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $order->id }}"> 
+                            <tr>
+                                <th> Tracking Number : </th>
+                                <th> 
+                                    <div class="controls">
+                                        <input type="text" name="tracking_num" class="form-control" value="{{ $order->tracking_num }}" required> 
+                                        @error('tracking_num') 
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror 
+                                    </div> 
+                                    <input type="submit" class="btn btn-rounded btn-primary mb-5" value="submit">
+                                </th>
+                            </tr>
+                        </form> 
                         <tr>
                             <th> </th>
                             <th> 
@@ -102,7 +118,7 @@
                                     <a href="{{ route('picked-shipped',$order->id) }}" class="btn btn-block btn-success" id="shipped">Ship Order</a>
                                 @endif 
                             </th>
-                        </tr>
+                        </tr>                                               
                     </table>
                 </div>
             </div>

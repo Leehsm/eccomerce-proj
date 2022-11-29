@@ -18,6 +18,8 @@ class CreateContactsTable extends Migration
             $table->string('contact_call');
             $table->string('contact_company');
             $table->string('contact_location');
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

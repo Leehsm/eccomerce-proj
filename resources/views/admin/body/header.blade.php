@@ -16,18 +16,18 @@
 			    </a>
 			</li>			
 			
-			<li class="btn-group nav-item d-none d-xl-inline-block">
+			{{-- <li class="btn-group nav-item d-none d-xl-inline-block">
 				<a href="calendar.html" class="waves-effect waves-light nav-link rounded svg-bt-icon" title="">
 					<i class="ti-calendar"></i>
 			    </a>
-			</li>
+			</li> --}}
 		  </ul>
 	  </div>
 		
       <div class="navbar-custom-menu r-side">
         <ul class="nav navbar-nav">
 		  <!-- full Screen -->
-	      <li class="search-bar">		  
+	      {{-- <li class="search-bar">		  
 			  <div class="lookup lookup-circle lookup-right">
 			     <input type="text" name="s">
 			  </div>
@@ -96,7 +96,7 @@
 				  <a href="#">View all</a>
 			  </li>
 			</ul>
-		  </li>	
+		  </li>	 --}}
 		  
 		  @php
 			  $adminData = DB::table('admins')->first();
@@ -118,11 +118,11 @@
 			  </li>
 			</ul>
           </li>	
-		  <li>
+		  {{-- <li>
               <a href="#" data-toggle="control-sidebar" title="Setting" class="waves-effect waves-light">
 			  	<i class="ti-settings"></i>
 			  </a>
-          </li>
+          </li> --}}
 			
         </ul>
       </div>

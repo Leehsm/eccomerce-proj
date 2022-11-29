@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use Carbon\Carbon;
 use Image;
+use Auth;
 
 
 class SliderController extends Controller
@@ -34,6 +35,8 @@ class SliderController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'slider_img' => $save_url,
+            'created_by' => Auth::id(),
+            'created_at' => Carbon::now(),
     	]);
 
 	    $notification = array(
@@ -67,6 +70,8 @@ class SliderController extends Controller
                 'title' => $request->title,
                 'description' => $request->description,
                 'slider_img' => $save_url,
+                'updated_by' => Auth::id(),
+                'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -80,6 +85,8 @@ class SliderController extends Controller
             Slider::findOrFail($slider_id)->update([
             'title' => $request->title,
             'description' => $request->description,
+            'updated_by' => Auth::id(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
