@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <h5>Contact call  <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_call" class="form-control" value="{{ $contacts->contact_call }}"> 
+                                        <input type="text"  name="contact_call" class="form-control" value="{{ $contacts->contact_call }}"> 
                                         @error('contact_call') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
@@ -30,7 +30,7 @@
 	                            <div class="form-group">
                                     <h5>Contact company <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_company" class="form-control" value="{{ $contacts->contact_company }}"> 
+                                        <input type="text"  name="contact_company" class="form-control" value="{{ $contacts->contact_company }}"> 
                                         @error('contact_company') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <h5>Contact location <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  call="contact_location" class="form-control" value="{{ $contacts->contact_location }}"> 
+                                        <input type="text"  name="contact_location" class="form-control" value="{{ $contacts->contact_location }}"> 
                                         @error('contact_location') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
