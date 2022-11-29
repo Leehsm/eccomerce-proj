@@ -18,6 +18,8 @@ class CreateSizesTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->string('size_type')->nullable();
             $table->integer('quantity');
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

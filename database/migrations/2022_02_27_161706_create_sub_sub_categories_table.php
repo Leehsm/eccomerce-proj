@@ -21,6 +21,8 @@ class CreateSubSubCategoriesTable extends Migration
             $table->string('subsubcategory_name_my')->nullable();
             $table->string('subsubcategory_slug_en')->nullable();
             $table->string('subsubcategory_slug_my')->nullable();
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

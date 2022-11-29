@@ -44,6 +44,8 @@ class CreateProductsTable extends Migration
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
             $table->integer('status')->default(0);
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             // $table->integer('new_arrival')->nullable();
             // $table->integer('best_seller')->nullable();
             $table->timestamps();

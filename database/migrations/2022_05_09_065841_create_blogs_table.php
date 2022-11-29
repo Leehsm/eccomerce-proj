@@ -22,6 +22,8 @@ class CreateBlogsTable extends Migration
             $table->text('long_description')->nullable;
             $table->text('long_description2')->nullable;
             $table->integer('status')->default(1);
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
