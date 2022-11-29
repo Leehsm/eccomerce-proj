@@ -8,14 +8,9 @@ My Checkout
 
 <div class="breadcrumb">
 	<div class="container">
-		<div class="breadcrumb-inner">
-			<ul class="list-inline list-unstyled">
-				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>Checkout</li>
-			</ul>
-		</div><!-- /.breadcrumb-inner -->
-	</div><!-- /.container -->
-</div><!-- /.breadcrumb --> 
+		
+	</div>
+</div>
 <div class="body-content">
 	<div class="container">
 		<div class="checkout-box ">
@@ -49,28 +44,28 @@ My Checkout
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Address Line 1</b> <span>*</span></label>
-                                                    <input type="text" name="address1" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 1" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="address1" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 1" required style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Address Line 2</b> <span>*</span></label>
-                                                    <input type="text" name="address2" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 2" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="address2" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Address Line 2" required style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Post Code </b> <span>*</span></label>
-                                                    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
 
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>District </b> <span>*</span></label>
-                                                    <input type="text" name="district" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="District" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="district" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="District" required style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>State </b> <span>*</span></label>
-                                                    <input type="text" name="state" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="State" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="state" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="State" required style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
                                                 <div class="form-group">
                                                     <label class="info-title" for="exampleInputEmail1"><b>Country </b> <span>*</span></label>
-                                                    <input type="text" name="country" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Country" required="" style="text-transform:uppercase">
+                                                    <input type="text" name="country" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Country" value="MALAYSIA" readonly style="text-transform:uppercase">
                                                 </div>  <!-- // end form group  -->
 
                                                 <input type="hidden" name="amount" value="{{ $cartTotal }}">
@@ -157,15 +152,15 @@ My Checkout
                                     <h4 class="unicase-checkout-title">Select Payment Method</h4>
                                 </div>
                                 <div class="row">
-                                    {{-- <div class="col-md-4">
-                                        <label for="">Stripe</label> 		
-                                        <input type="radio" name="payment_method" value="stripe" required>
-                                        <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
-                                    </div> --}}
                                     <div class="col-md-4">
                                         <label for="">FPX</label> 		
-                                        <input type="radio" name="payment_method" value="fpx" >	
+                                        <input type="radio" name="payment_method" value="fpx" required>	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="">Other Payment (coming soon)</label> 		
+                                        <input type="radio" name="payment_method" value="stripe" disabled>
+                                        {{-- <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		 --}}
                                     </div>
                                 </div> 
                                 <hr>
@@ -188,45 +183,45 @@ My Checkout
 </div><!-- /.body-content -->
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('select[name="division_id"]').on('change', function(){
-            var division_id = $(this).val();
-            if(division_id) {
-                $.ajax({
-                    url: "{{  url('/district-get/ajax') }}/"+division_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                        $('select[name="state_id"]').empty(); 
-                        var d =$('select[name="district_id"]').empty();
-                            $.each(data, function(key, value){
-                                $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name + '</option>');
-                            });
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-        });
+    // $(document).ready(function() {
+    //     $('select[name="division_id"]').on('change', function(){
+    //         var division_id = $(this).val();
+    //         if(division_id) {
+    //             $.ajax({
+    //                 url: "{{  url('/district-get/ajax') }}/"+division_id,
+    //                 type:"GET",
+    //                 dataType:"json",
+    //                 success:function(data) {
+    //                     $('select[name="state_id"]').empty(); 
+    //                     var d =$('select[name="district_id"]').empty();
+    //                         $.each(data, function(key, value){
+    //                             $('select[name="district_id"]').append('<option value="'+ value.id +'">' + value.district_name + '</option>');
+    //                         });
+    //                 },
+    //             });
+    //         } else {
+    //             alert('danger');
+    //         }
+    //     });
 
-        $('select[name="district_id"]').on('change', function(){
-            var district_id = $(this).val();
-            if(district_id) {
-                $.ajax({
-                    url: "{{  url('/state-get/ajax') }}/"+district_id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function(data) {
-                       var d =$('select[name="state_id"]').empty();
-                          $.each(data, function(key, value){
-                              $('select[name="state_id"]').append('<option value="'+ value.id +'">' + value.state_name + '</option>');
-                          });
-                    },
-                });
-            } else {
-                alert('danger');
-            }
-        });
-    });
-    </script>
+    //     $('select[name="district_id"]').on('change', function(){
+    //         var district_id = $(this).val();
+    //         if(district_id) {
+    //             $.ajax({
+    //                 url: "{{  url('/state-get/ajax') }}/"+district_id,
+    //                 type:"GET",
+    //                 dataType:"json",
+    //                 success:function(data) {
+    //                    var d =$('select[name="state_id"]').empty();
+    //                       $.each(data, function(key, value){
+    //                           $('select[name="state_id"]').append('<option value="'+ value.id +'">' + value.state_name + '</option>');
+    //                       });
+    //                 },
+    //             });
+    //         } else {
+    //             alert('danger');
+    //         }
+    //     });
+    // });
+</script>
 @endsection

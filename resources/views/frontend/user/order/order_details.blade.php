@@ -1,10 +1,23 @@
 @extends('frontend.main_master')
 @section('content')
+
+<div class="breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-inner">
+			<ul class="list-inline list-unstyled">
+				<li><a href="{{ url('dashboard') }}">Dashboard</a></li>
+				<li><a href="{{ route('my.orders') }}">OrderHistory</a></li>
+				<li class='active'>Order Details</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
 <div class="body-content">
 	<div class="container">
 		<div class="row">
-			@include('frontend.common.user_sidebar')
-            <div class="col-md-5">
+			{{-- @include('frontend.common.user_sidebar') --}}
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header"><h4>Shipping Details</h4></div>
                     <hr>

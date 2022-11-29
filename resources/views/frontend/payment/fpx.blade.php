@@ -8,13 +8,13 @@ FPX Payment Page
 
 <div class="breadcrumb">
 	<div class="container">
-		<div class="breadcrumb-inner">
+		{{-- <div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href={{url('/')}}>Home</a></li>
 				<li><a href="{{route('checkout')}}">Checkout</a></li>
 				<li class='active'>FPX Payment</li>
 			</ul>
-		</div><!-- /.breadcrumb-inner -->
+		</div><!-- /.breadcrumb-inner --> --}}
 	</div><!-- /.container -->
 </div><!-- /.breadcrumb --> 
 
