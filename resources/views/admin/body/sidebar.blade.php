@@ -9,7 +9,7 @@
   <section class="sidebar">	
     <div class="user-profile">
       <div class="ulogo">
-        <a href="index.html">
+        <a href="{{ url('admin/dashboard') }}">
           <!-- logo for regular state and mobile devices -->
           <div class="d-flex align-items-center justify-content-center">			
             <img src="{{ asset('backend/images/logo.png') }}" alt="" style="width: 25%">
