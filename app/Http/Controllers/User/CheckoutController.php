@@ -86,12 +86,14 @@ class CheckoutController extends Controller
             'created_at' => Carbon::now(),
             ]);
 
-    	if ($request->payment_method == 'stripe') {
-    		return view('frontend.payment.stripe',compact('data', 'cartTotal'));
-    	}elseif ($request->payment_method == 'fpx') {
-    		return view('frontend.payment.fpx', compact('data', 'cartTotal', 'shipping_name', 'shipping_email', 'shipping_phone', 'address1', 'address2', 'post_code', 'district', 'state', 'country', 'notes', 'amount'));
-    	}else{
-            return 'cash';
-    	}
-    }// end mehtod.
+		return view('frontend.payment.fpx', compact('data', 'cartTotal', 'shipping_name', 'shipping_email', 'shipping_phone', 'address1', 'address2', 'post_code', 'district', 'state', 'country', 'notes', 'amount'));
+
+    	// if ($request->payment_method == 'stripe') {
+    	// 	return view('frontend.payment.stripe',compact('data', 'cartTotal'));
+    	// }elseif ($request->payment_method == 'fpx') {
+    	// 	return view('frontend.payment.fpx', compact('data', 'cartTotal', 'shipping_name', 'shipping_email', 'shipping_phone', 'address1', 'address2', 'post_code', 'district', 'state', 'country', 'notes', 'amount'));
+    	// }else{
+        //     return 'cash';
+    	// }
+    }
 }
