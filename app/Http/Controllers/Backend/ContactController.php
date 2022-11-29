@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Carbon\Carbon;
+use Auth;
 
 class ContactController extends Controller
 {
@@ -25,6 +26,7 @@ class ContactController extends Controller
             'contact_call' => $request->contact_call,
             'contact_company' => $request->contact_company, 
             'contact_location' => $request->contact_location,
+            'created_by' => Auth::id(),
             'created_at' => Carbon::now(),
             ]);
 
@@ -42,11 +44,13 @@ class ContactController extends Controller
     }
 
     public function ContactUpdate(Request $request, $id){
+        // dd($request->all());
         Contact::findOrFail($id)->update([
             'contact_call' => $request->contact_call,
             'contact_company' => $request->contact_company, 
             'contact_location' => $request->contact_location,
-            'created_at' => Carbon::now(),
+            'updated_by' => Auth::id(),
+            'updated_at' => Carbon::now(),
            ]);
         $notification = array(
             'message' => 'Contact Updated Successfully',

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Image;
+use Auth;
+use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
@@ -32,6 +34,8 @@ class CategoryController extends Controller
             'category_slug_en' => strtolower(str_replace(' ', '-',$request->category_name_en)),
             'category_slug_my' => str_replace(' ', '-',$request->category_name_my),
             'category_icon' => $request->category_icon,
+            'created_by' => Auth::id(),
+            'created_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -58,6 +62,8 @@ class CategoryController extends Controller
             'category_slug_en' => strtolower(str_replace(' ', '-',$request->category_name_en)),
             'category_slug_my' => str_replace(' ', '-',$request->category_name_my),
             'category_icon' => $request->category_icon,
+            'updated_by' => Auth::id(),
+            'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(

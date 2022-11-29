@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use Image;
+use Auth;
+use Carbon\Carbon;
 
 class BrandController extends Controller
 {
@@ -37,6 +39,8 @@ class BrandController extends Controller
             'brand_slug_en' => strtolower(str_replace(' ', '-',$request->brand_name_en)),
             'brand_slug_my' => str_replace(' ', '-',$request->brand_name_my),
             'brand_image' => $save_url,
+            'created_by' => Auth::id(),
+            'created_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -54,7 +58,7 @@ class BrandController extends Controller
     }
 
     public function BrandUpdate(Request $request){
-
+        
         $brand_id = $request->id;
         $old_img = $request->old_image;
 
@@ -72,6 +76,8 @@ class BrandController extends Controller
                 'brand_slug_en' => strtolower(str_replace(' ', '-',$request->brand_name_en)),
                 'brand_slug_my' => str_replace(' ', '-',$request->brand_name_my),
                 'brand_image' => $save_url,
+                'updated_by' => Auth::id(),
+                'updated_at' => Carbon::now(),
             ]);
 
             $notification = array(
@@ -88,6 +94,8 @@ class BrandController extends Controller
                 'brand_name_my' => $request->brand_name_my,
                 'brand_slug_en' => strtolower(str_replace(' ', '-',$request->brand_name_en)),
                 'brand_slug_my' => str_replace(' ', '-',$request->brand_name_my),
+                'updated_by' => Auth::id(),
+                'updated_at' => Carbon::now(),
             ]);
 
             $notification = array(

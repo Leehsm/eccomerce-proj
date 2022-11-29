@@ -10,6 +10,7 @@ use App\Models\MultiImg;
 use App\Models\Blog;
 use Carbon\Carbon;
 use Image;
+use Auth;
 
 class BlogController extends Controller
 {
@@ -41,6 +42,8 @@ class BlogController extends Controller
             'long_description' => $request->long_description,
             'long_description2' => $request->long_description2,
             'blogImg' => $save_url,
+            'created_by' => Auth::id(),
+            'created_at' => Carbon::now(),
     	]);
 
         ////////// Multiple Image Upload Start ///////////
@@ -53,7 +56,8 @@ class BlogController extends Controller
             MultiImgBlog::insert([
                 'blog_id' => $blog_id,
                 'photo_name' => $uploadPath,
-                'created_at' => Carbon::now(), 
+                'created_by' => Auth::id(),
+                'created_at' => Carbon::now(),
             ]);
         }////////// End Multiple Image Upload///////////
 
@@ -89,6 +93,8 @@ class BlogController extends Controller
                 'long_description' => $request->long_description,
                 'long_description2' => $request->long_description2,
                 'blogImg' => $save_url,
+                'updated_by' => Auth::id(),
+                'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -105,6 +111,8 @@ class BlogController extends Controller
                 'description' => $request->description,
                 'long_description' => $request->long_description,
                 'long_description2' => $request->long_description2,
+                'updated_by' => Auth::id(),
+                'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -167,6 +175,7 @@ class BlogController extends Controller
 
             MultiImgBlog::where('id',$id)->update([
                 'photo_name' => $uploadPath,
+                'updated_by' => Auth::id(),
                 'updated_at' => Carbon::now(),
             ]);
 	    } 
