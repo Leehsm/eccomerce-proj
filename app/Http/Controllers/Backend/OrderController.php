@@ -10,6 +10,9 @@ use Auth;
 use Carbon\Carbon;
 use PDF;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TrackingMail;
+
 class OrderController extends Controller
 {
     //PendingOrders
@@ -99,7 +102,10 @@ class OrderController extends Controller
 
     //UPDATE STATUS
     public function PendingToConfirm($order_id){
-        Order::findOrFail($order_id)->update(['status' => 'Confirm']);
+        Order::findOrFail($order_id)->update([
+            'status' => 'Confirm',
+            'confirmed_date' => Carbon::now(),
+        ]);
         $notification = array(
             'message' => 'Order Confirmed Successfully',
             'alert-type' => 'success'
@@ -108,7 +114,10 @@ class OrderController extends Controller
     }
 
     public function ConfirmToProcessing($order_id){
-        Order::findOrFail($order_id)->update(['status' => 'Processing']);
+        Order::findOrFail($order_id)->update([
+            'status' => 'Processing',
+            'processing_date' => Carbon::now(),
+        ]);
         $notification = array(
             'message' => 'Order Processed Successfully',
             'alert-type' => 'success'
@@ -117,7 +126,10 @@ class OrderController extends Controller
     }
 
     public function ProcessingToPicked($order_id){
-        Order::findOrFail($order_id)->update(['status' => 'Picked']);
+        Order::findOrFail($order_id)->update([
+            'status' => 'Picked',
+            'picked_date' => Carbon::now(),
+        ]);
         $notification = array(
             'message' => 'Order Picked Successfully',
             'alert-type' => 'success'
@@ -125,17 +137,55 @@ class OrderController extends Controller
         return redirect()->route('processing-orders')->with($notification);
     }
 
+    public function trackingUpdate(Request $req){
+        $id = $req->id;
+        
+        Order::where('id',$id)->update([
+            'tracking_num' => $req->tracking_num,
+        ]);
+
+        
+        $name = Order::where('id', $id)->pluck('name');
+        $email = Order::where('id', $id)->pluck('email');
+        $inv = Order::where('id', $id)->pluck('invoice_no');
+        $tracking = Order::where('id', $id)->pluck('tracking_num');
+        
+        $tracking_number = [
+            'name' => $name,
+            'email' => $email,
+            'invoice' => $inv,
+            'tracking_number' => $tracking,
+        ];
+
+        //send Email
+        Mail::to($email)->send(new TrackingMail($tracking_number));
+
+        $notification = array(
+            'message' => 'Tracking Number Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
     public function PickedToShipped($order_id){
-        Order::findOrFail($order_id)->update(['status' => 'Shipped']);
+        Order::findOrFail($order_id)->update([
+            // 'tracking_num' => $req->tracking_num,
+            'status' => 'Shipped',
+            'shipped_date' => Carbon::now(),
+        ]);
         $notification = array(
             'message' => 'Order Shipped Successfully',
             'alert-type' => 'success'
         );
         return redirect()->route('picked-orders')->with($notification);
     }
+    
 
     public function ShippedToDelivered($order_id){
-        Order::findOrFail($order_id)->update(['status' => 'Delivered']);
+        Order::findOrFail($order_id)->update([
+            'status' => 'Delivered',
+            'delivered_date' => Carbon::now(),
+        ]);
         $notification = array(
             'message' => 'Order Delivered Successfully',
             'alert-type' => 'success'

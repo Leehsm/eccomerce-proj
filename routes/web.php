@@ -336,7 +336,10 @@ Route::prefix('orders')->group(function(){
     Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending-confirm'); 
     Route::get('/confirm/processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm-processing'); 
     Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing-picked'); 
+
     Route::get('/picked/shipped/{order_id}', [OrderController::class, 'PickedToShipped'])->name('picked-shipped'); 
+    Route::post('/picked/shipped/tracking_num/{order_id}', [OrderController::class, 'trackingUpdate'])->name('tracking-update'); 
+
     Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'ShippedToDelivered'])->name('shipped-delivered'); 
     Route::get('/cancel/{order_id}', [OrderController::class, 'CancelOrder'])->name('cancel-order'); 
     Route::get('/invoice/download/{order_id}', [OrderController::class, 'InvoiceDownload'])->name('invoice-download'); 

@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class OrderMail extends Mailable
+class TrackingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $tracking_number;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($tracking_number)
     {
-        $this->data = $data;
+        $this->tracking_number = $tracking_number;
     }
 
     /**
@@ -30,7 +30,7 @@ class OrderMail extends Mailable
      */
     public function build()
     {
-        $order = $this->data;
-        return $this->from('gamesajee123@gmail.com')->view('mail.order_mail',compact('order'))->subject('Thank You For Purchasing From Sahira');
+        $tracking_number = $this->tracking_number;
+        return $this->from('gamesajee123@gmail.com')->view('mail.tracking_mail',compact('tracking_number'))->subject('Your Purchased Item Tracking Number From Sahira');
     }
 }

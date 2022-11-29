@@ -44,11 +44,11 @@
                         <tr>
                             <th> Address : </th>
                             <th> {{ $order->address1 }}, 
-                                    {{ $order->address2 }}, 
-                                    {{ $order->post_code }}, 
-                                    {{ $order->district->district_name }},
-                                    {{ $order->division->division_name }}, 
-                                    {{ $order->state->state_name }} </th>
+                                {{ $order->address2 }}, 
+                                {{ $order->post_code }}, 
+                                {{ $order->district }},
+                                {{ $order->state }}, 
+                                {{ $order->country }} </th>
                         </tr>
                         <tr>
                             <th> Order Date : </th>

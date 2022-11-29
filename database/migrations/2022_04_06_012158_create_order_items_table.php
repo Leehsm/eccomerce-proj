@@ -22,7 +22,8 @@ class CreateOrderItemsTable extends Migration
             $table->string('size')->nullable();
             $table->integer('qty');
             $table->float('price',8,2);
-            $table->integer('status');
+            $table->string('buyRefNo');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
