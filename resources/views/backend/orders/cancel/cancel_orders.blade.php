@@ -36,11 +36,7 @@
                                     <td> RM{{ $item->amount }} </td>
                                     <td> {{ $item->payment_method }} </td>
                                     <td> 
-                                        @if ($item->status!= "Pending")
-                                            <span class="badge badge-pill badge-primary"> Done </span>
-                                        @else
-                                            <span class="badge badge-pill badge-danger"> Pending </span>
-                                        @endif
+                                        <span class="badge badge-pill badge-red"> {{$item->status}} </span>
                                     </td>
                                     <td >
                                         <a href="{{ route('cancel-orders-details',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-eye"></i> </a>

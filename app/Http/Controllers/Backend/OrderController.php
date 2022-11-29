@@ -89,7 +89,7 @@ class OrderController extends Controller
 
     //CancelOrders
     public function CancelOrders(){
-        $orders = Order::where('status','Cancel')->orderBy('id','DESC')->get();
+        $orders = Order::where('status','CANCEL / UNSUCCESSFUL')->orderBy('id','DESC')->get();
         return view('backend.orders.cancel.cancel_orders', compact('orders'));
     }
 

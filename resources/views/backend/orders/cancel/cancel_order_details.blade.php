@@ -44,11 +44,11 @@
                         <tr>
                             <th> Address : </th>
                             <th> {{ $order->address1 }}, 
-                                    {{ $order->address2 }}, 
-                                    {{ $order->post_code }}, 
-                                    {{ $order->district->district_name }},
-                                    {{ $order->division->division_name }}, 
-                                    {{ $order->state->state_name }} </th>
+                                {{ $order->address2 }}, 
+                                {{ $order->post_code }}, 
+                                {{ $order->district }},
+                                {{ $order->state }}, 
+                                {{ $order->country }} </th>
                         </tr>
                         <tr>
                             <th> Order Date : </th>
@@ -92,12 +92,7 @@
                         <tr>
                             <th> Order : </th>
                             <th> 
-                                @if ($order->status != "Pending")
-                                    <span class="badge badge-pill badge-primary"> Done </span>
-                                @else
-                                    <span class="badge badge-pill badge-danger"> Pending </span>
-                                @endif  
-                                {{-- <span class="badge badge-pill badge-warning" style="background: #418DB9;">{{ $order->status }} </span>  --}}
+                                <span class="badge badge-pill badge-primary">  {{$order->status}} </span>
                             </th>
                         </tr>
                     </table>
