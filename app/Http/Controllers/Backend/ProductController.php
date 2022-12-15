@@ -98,6 +98,7 @@ class ProductController extends Controller
                     'product_id' => $product_id,
                     'Size_type' => $size[$i],
                     'quantity' => $quantity[$i],
+                    'created_by' => Auth::id(),
                 ]);
             }
         }
