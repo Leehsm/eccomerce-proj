@@ -42,8 +42,8 @@ class ToyyibpayController extends Controller
             $some_data = array(
                 'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
                 'categoryCode' => env('TOYYIBPAY_CODE'),
-                'billName' => 'SahiraShop.com',
-                'billDescription' => 'Payment for purchased item from SahiraShop website',
+                'billName' => 'outfitbysahira.com',
+                'billDescription' => 'Payment for purchased item from outfitbysahira.com',
                 'billPriceSetting' => 1,
                 'billPayorInfo' => 1,
                 'billAmount' => $total_amount*100,
@@ -122,8 +122,8 @@ class ToyyibpayController extends Controller
             $some_data = array(
                 'userSecretKey' => env('TOYYIBPAY_USER_SECRET_KEY'),
                 'categoryCode' => env('TOYYIBPAY_CODE'),
-                'billName' => 'SahiraShop.com',
-                'billDescription' => 'Payment for purchased item from SahiraShop website',
+                'billName' => 'outfitbysahira.com',
+                'billDescription' => 'Payment for purchased item from outfitbysahira.com',
                 'billPriceSetting' => 1,
                 'billPayorInfo' => 1,
                 'billAmount' => $total_amount*100,

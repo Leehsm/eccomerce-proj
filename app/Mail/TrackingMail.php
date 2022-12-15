@@ -31,6 +31,6 @@ class TrackingMail extends Mailable
     public function build()
     {
         $tracking_number = $this->tracking_number;
-        return $this->from('gamesajee123@gmail.com')->view('mail.tracking_mail',compact('tracking_number'))->subject('Your Purchased Item Tracking Number From Sahira');
+        return $this->from('gamesajee123@gmail.com')->view('mail.tracking_mail',compact('tracking_number'))->subject('Your Items Tracking Number From outfitbysahira.com');
     }
 }
