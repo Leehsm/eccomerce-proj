@@ -72,17 +72,17 @@ class IndexController extends Controller
                                 ->get();
 
     	$skip_brand_1 = Brand::skip(2)->first();
-    	$skip_brand_product_1 = Product::where('status',1)
-                                        ->where('brand_id',$skip_brand_1->id)
-                                        ->where('status',1)
-                                        ->orderBy('id','DESC')
-                                        ->get();
+    	// $skip_brand_product_1 = Product::where('status',1)
+        //                                 ->where('brand_id',$skip_brand_1->id)
+        //                                 ->where('status',1)
+        //                                 ->orderBy('id','DESC')
+        //                                 ->get();
 
 
     	// return $skip_category->id;
     	// die();
 
-    	return view('frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1'));
+    	return view('frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1'));
     }
 
     public function UserLogout(){
