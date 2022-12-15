@@ -16,7 +16,6 @@ class StockController extends Controller
         return view('backend.stockcart.homepage',compact('stocks'));
     }
 
-
     //Bag
     public function BagView(){
 		$bags = Stock::latest()->where('category', 'Bag')->get();
@@ -37,7 +36,7 @@ class StockController extends Controller
 
     	$image = $request->file('image');
     	$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    	Image::make($image)->resize(870,370)->save('upload/stock/bags/'.$name_gen);
+    	Image::make($image)->resize(900,1200)->save('upload/stock/bags/'.$name_gen);
     	$save_url = 'upload/stock/bags/'.$name_gen;
 
 	    Stock::insert([
@@ -47,6 +46,7 @@ class StockController extends Controller
             'size' => $request->size,
             'color' => $request->color,
             'quantity' => $request->quantity,
+            'price' => $request->price,
     	]);
 
 	    $notification = array(
@@ -73,7 +73,7 @@ class StockController extends Controller
             unlink($old_img);
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(870,370)->save('upload/stock/bags/'.$name_gen);
+            Image::make($image)->resize(900,1200)->save('upload/stock/bags/'.$name_gen);
             $save_url = 'upload/stock/bags/'.$name_gen;
 
             Stock::findOrFail($id)->update([
@@ -83,6 +83,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
 
         $notification = array(
@@ -99,6 +100,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
 
         $notification = array(
@@ -115,7 +117,7 @@ class StockController extends Controller
     	$bags = Stock::findOrFail($id);
     	$img = $bags->image;
     	unlink($img);
-    	Bag::findOrFail($id)->delete();
+    	Stock::findOrFail($id)->delete();
 
     	$notification = array(
 			'message' => 'Bag Delectd Successfully',
@@ -147,7 +149,7 @@ class StockController extends Controller
     
         $image = $request->file('image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(870,370)->save('upload/stock/cloths/'.$name_gen);
+        Image::make($image)->resize(900,1200)->save('upload/stock/cloths/'.$name_gen);
         $save_url = 'upload/stock/cloths/'.$name_gen;
     
         Stock::insert([
@@ -157,6 +159,7 @@ class StockController extends Controller
             'size' => $request->size,
             'color' => $request->color,
             'quantity' => $request->quantity,
+            'price' => $request->price,
         ]);
     
         $notification = array(
@@ -183,7 +186,7 @@ class StockController extends Controller
             unlink($old_img);
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(870,370)->save('upload/stock/cloths/'.$name_gen);
+            Image::make($image)->resize(900,1200)->save('upload/stock/cloths/'.$name_gen);
             $save_url = 'upload/stock/cloths/'.$name_gen;
     
             Stock::findOrFail($id)->update([
@@ -193,6 +196,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
@@ -209,6 +213,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
@@ -225,7 +230,7 @@ class StockController extends Controller
         $cloths = Stock::findOrFail($id);
         $img = $cloths->image;
         unlink($img);
-        Bag::findOrFail($id)->delete();
+        Stock::findOrFail($id)->delete();
     
         $notification = array(
             'message' => 'Clothing Delectd Successfully',
@@ -257,7 +262,7 @@ class StockController extends Controller
     
         $image = $request->file('image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(870,370)->save('upload/stock/wallets/'.$name_gen);
+        Image::make($image)->resize(900,1200)->save('upload/stock/wallets/'.$name_gen);
         $save_url = 'upload/stock/wallets/'.$name_gen;
     
         Stock::insert([
@@ -267,6 +272,7 @@ class StockController extends Controller
             'size' => $request->size,
             'color' => $request->color,
             'quantity' => $request->quantity,
+            'price' => $request->price,
         ]);
     
         $notification = array(
@@ -293,7 +299,7 @@ class StockController extends Controller
             unlink($old_img);
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(870,370)->save('upload/stock/wallets/'.$name_gen);
+            Image::make($image)->resize(900,1200)->save('upload/stock/wallets/'.$name_gen);
             $save_url = 'upload/stock/wallets/'.$name_gen;
     
             Stock::findOrFail($id)->update([
@@ -303,6 +309,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
@@ -319,6 +326,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
@@ -367,7 +375,7 @@ class StockController extends Controller
     
         $image = $request->file('image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(870,370)->save('upload/stock/skincare/'.$name_gen);
+        Image::make($image)->resize(900,1200)->save('upload/stock/skincare/'.$name_gen);
         $save_url = 'upload/stock/skincare/'.$name_gen;
     
         Stock::insert([
@@ -377,6 +385,7 @@ class StockController extends Controller
             'size' => $request->size,
             'color' => $request->color,
             'quantity' => $request->quantity,
+            'price' => $request->price,
         ]);
     
         $notification = array(
@@ -403,7 +412,7 @@ class StockController extends Controller
             unlink($old_img);
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(870,370)->save('upload/stock/skincare/'.$name_gen);
+            Image::make($image)->resize(900,1200)->save('upload/stock/skincare/'.$name_gen);
             $save_url = 'upload/stock/skincare/'.$name_gen;
     
             Stock::findOrFail($id)->update([
@@ -413,6 +422,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
@@ -429,6 +439,7 @@ class StockController extends Controller
                 'size' => $request->size,
                 'color' => $request->color,
                 'quantity' => $request->quantity,
+                'price' => $request->price,
         ]);
     
         $notification = array(
