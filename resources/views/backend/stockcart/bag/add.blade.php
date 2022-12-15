@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <h5>Category<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  name="category" class="form-control" value="Bag" disabled> 
+                                        <input type="text"  name="category" class="form-control" value="Bag" readonly> 
                                         @error('category') 
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror 
@@ -63,6 +63,15 @@
                                         @enderror 
                                     </div>
                                 </div> 
+                                <div class="form-group">
+                                    <h5>Price<span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="text"  name="price" class="form-control"> 
+                                        @error('price') 
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror 
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <h5>Image<span class="text-danger">*</span></h5>
                                     <div class="controls">

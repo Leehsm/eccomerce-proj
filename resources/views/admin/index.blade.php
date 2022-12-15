@@ -20,7 +20,7 @@ $dailySales = DB::table('orders')->where('order_date',$date)->where('status', '!
 $monthlySales = DB::table('orders')->where('order_date', 'LIKE', "%$month2%")->where('status', '!=', 'CANCEL / UNSUCCESSFUL')->sum('amount');
 $totalSales = DB::table('orders')->where('status', '!=', 'CANCEL / UNSUCCESSFUL')->sum('amount');
 
-$orders = DB::table('orders')->orderBy('order_date','ASC')->get();
+$orders = DB::table('orders')->orderBy('order_date','DESC')->get();
 
 $orderTrial1 = DB::table('products')
                 ->join('order_items', 'products.id', '=', 'order_items.product_id')

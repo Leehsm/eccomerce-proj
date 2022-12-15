@@ -25,6 +25,7 @@
                                         <th>Size</th>
                                         <th>Color</th>
                                         <th>Quantity</th>
+                                        <th>Price</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -38,7 +39,8 @@
                                         <td>{{ $item->size }}</td>
                                         <td>{{ $item->color }}</td>
                                         <td>{{ $item->quantity }}</td>
-                                        <td width="30%">   
+                                        <td>RM{{ $item->price }}</td>
+                                        <td>   
                                             <a href="{{ route('bag.edit',$item->id) }}" class="btn btn-info btn-sm" title="Edit Data"><i class="fa fa-pencil"></i> </a>
                                             <a href="{{ route('bag.delete',$item->id) }}" class="btn btn-danger btn-sm" title="Delete Data" id="delete"><i class="fa fa-trash"></i></a>
                                         </td>

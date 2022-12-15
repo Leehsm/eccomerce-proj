@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <h5>Category <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text"  name="category" class="form-control" value="{{ $bags->category }}" disabled> 
+                                    <input type="text"  name="category" class="form-control" value="{{ $bags->category }}" readonly> 
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,12 +53,20 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <h5>Price <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="price" class="form-control" value="{{ $bags->price }}" >
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <h5>Image <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="file" name="image" class="form-control" >
-                                    @error('image') 
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror 
+                                    <img src="{{ asset($bags->image) }}" style="height: 130px; width: 130px;">
+                                    <div class="form-group">
+                                        <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
+                                        <input type="file" name="image" class="form-control" onChange="mainThamUrl(this)"  >
+                                        <img src="" id="mainThmb">
+                                    </div> 
                                 </div>
                             </div>
                             <div class="text-xs-right">
