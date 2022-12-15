@@ -30,7 +30,7 @@
                                         @foreach($stocks as $item)
                                         <tr>
                                             <td>
-                                                <span class="text-fade font-weight-600 d-block font-size-16">
+                                                <span>
                                                     <img src="{{ asset($item->image) }}" style="width: 100px; height: 100px;">
                                                 </span>
                                             </td>

@@ -149,10 +149,10 @@ My Checkout
                         <div class="panel-group">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">Select Payment Method</h4>
+                                    {{-- <h4 class="unicase-checkout-title">Select Payment Method</h4> --}}
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <label for="">FPX</label> 		
                                         <input type="radio" name="payment_method" value="fpx" required>	
                                         <img src="{{ asset('frontend/assets/images/payments/fpx.jpg') }}" style="width: 50%">    		
@@ -160,8 +160,8 @@ My Checkout
                                     <div class="col-md-4">
                                         <label for="">Other Payment (coming soon)</label> 		
                                         <input type="radio" name="payment_method" value="stripe" disabled>
-                                        {{-- <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		 --}}
-                                    </div>
+                                        <img src="{{ asset('frontend/assets/images/payments/3.png') }}">		    		
+                                    </div> --}}
                                 </div> 
                                 <hr>
                                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Continue For Payment</button>

@@ -11,6 +11,11 @@
 <meta name="robots" content="all">
 <title> @yield('title') </title>
 
+{{-- <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('frontend/assets/images/logoss.png') }}"> --}}
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('frontend/assets/images/logoss.png') }}">
+{{-- <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('frontend/assets/images/logoss.png') }}"> --}}
+{{-- <link rel="manifest" href="{{ asset('frontend/assets/images/logoss.png') }}"> --}}
+
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
 
