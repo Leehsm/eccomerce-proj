@@ -82,17 +82,22 @@
           <li class="{{ ($route == 'manage-skincare')? 'active':'' }}"><a href="{{ route('manage-skincare') }}"><a href="{{ route('manage-skincare') }}"><i class="ti-more"></i>View</a></li>
           <li class="{{ ($route == 'add-skincare')? 'active':'' }}"><a href="{{ route('add-skincare') }}"><a href="{{ route('add-skincare') }}"><i class="ti-more"></i>Add</a></li>
         </ul>
+      </li> 
+      <li class="treeview {{ ($prefix == '/membership')?'active':'' }}  ">
+        <a href="#">
+          <i data-feather="users"></i>
+          <span>Membership</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ ($route == 'manage-membership')? 'active':'' }}"><a href="{{ route('manage-membership') }}"><a href="{{ route('manage-membership') }}"><i class="ti-more"></i>View</a></li>
+          <li class="{{ ($route == 'add-membership')? 'active':'' }}"><a href="{{ route('add-membership') }}"><a href="{{ route('add-membership') }}"><i class="ti-more"></i>Add</a></li>
+        </ul>
       </li>            
     </ul>
 
 
   </section>
-	{{-- <div class="sidebar-footer">
-		<!-- item-->
-		<a href="javascript:void(0)" class="link" data-toggle="tooltip" title="" data-original-title="Settings" aria-describedby="tooltip92529"><i class="ti-settings"></i></a>
-		<!-- item-->
-		<a href="{{ url('/admin/dashboard') }}" class="link" data-toggle="tooltip" title="" data-original-title="Manage Shop"><i class="ti-shopping-cart-full"></i></a>
-		<!-- item-->
-		<a href="{{ route('admin.logout') }}" class="link" data-toggle="tooltip" title="" data-original-title="Logout"><i class="ti-lock"></i></a>
-	</div> --}}
 </aside>
